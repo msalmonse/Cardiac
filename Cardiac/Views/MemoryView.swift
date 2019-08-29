@@ -11,19 +11,21 @@ import SwiftUI
 fileprivate let columnOffset = 20
 fileprivate let columns = 5
 
+fileprivate let dummyCell = Cell(-1, 0)
 struct MemoryView: View {
     var memory: Memory
 
     func conditionalCellView(_ index: Int) -> some View {
-        return index >= Memory.size
-            ? CellView(index: -1, cell: memory[0])
-            : CellView(index: index, cell: memory[index])
+        print("\(index)")
+        return Memory.contains(index)
+            ? CellView(index: index, cell: memory[index])
+            : CellView(index: -1, cell: dummyCell)
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 1) {
             ForEach(0..<columnOffset) {row in
-                HStack {
+                HStack(spacing: 1) {
                     ForEach(0..<columns) { column in
                         self.conditionalCellView(row + column * columnOffset)
                     }

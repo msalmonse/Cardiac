@@ -10,7 +10,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello World")
+        ZStack {
+            Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
+            HStack {
+                MemoryView(memory: Memory())
+                .overlay(
+                    RoundedRectangle(cornerRadius: 3)
+                    .stroke(lineWidth: 3.0)
+                    .foregroundColor(.green)
+                )
+            }
+        }
     }
 }
 

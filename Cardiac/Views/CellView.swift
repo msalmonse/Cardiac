@@ -21,22 +21,22 @@ struct CellView: View {
             if index < 0 {
                 Text("")
             } else {
-                Text("\(index)")
-                .multilineTextAlignment(.trailing)
-                .font(.caption)
-                padding(.trailing, 2)
-                digitImage(cell.value/100)
-                digitImage(cell.value/10)
-                digitImage(cell.value)
+                Text(cell.location)
+                .padding(3)
+                Spacer()
+                Text(cell.string)
+                .padding(3)
+                .overlay(RoundedRectangle(cornerRadius: 2).stroke(lineWidth: 1))
             }
         }
+        .font(.system(.body, design: .monospaced))
         .frame(width: 80)
-        .overlay(RoundedRectangle(cornerRadius: 2).stroke(lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 2).stroke(lineWidth: 2))
     }
 }
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(index: 0, cell: Cell())
+        CellView(index: 0, cell: Cell(0))
     }
 }

@@ -10,11 +10,22 @@ import SwiftUI
 
 class Memory: Identifiable {
     static let size = 100
+    static let range = 0..<size
+
+    static func contains(_ value: Int) -> Bool {
+        return range.contains(value)
+    }
+
     let id = UUID()
-    var cells: [Cell] = (0..<size).map {_ in Cell() }
+    var cells: [Cell] = range.map { Cell($0, 900) }
 
     subscript(index: Int) -> Cell {
         get { return cells[index] }
         set { cells[index] = newValue }
+    }
+
+    init() {
+        cells[0].setValue(1).setRO()
+        cells[99].setValue(800).setRO()
     }
 }
