@@ -8,3 +8,7 @@ disabled_rules:
 
 colon:
   flexible_right_spacing: true
+
+excluded:
+  - ./*/AppDelegate.swift
+  - ./*/SceneDelegate.swift
