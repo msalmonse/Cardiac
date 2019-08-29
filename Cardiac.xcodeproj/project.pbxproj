@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBAF2317C07E004B8146 /* AppDelegate.swift */; };
+		C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB12317C07E004B8146 /* SceneDelegate.swift */; };
+		C446BBB42317C07E004B8146 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB32317C07E004B8146 /* ContentView.swift */; };
+		C446BBB62317C084004B8146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C446BBB52317C084004B8146 /* Assets.xcassets */; };
+		C446BBB92317C084004B8146 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C446BBB82317C084004B8146 /* Preview Assets.xcassets */; };
+		C446BBBC2317C084004B8146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */; };
+		C446BBC72317C085004B8146 /* CardiacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBC62317C085004B8146 /* CardiacTests.swift */; };
+		C446BBD22317C085004B8146 /* CardiacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBD12317C085004B8146 /* CardiacUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C446BBC32317C085004B8146 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C446BBA42317C07E004B8146 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C446BBAB2317C07E004B8146;
+			remoteInfo = Cardiac;
+		};
+		C446BBCE2317C085004B8146 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C446BBA42317C07E004B8146 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C446BBAB2317C07E004B8146;
+			remoteInfo = Cardiac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C446BBAC2317C07E004B8146 /* Cardiac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardiac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C446BBAF2317C07E004B8146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C446BBB12317C07E004B8146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C446BBB32317C07E004B8146 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C446BBB52317C084004B8146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C446BBB82317C084004B8146 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C446BBBB2317C084004B8146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C446BBBD2317C084004B8146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C446BBC22317C085004B8146 /* CardiacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardiacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C446BBC62317C085004B8146 /* CardiacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiacTests.swift; sourceTree = "<group>"; };
+		C446BBC82317C085004B8146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C446BBCD2317C085004B8146 /* CardiacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardiacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C446BBD12317C085004B8146 /* CardiacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiacUITests.swift; sourceTree = "<group>"; };
+		C446BBD32317C085004B8146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C446BBA92317C07E004B8146 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBBF2317C085004B8146 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBCA2317C085004B8146 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C446BBA32317C07E004B8146 = {
+			isa = PBXGroup;
+			children = (
+				C446BBAE2317C07E004B8146 /* Cardiac */,
+				C446BBC52317C085004B8146 /* CardiacTests */,
+				C446BBD02317C085004B8146 /* CardiacUITests */,
+				C446BBAD2317C07E004B8146 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C446BBAD2317C07E004B8146 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBAC2317C07E004B8146 /* Cardiac.app */,
+				C446BBC22317C085004B8146 /* CardiacTests.xctest */,
+				C446BBCD2317C085004B8146 /* CardiacUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C446BBAE2317C07E004B8146 /* Cardiac */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBAF2317C07E004B8146 /* AppDelegate.swift */,
+				C446BBB12317C07E004B8146 /* SceneDelegate.swift */,
+				C446BBB32317C07E004B8146 /* ContentView.swift */,
+				C446BBB52317C084004B8146 /* Assets.xcassets */,
+				C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */,
+				C446BBBD2317C084004B8146 /* Info.plist */,
+				C446BBB72317C084004B8146 /* Preview Content */,
+			);
+			path = Cardiac;
+			sourceTree = "<group>";
+		};
+		C446BBB72317C084004B8146 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBB82317C084004B8146 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C446BBC52317C085004B8146 /* CardiacTests */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBC62317C085004B8146 /* CardiacTests.swift */,
+				C446BBC82317C085004B8146 /* Info.plist */,
+			);
+			path = CardiacTests;
+			sourceTree = "<group>";
+		};
+		C446BBD02317C085004B8146 /* CardiacUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBD12317C085004B8146 /* CardiacUITests.swift */,
+				C446BBD32317C085004B8146 /* Info.plist */,
+			);
+			path = CardiacUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C446BBAB2317C07E004B8146 /* Cardiac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C446BBD62317C085004B8146 /* Build configuration list for PBXNativeTarget "Cardiac" */;
+			buildPhases = (
+				C446BBA82317C07E004B8146 /* Sources */,
+				C446BBA92317C07E004B8146 /* Frameworks */,
+				C446BBAA2317C07E004B8146 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cardiac;
+			productName = Cardiac;
+			productReference = C446BBAC2317C07E004B8146 /* Cardiac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C446BBC12317C085004B8146 /* CardiacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C446BBD92317C085004B8146 /* Build configuration list for PBXNativeTarget "CardiacTests" */;
+			buildPhases = (
+				C446BBBE2317C085004B8146 /* Sources */,
+				C446BBBF2317C085004B8146 /* Frameworks */,
+				C446BBC02317C085004B8146 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C446BBC42317C085004B8146 /* PBXTargetDependency */,
+			);
+			name = CardiacTests;
+			productName = CardiacTests;
+			productReference = C446BBC22317C085004B8146 /* CardiacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C446BBCC2317C085004B8146 /* CardiacUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C446BBDC2317C085004B8146 /* Build configuration list for PBXNativeTarget "CardiacUITests" */;
+			buildPhases = (
+				C446BBC92317C085004B8146 /* Sources */,
+				C446BBCA2317C085004B8146 /* Frameworks */,
+				C446BBCB2317C085004B8146 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C446BBCF2317C085004B8146 /* PBXTargetDependency */,
+			);
+			name = CardiacUITests;
+			productName = CardiacUITests;
+			productReference = C446BBCD2317C085004B8146 /* CardiacUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C446BBA42317C07E004B8146 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = mesme;
+				TargetAttributes = {
+					C446BBAB2317C07E004B8146 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					C446BBC12317C085004B8146 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C446BBAB2317C07E004B8146;
+					};
+					C446BBCC2317C085004B8146 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C446BBAB2317C07E004B8146;
+					};
+				};
+			};
+			buildConfigurationList = C446BBA72317C07E004B8146 /* Build configuration list for PBXProject "Cardiac" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C446BBA32317C07E004B8146;
+			productRefGroup = C446BBAD2317C07E004B8146 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C446BBAB2317C07E004B8146 /* Cardiac */,
+				C446BBC12317C085004B8146 /* CardiacTests */,
+				C446BBCC2317C085004B8146 /* CardiacUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C446BBAA2317C07E004B8146 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C446BBBC2317C084004B8146 /* LaunchScreen.storyboard in Resources */,
+				C446BBB92317C084004B8146 /* Preview Assets.xcassets in Resources */,
+				C446BBB62317C084004B8146 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBC02317C085004B8146 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBCB2317C085004B8146 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C446BBA82317C07E004B8146 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
+				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
+				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBBE2317C085004B8146 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C446BBC72317C085004B8146 /* CardiacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C446BBC92317C085004B8146 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C446BBD22317C085004B8146 /* CardiacUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C446BBC42317C085004B8146 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C446BBAB2317C07E004B8146 /* Cardiac */;
+			targetProxy = C446BBC32317C085004B8146 /* PBXContainerItemProxy */;
+		};
+		C446BBCF2317C085004B8146 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C446BBAB2317C07E004B8146 /* Cardiac */;
+			targetProxy = C446BBCE2317C085004B8146 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C446BBBB2317C084004B8146 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C446BBD42317C085004B8146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C446BBD52317C085004B8146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C446BBD72317C085004B8146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Cardiac/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Cardiac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C446BBD82317C085004B8146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Cardiac/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Cardiac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C446BBDA2317C085004B8146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CardiacTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CardiacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardiac.app/Cardiac";
+			};
+			name = Debug;
+		};
+		C446BBDB2317C085004B8146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CardiacTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CardiacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cardiac.app/Cardiac";
+			};
+			name = Release;
+		};
+		C446BBDD2317C085004B8146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CardiacUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CardiacUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cardiac;
+			};
+			name = Debug;
+		};
+		C446BBDE2317C085004B8146 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CardiacUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CardiacUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cardiac;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C446BBA72317C07E004B8146 /* Build configuration list for PBXProject "Cardiac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C446BBD42317C085004B8146 /* Debug */,
+				C446BBD52317C085004B8146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C446BBD62317C085004B8146 /* Build configuration list for PBXNativeTarget "Cardiac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C446BBD72317C085004B8146 /* Debug */,
+				C446BBD82317C085004B8146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C446BBD92317C085004B8146 /* Build configuration list for PBXNativeTarget "CardiacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C446BBDA2317C085004B8146 /* Debug */,
+				C446BBDB2317C085004B8146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C446BBDC2317C085004B8146 /* Build configuration list for PBXNativeTarget "CardiacUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C446BBDD2317C085004B8146 /* Debug */,
+				C446BBDE2317C085004B8146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C446BBA42317C07E004B8146 /* Project object */;
+}
