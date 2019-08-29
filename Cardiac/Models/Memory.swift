@@ -25,7 +25,7 @@ class Memory: Identifiable {
     }
 
     init() {
-        cells[0].setValue(1).setRO()
+        cells[0].setValue(1).lock()
         cells[99].setValue(800).setRO()
     }
 }

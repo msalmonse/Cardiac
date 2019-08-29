@@ -11,7 +11,7 @@ import SwiftUI
 /// A memory cell
 
 enum CellStatus {
-    case ro, rw
+    case ro, rw, locked
 }
 
 class Cell: ObservableObject, Identifiable {
@@ -46,10 +46,22 @@ class Cell: ObservableObject, Identifiable {
     var status: CellStatus = .rw
 
     @discardableResult
-    func setRO() -> Cell { status = .ro; return self }
+    func lock() -> Cell {
+        status = .locked
+        return self
+    }
 
     @discardableResult
-    func setRW() -> Cell { status = .rw; return self }
+    func setRO() -> Cell {
+        if status == .rw { status = .ro }
+        return self
+    }
+
+    @discardableResult
+    func setRW() -> Cell {
+        if status == .ro { status = .rw }
+        return self
+    }
 
     init(_ location: Int, _ value: UInt16 = 0) {
         self.location = Memory.contains(location) ? String(format: "%02d", location) : ""
