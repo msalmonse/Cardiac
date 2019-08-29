@@ -16,7 +16,6 @@ struct MemoryView: View {
     var memory: Memory
 
     func conditionalCellView(_ index: Int) -> some View {
-        print("\(index)")
         return Memory.contains(index)
             ? CellView(index: index, cell: memory[index])
             : CellView(index: -1, cell: dummyCell)
