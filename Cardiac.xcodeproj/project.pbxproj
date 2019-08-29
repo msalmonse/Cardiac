@@ -15,6 +15,10 @@
 		C446BBBC2317C084004B8146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */; };
 		C446BBC72317C085004B8146 /* CardiacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBC62317C085004B8146 /* CardiacTests.swift */; };
 		C446BBD22317C085004B8146 /* CardiacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBD12317C085004B8146 /* CardiacUITests.swift */; };
+		C446BBE42317C298004B8146 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE32317C298004B8146 /* Cell.swift */; };
+		C446BBE62317C3C6004B8146 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE52317C3C6004B8146 /* CellView.swift */; };
+		C446BBE82317C696004B8146 /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE72317C696004B8146 /* MemoryView.swift */; };
+		C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE92317C6CD004B8146 /* Memory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		C446BBCD2317C085004B8146 /* CardiacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardiacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C446BBD12317C085004B8146 /* CardiacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiacUITests.swift; sourceTree = "<group>"; };
 		C446BBD32317C085004B8146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C446BBE32317C298004B8146 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		C446BBE52317C3C6004B8146 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		C446BBE72317C696004B8146 /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = "<group>"; };
+		C446BBE92317C6CD004B8146 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +108,14 @@
 			isa = PBXGroup;
 			children = (
 				C446BBAF2317C07E004B8146 /* AppDelegate.swift */,
-				C446BBB12317C07E004B8146 /* SceneDelegate.swift */,
-				C446BBB32317C07E004B8146 /* ContentView.swift */,
 				C446BBB52317C084004B8146 /* Assets.xcassets */,
-				C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */,
+				C446BBB32317C07E004B8146 /* ContentView.swift */,
 				C446BBBD2317C084004B8146 /* Info.plist */,
+				C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */,
+				C446BBE12317C270004B8146 /* Models */,
 				C446BBB72317C084004B8146 /* Preview Content */,
+				C446BBB12317C07E004B8146 /* SceneDelegate.swift */,
+				C446BBE02317C264004B8146 /* Views */,
 			);
 			path = Cardiac;
 			sourceTree = "<group>";
@@ -134,6 +144,24 @@
 				C446BBD32317C085004B8146 /* Info.plist */,
 			);
 			path = CardiacUITests;
+			sourceTree = "<group>";
+		};
+		C446BBE02317C264004B8146 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBE52317C3C6004B8146 /* CellView.swift */,
+				C446BBE72317C696004B8146 /* MemoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C446BBE12317C270004B8146 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBE32317C298004B8146 /* Cell.swift */,
+				C446BBE92317C6CD004B8146 /* Memory.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +316,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C446BBE82317C696004B8146 /* MemoryView.swift in Sources */,
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
+				C446BBE62317C3C6004B8146 /* CellView.swift in Sources */,
+				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
+				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
 			);
