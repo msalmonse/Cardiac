@@ -19,6 +19,9 @@
 		C446BBE62317C3C6004B8146 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE52317C3C6004B8146 /* CellView.swift */; };
 		C446BBE82317C696004B8146 /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE72317C696004B8146 /* MemoryView.swift */; };
 		C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBE92317C6CD004B8146 /* Memory.swift */; };
+		C446BBEC23184621004B8146 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBEB23184621004B8146 /* CPU.swift */; };
+		C446BBEE2318492A004B8146 /* Tape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBED2318492A004B8146 /* Tape.swift */; };
+		C446BBF023185035004B8146 /* Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBEF23185035004B8146 /* Dump.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		C446BBE52317C3C6004B8146 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		C446BBE72317C696004B8146 /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = "<group>"; };
 		C446BBE92317C6CD004B8146 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		C446BBEB23184621004B8146 /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
+		C446BBED2318492A004B8146 /* Tape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tape.swift; sourceTree = "<group>"; };
+		C446BBEF23185035004B8146 /* Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dump.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				C446BBE32317C298004B8146 /* Cell.swift */,
+				C446BBEB23184621004B8146 /* CPU.swift */,
+				C446BBED2318492A004B8146 /* Tape.swift */,
 				C446BBE92317C6CD004B8146 /* Memory.swift */,
+				C446BBEF23185035004B8146 /* Dump.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,8 +329,11 @@
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
 				C446BBE62317C3C6004B8146 /* CellView.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
+				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
+				C446BBF023185035004B8146 /* Dump.swift in Sources */,
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
+				C446BBEE2318492A004B8146 /* Tape.swift in Sources */,
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
