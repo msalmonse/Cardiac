@@ -22,12 +22,12 @@ struct CellView: View {
                 Spacer()
                 Text(cell.string)
                 .padding(3)
-                .overlay(RoundedRectangle(cornerRadius: 2).stroke(lineWidth: 1))
+                .overlay(strokedRoundedRectangle(cornerRadius: 2))
             }
         }
         .font(.system(.body, design: .monospaced))
         .frame(width: 80)
-        .overlay(RoundedRectangle(cornerRadius: 2).stroke(lineWidth: 2))
+        .overlay(strokedRoundedRectangle(cornerRadius: 2, stroke: 2))
     }
 }
 

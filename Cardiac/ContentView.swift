@@ -28,11 +28,7 @@ struct ContentView: View {
                     )
                     Spacer()
                     MemoryView(memory: cpu.memory)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 3)
-                        .stroke(lineWidth: 3.0)
-                        .foregroundColor(.green)
-                    )
+                    .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
                     Spacer()
                 }
             }
