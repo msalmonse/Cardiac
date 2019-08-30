@@ -14,6 +14,16 @@ enum CellStatus {
     case ro, rw, locked
 }
 
+extension CellStatus: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .ro:     return "Read Only"
+        case .rw:     return "Read/Write"
+        case .locked: return "Locked"
+        }
+    }
+}
+
 class Cell: ObservableObject, Identifiable {
     private let range: ClosedRange<UInt16> = 0...999
 
