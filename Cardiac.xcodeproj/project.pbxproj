@@ -22,6 +22,10 @@
 		C446BBEC23184621004B8146 /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBEB23184621004B8146 /* CPU.swift */; };
 		C446BBEE2318492A004B8146 /* Tape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBED2318492A004B8146 /* Tape.swift */; };
 		C446BBF023185035004B8146 /* Dump.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBEF23185035004B8146 /* Dump.swift */; };
+		C446BBF32318E09B004B8146 /* LoadAndSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBF22318E09B004B8146 /* LoadAndSave.swift */; };
+		C446BBF52318E3AD004B8146 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBF42318E3AD004B8146 /* Files.swift */; };
+		C446BBF92318E55B004B8146 /* nim.json in Resources */ = {isa = PBXBuildFile; fileRef = C446BBF72318E55B004B8146 /* nim.json */; };
+		C446BBFA2318E55B004B8146 /* reverse.json in Resources */ = {isa = PBXBuildFile; fileRef = C446BBF82318E55B004B8146 /* reverse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		C446BBEB23184621004B8146 /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
 		C446BBED2318492A004B8146 /* Tape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tape.swift; sourceTree = "<group>"; };
 		C446BBEF23185035004B8146 /* Dump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dump.swift; sourceTree = "<group>"; };
+		C446BBF22318E09B004B8146 /* LoadAndSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAndSave.swift; sourceTree = "<group>"; };
+		C446BBF42318E3AD004B8146 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
+		C446BBF72318E55B004B8146 /* nim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nim.json; sourceTree = "<group>"; };
+		C446BBF82318E55B004B8146 /* reverse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reverse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +128,9 @@
 				C446BBBA2317C084004B8146 /* LaunchScreen.storyboard */,
 				C446BBE12317C270004B8146 /* Models */,
 				C446BBB72317C084004B8146 /* Preview Content */,
+				C446BBF62318E4F1004B8146 /* Resources */,
 				C446BBB12317C07E004B8146 /* SceneDelegate.swift */,
+				C446BBF12318E070004B8146 /* Util */,
 				C446BBE02317C264004B8146 /* Views */,
 			);
 			path = Cardiac;
@@ -171,6 +181,24 @@
 				C446BBEF23185035004B8146 /* Dump.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C446BBF12318E070004B8146 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBF22318E09B004B8146 /* LoadAndSave.swift */,
+				C446BBF42318E3AD004B8146 /* Files.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		C446BBF62318E4F1004B8146 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C446BBF72318E55B004B8146 /* nim.json */,
+				C446BBF82318E55B004B8146 /* reverse.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,7 +306,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C446BBF92318E55B004B8146 /* nim.json in Resources */,
 				C446BBBC2317C084004B8146 /* LaunchScreen.storyboard in Resources */,
+				C446BBFA2318E55B004B8146 /* reverse.json in Resources */,
 				C446BBB92317C084004B8146 /* Preview Assets.xcassets in Resources */,
 				C446BBB62317C084004B8146 /* Assets.xcassets in Resources */,
 			);
@@ -330,6 +360,8 @@
 				C446BBE62317C3C6004B8146 /* CellView.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
 				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
+				C446BBF52318E3AD004B8146 /* Files.swift in Sources */,
+				C446BBF32318E09B004B8146 /* LoadAndSave.swift in Sources */,
 				C446BBF023185035004B8146 /* Dump.swift in Sources */,
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
