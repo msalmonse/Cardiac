@@ -19,7 +19,12 @@ struct CellDetail: View {
                 label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
             )
             .disabled(index <= 0)
+
             DetailView(cell: memory[index])
+            .padding()
+            .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
+            .padding()
+
             Button(
                 action: { self.index += 1 },
                 label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
