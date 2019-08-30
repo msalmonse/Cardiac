@@ -24,6 +24,14 @@ class Memory: Identifiable {
         set { cells[index] = newValue }
     }
 
+    // set the activity indicators for all cells
+    func setActivity(read: Int, write: Int, exec: Int) {
+        _ = cells.map { $0.setActivity(.noactivity) }
+        if Self.range.contains(read){ cells[read].setActivity(.reading) }
+        if Self.range.contains(write){ cells[write].setActivity(.writing) }
+        if Self.range.contains(exec){ cells[exec].setActivity(.executing) }
+    }
+
     init() {
         cells[0].setValue(1).lock()
         cells[99].setValue(800).setRO()

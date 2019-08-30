@@ -14,6 +14,19 @@ enum CellStatus {
     case ro, rw, locked
 }
 
+enum CellActivity {
+    case noactivity, reading, writing, executing
+
+    var color: Color {
+        switch self {
+        case .executing:    return .blue
+        case .noactivity:   return .primary
+        case .reading:      return .green
+        case .writing:      return .red
+        }
+    }
+}
+
 extension CellStatus: CustomStringConvertible {
     var description: String {
         switch self {
@@ -60,6 +73,7 @@ class Cell: ObservableObject, Identifiable {
 
     let location: String
 
+    var activity: CellActivity = .noactivity
     var status: CellStatus = .rw
 
     @discardableResult
@@ -77,6 +91,19 @@ class Cell: ObservableObject, Identifiable {
     @discardableResult
     func setRW() -> Cell {
         if status == .ro { status = .rw }
+        return self
+    }
+
+    @discardableResult
+    func setActivity(_ newActivity: CellActivity) -> Cell {
+        switch (status, newActivity) {
+        case (_, .executing):  activity = .executing
+        case (_, .noactivity): activity = .noactivity
+        case (_, .reading):    activity = .reading
+        case (.rw, .writing):  activity = .writing
+        case (_, .writing):    activity = .noactivity
+        }
+
         return self
     }
 
