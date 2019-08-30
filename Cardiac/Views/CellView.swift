@@ -12,10 +12,6 @@ struct CellView: View {
     let index: Int
     @ObservedObject var cell: Cell
 
-    private func digitImage(_ digit: UInt16) -> some View {
-        return Image(systemName: "\(digit % 10).square")
-    }
-
     var body: some View {
         HStack(spacing: 1) {
             if index < 0 {
