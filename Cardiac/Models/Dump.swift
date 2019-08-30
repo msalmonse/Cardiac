@@ -13,7 +13,7 @@ import Foundation
 class DumpData: Codable {
     var programCounter = 0
     var memory = [[String: Int]]()
-    var input = [[String: Int]]()
+    var input: [[String: Int]]? = nil
 
     enum CodingKeys: String, CodingKey {
         case programCounter = "PC"
