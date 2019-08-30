@@ -11,14 +11,13 @@ import SwiftUI
 fileprivate let columnOffset = 20
 fileprivate let columns = 5
 
-fileprivate let dummyCell = Cell(-1, 0)
 struct MemoryView: View {
     var memory: Memory
 
     func conditionalCellView(_ index: Int) -> some View {
         return Memory.contains(index)
-            ? CellView(index: index, cell: memory[index])
-            : CellView(index: -1, cell: dummyCell)
+            ? CellLink(memory: memory, index: index)
+            : CellLink(memory: memory, index: -1)
     }
 
     var body: some View {

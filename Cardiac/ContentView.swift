@@ -12,26 +12,32 @@ struct ContentView: View {
     var cpu = CPU()
 
     var body: some View {
-        ZStack {
-            Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
-            HStack {
-                Button(
-                    action: {
-                        switch self.cpu.loadJsonResource("nim") {
-                        case .success: break
-                        case .failure(let err): print(err)
-                        }
-                },
-                    label: { Text("Load nim") }
-                )
-                MemoryView(memory: cpu.memory)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 3)
-                    .stroke(lineWidth: 3.0)
-                    .foregroundColor(.green)
-                )
+        NavigationView {
+            ZStack {
+                Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            switch self.cpu.loadJsonResource("nim") {
+                            case .success: break
+                            case .failure(let err): print(err)
+                            }
+                    },
+                        label: { Text("Load nim") }
+                    )
+                    Spacer()
+                    MemoryView(memory: cpu.memory)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 3)
+                        .stroke(lineWidth: 3.0)
+                        .foregroundColor(.green)
+                    )
+                    Spacer()
+                }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
