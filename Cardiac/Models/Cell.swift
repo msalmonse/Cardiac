@@ -25,12 +25,19 @@ class Cell: ObservableObject, Identifiable {
     }
 
     @discardableResult
-    func setValue(_ newValue: UInt16) -> Cell {
-        if status == .rw && range.contains(newValue) { value = newValue}
+    func setValue(_ newValue: UInt16, overwrite: Bool = false) -> Cell {
+        if range.contains(newValue) {
+            switch (status, overwrite) {
+            case (.rw, _), (.ro, true):
+                value = newValue
+            default: break
+            }
+        }
 
         return self
     }
 
+    @Published
     private(set) var string = ""
 
     var opcode: UInt16 {
