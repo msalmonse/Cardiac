@@ -20,4 +20,38 @@ class CPU {
 
     var inTape = Tape(.input)
     var outTape = Tape(.output)
+
+    func loadJsonResource(_ name: String) -> Result<Void, Error> {
+        var url: URL
+        switch bundledURL(name) {
+        case .success(let ret): url = ret
+        case .failure(let err): return .failure(err)
+        }
+
+        return loadJsonURL(url)
+    }
+
+    func loadJsonURL(_ url: URL) -> Result<Void, Error> {
+        var dump: DumpData
+        switch loadFromJSON(url, as: DumpData.self) {
+        case .success(let data): dump = data
+        case .failure(let err): return .failure(err)
+        }
+
+        var err: Error? = nil
+
+        programCounter = UInt8(dump.programCounter)
+
+        for mem in dump.memory {
+            let addr = mem["addr"]
+            let data = mem["data"]
+            if addr == nil || data == nil {
+                err = FileError.dataFormatError
+                continue
+            }
+            memory[addr!].setValue(UInt16(data!))
+        }
+
+        return err == nil ? .success(Void()) : .failure(err!)
+    }
 }

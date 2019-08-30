@@ -176,9 +176,9 @@
 			children = (
 				C446BBE32317C298004B8146 /* Cell.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
-				C446BBED2318492A004B8146 /* Tape.swift */,
-				C446BBE92317C6CD004B8146 /* Memory.swift */,
 				C446BBEF23185035004B8146 /* Dump.swift */,
+				C446BBE92317C6CD004B8146 /* Memory.swift */,
+				C446BBED2318492A004B8146 /* Tape.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
