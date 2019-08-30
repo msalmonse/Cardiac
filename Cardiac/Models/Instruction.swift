@@ -10,6 +10,8 @@ import Foundation
 
 /// Convert a cell's opcode and address into a string
 
+// swiftlint:disable cyclomatic_complexity
+
 func instruction(_ cell: Cell, verbose: Bool = true) -> String {
     func sl() -> UInt16 { return cell.address / 10 }
     func sr() -> UInt16 { return cell.address % 10 }
@@ -38,7 +40,7 @@ func instruction(_ cell: Cell, verbose: Bool = true) -> String {
     case (8, false): return "JMP " + addr
     case (9, true):  return "Halt and reset to " + addr
     case (9, false): return "HRS " + addr
-    case (_, true):  return "Unkown opcode"
+    case (_, true):  return "Unkown opcode: \(opcode)"
     case (_, false): return "UNK"
     }
 }
