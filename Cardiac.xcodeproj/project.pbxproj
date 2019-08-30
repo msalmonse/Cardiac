@@ -26,6 +26,7 @@
 		C446BBF52318E3AD004B8146 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBF42318E3AD004B8146 /* Files.swift */; };
 		C446BBF92318E55B004B8146 /* nim.json in Resources */ = {isa = PBXBuildFile; fileRef = C446BBF72318E55B004B8146 /* nim.json */; };
 		C446BBFA2318E55B004B8146 /* reverse.json in Resources */ = {isa = PBXBuildFile; fileRef = C446BBF82318E55B004B8146 /* reverse.json */; };
+		C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBFB2318FB18004B8146 /* Instruction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		C446BBF42318E3AD004B8146 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		C446BBF72318E55B004B8146 /* nim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nim.json; sourceTree = "<group>"; };
 		C446BBF82318E55B004B8146 /* reverse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reverse.json; sourceTree = "<group>"; };
+		C446BBFB2318FB18004B8146 /* Instruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				C446BBEF23185035004B8146 /* Dump.swift */,
 				C446BBE92317C6CD004B8146 /* Memory.swift */,
 				C446BBED2318492A004B8146 /* Tape.swift */,
+				C446BBFB2318FB18004B8146 /* Instruction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				C446BBF32318E09B004B8146 /* LoadAndSave.swift in Sources */,
 				C446BBF023185035004B8146 /* Dump.swift in Sources */,
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
+				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
 				C446BBEE2318492A004B8146 /* Tape.swift in Sources */,
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
