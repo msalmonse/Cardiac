@@ -20,8 +20,8 @@ class Memory: Identifiable {
     var cells: [Cell] = range.map { Cell($0, 900) }
 
     subscript(index: Int) -> Cell {
-        get { return cells[index] }
-        set { cells[index] = newValue }
+        get { return Self.range.contains(index) ? cells[index] : Cell.empty }
+        set { if Self.range.contains(index) { cells[index] = newValue } }
     }
 
     // set the activity indicators for all cells

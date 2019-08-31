@@ -25,7 +25,7 @@ struct CellView: View {
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))
             }
         }
-        .font(.system(.body, design: .monospaced))
+        .font(.system(.headline, design: .monospaced))
         .frame(width: 80)
         .overlay(strokedRoundedRectangle(cornerRadius: 2, stroke: 2))
     }

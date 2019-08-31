@@ -11,7 +11,7 @@ import SwiftUI
 /// A memory cell
 
 enum CellStatus {
-    case ro, rw, locked
+    case ro, rw, locked, empty
 }
 
 enum CellActivity {
@@ -30,9 +30,10 @@ enum CellActivity {
 extension CellStatus: CustomStringConvertible {
     var description: String {
         switch self {
+        case .empty:  return "Empty"
+        case .locked: return "Locked"
         case .ro:     return "Read Only"
         case .rw:     return "Read/Write"
-        case .locked: return "Locked"
         }
     }
 }
@@ -49,7 +50,7 @@ class Cell: ObservableObject, Identifiable {
 
     @discardableResult
     func setValue(_ newValue: UInt16, overwrite: Bool = false) -> Cell {
-        if range.contains(newValue) {
+        if range.contains(newValue) && value != newValue {
             switch (status, overwrite) {
             case (.rw, _), (.ro, true):
                 value = newValue
@@ -60,8 +61,23 @@ class Cell: ObservableObject, Identifiable {
         return self
     }
 
-    @Published
-    private(set) var string = ""
+    var string = "" {
+        willSet { objectWillChange.send() }
+        didSet {
+            if string != oldValue {
+                guard let val = UInt16(string) else {
+                    string = oldValue
+                    objectWillChange.send()
+                    return
+                }
+                setValue(val)
+                if value != val {
+                    string = oldValue
+                    objectWillChange.send()
+                }
+            }
+        }
+    }
 
     var opcode: UInt16 {
         return value/100
@@ -97,6 +113,7 @@ class Cell: ObservableObject, Identifiable {
     @discardableResult
     func setActivity(_ newActivity: CellActivity) -> Cell {
         switch (status, newActivity) {
+        case (.empty, _):      activity = .noactivity
         case (_, .executing):  activity = .executing
         case (_, .noactivity): activity = .noactivity
         case (_, .reading):    activity = .reading
@@ -111,5 +128,13 @@ class Cell: ObservableObject, Identifiable {
         self.location = Memory.contains(location) ? String(format: "%02d", location) : ""
         self.value = value
         self.string = String(format: "%03d", value)
+    }
+
+    static var empty: Cell {
+        let cell = Cell(-1)
+        cell.string = ""
+        cell.status = .empty
+
+        return cell
     }
 }
