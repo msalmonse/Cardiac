@@ -11,28 +11,38 @@ import SwiftUI
 struct CellDetail: View {
     @State var index: Int
     var memory: Memory
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
-            Button(
-                action: { self.index -= 1 },
-                label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
-            )
-            .disabled(index <= 0)
+            HStack {
+                Button(
+                    action: { self.index -= 1 },
+                    label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
+                )
+                .disabled(index <= 0)
 
-            VStack(spacing: 1) {
-                DetailView(cell: memory[index - 1])
-                DetailView(cell: memory[index])
-                DetailView(cell: memory[index + 1])
+                VStack(spacing: 1) {
+                    DetailView(cell: memory[index - 1])
+                    DetailView(cell: memory[index])
+                    DetailView(cell: memory[index + 1])
+                    DetailView(cell: memory[index + 2])
+                }
+                .padding()
+                .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
+
+                Button(
+                    action: { self.index += 1 },
+                    label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
+                )
+                .disabled(index + 1 >= Memory.size)
+
             }
-            .padding()
-            .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
 
             Button(
-                action: { self.index += 1 },
-                label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
+                action: { self.mode.wrappedValue.dismiss() },
+                label: { Text("Dismiss") }
             )
-            .disabled(index + 1 >= Memory.size)
         }
     }
 }
@@ -41,7 +51,7 @@ struct DetailView: View {
     @ObservedObject var cell: Cell
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             if cell.status == .empty {
                 Image(systemName: "x.circle.fill")
                 .font(.largeTitle)
@@ -52,12 +62,9 @@ struct DetailView: View {
                 HStack {
                     Text("Value:")
                     if cell.status != .rw {
-                        Text(cell.string)
-                        } else {
-                        TextField(
-                            "Memory cell value",
-                            text: $cell.string
-                        )
+                        Text(cell.formattedValue)
+                    } else {
+                        TextField("Cell value", text: $cell.formattedValue)
                         .multilineTextAlignment(.trailing)
                         .frame(width: 75)
                     }

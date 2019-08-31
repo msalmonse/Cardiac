@@ -20,7 +20,8 @@ struct CellView: View {
                 Text(cell.location)
                 .padding(3)
                 Spacer()
-                Text(cell.string)
+                Text(cell.formattedValue)
+                .multilineTextAlignment(.trailing)
                 .padding(3)
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))
             }

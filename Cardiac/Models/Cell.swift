@@ -38,15 +38,26 @@ extension CellStatus: CustomStringConvertible {
     }
 }
 
+// get a Formatter for Cell values
+
+fileprivate func cellFormatter() -> NumberFormatter {
+    let fmt = NumberFormatter()
+    fmt.minimum = 0
+    fmt.maximum = 999
+    fmt.positiveFormat = "000"
+
+    return fmt
+}
+
 class Cell: ObservableObject, Identifiable {
+    static let formatter: NumberFormatter = cellFormatter()
+
     private let range: ClosedRange<UInt16> = 0...999
 
     let id = UUID()
 
-    private(set) var value: UInt16 {
-        willSet { objectWillChange.send() }
-        didSet { string = String(format: "%03d", value) }
-    }
+    @Published
+    private(set) var value: UInt16
 
     @discardableResult
     func setValue(_ newValue: UInt16, overwrite: Bool = false) -> Cell {
@@ -61,21 +72,14 @@ class Cell: ObservableObject, Identifiable {
         return self
     }
 
-    var string = "" {
-        willSet { objectWillChange.send() }
-        didSet {
-            if string != oldValue {
-                guard let val = UInt16(string) else {
-                    string = oldValue
-                    objectWillChange.send()
-                    return
-                }
-                setValue(val)
-                if value != val {
-                    string = oldValue
-                    objectWillChange.send()
-                }
-            }
+    var formattedValue: String {
+        get {
+            guard let str = Self.formatter.string(for: value) else { return "???" }
+            return str
+        }
+        set {
+            guard let num = UInt16(newValue) else { return }
+            setValue(num)
         }
     }
 
@@ -127,12 +131,10 @@ class Cell: ObservableObject, Identifiable {
     init(_ location: Int, _ value: UInt16 = 0) {
         self.location = Memory.contains(location) ? String(format: "%02d", location) : ""
         self.value = value
-        self.string = String(format: "%03d", value)
     }
 
     static var empty: Cell {
         let cell = Cell(-1)
-        cell.string = ""
         cell.status = .empty
 
         return cell
