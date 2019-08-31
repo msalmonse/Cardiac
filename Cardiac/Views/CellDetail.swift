@@ -51,7 +51,7 @@ struct DetailView: View {
     @ObservedObject var cell: Cell
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             if cell.status == .empty {
                 Image(systemName: "x.circle.fill")
                 .font(.largeTitle)
@@ -66,7 +66,7 @@ struct DetailView: View {
                     } else {
                         TextField("Cell value", text: $cell.formattedValue)
                         .multilineTextAlignment(.trailing)
-                        .frame(width: 75)
+                        .frame(width: 50)
                     }
                 }
                 Text(instruction(cell))
