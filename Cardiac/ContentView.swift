@@ -32,6 +32,8 @@ struct ContentView: View {
                     Spacer()
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarTitle(Text("Cardiac"), displayMode: .inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
