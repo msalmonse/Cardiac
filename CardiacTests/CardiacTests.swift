@@ -28,6 +28,33 @@ class CardiacTests: XCTestCase {
         }
     }
 
+    func testALU() {
+        let alu = ALU()
+
+        func res() -> Int { return Int(alu.result.value) }
+
+        alu.cla(666)
+        XCTAssertEqual(res(), 666)
+
+        alu.add(666)
+        XCTAssertEqual(res(), 1332)
+
+        alu.add(0)
+        XCTAssertEqual(res(), 333, "Test of result truncation")
+
+        alu.sub(111)
+        XCTAssertEqual(res(), 222)
+        XCTAssertFalse(alu.isNegative)
+
+        alu.sub(999)
+        XCTAssertEqual(res(), 777)
+        XCTAssertTrue(alu.isNegative)
+
+        alu.add(999)
+        XCTAssertEqual(res(), 222)
+        XCTAssertFalse(alu.isNegative)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
