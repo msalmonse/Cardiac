@@ -18,6 +18,10 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button(
+                        action: { self.cpu.execOne() },
+                        label: { Text("Exec 1") }
+                    )
+                    Button(
                         action: {
                             switch self.cpu.loadJsonResource("nim") {
                             case .success: break

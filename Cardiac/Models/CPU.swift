@@ -13,8 +13,11 @@ class CPU {
 
     let alu = ALU()
 
-    var execAddr: UInt8 = 0
-    var execNext: UInt8 = 0
+    var execAddr: UInt16 = 0
+    var execNext: UInt16 = 0
+
+    var readAddr: UInt16 = 0
+    var writeAddr: UInt16 = 0
 
     var inTape = Tape(.input)
     var outTape = Tape(.output)
@@ -38,7 +41,7 @@ class CPU {
 
         var err: Error? = nil
 
-        execAddr = UInt8(dump.programCounter)
+        execNext = UInt16(dump.programCounter)
 
         for mem in dump.memory {
             let addr = mem["addr"]

@@ -48,6 +48,34 @@ class ALU: ObservableObject, Identifiable {
         }
     }
 
+    func shiftLeft(_ count: UInt16) {
+        func slResult(_ mul: Int) {
+            let shifted = Int(result.value) * mul
+            result.setValue(UInt16(shifted % 10000))
+        }
+        switch count {
+        case 0: break
+        case 1: slResult(10)
+        case 2: slResult(100)
+        case 3: slResult(1000)
+        default: result.setValue(0)
+        }
+    }
+
+    func shiftRight(_ count: UInt16) {
+        func srResult(_ div: Int) {
+            let shifted = Int(result.value) / div
+            result.setValue(UInt16(shifted % 10000))
+        }
+        switch count {
+        case 0: break
+        case 1: srResult(10)
+        case 2: srResult(100)
+        case 3: srResult(1000)
+        default: result.setValue(0)
+        }
+    }
+
     init() {
         result.makeBig()
     }

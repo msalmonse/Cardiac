@@ -24,12 +24,17 @@ class Memory: Identifiable {
         set { if Self.range.contains(index) { cells[index] = newValue } }
     }
 
+    subscript(uindex: UInt16) -> Cell {
+        get { return self[Int(uindex)] }
+        set { self[Int(uindex)] = newValue }
+    }
+
     // set the activity indicators for all cells
-    func setActivity(read: Int, write: Int, exec: Int) {
+    func setActivity(read: UInt16, write: UInt16, exec: UInt16) {
         _ = cells.map { $0.setActivity(.noactivity) }
-        if Self.range.contains(read) { cells[read].setActivity(.reading) }
-        if Self.range.contains(write) { cells[write].setActivity(.writing) }
-        if Self.range.contains(exec) { cells[exec].setActivity(.executing) }
+        if Self.range.contains(Int(read)) { self[read].setActivity(.reading) }
+        if Self.range.contains(Int(write)) { self[write].setActivity(.writing) }
+        if Self.range.contains(Int(exec)) { self[exec].setActivity(.executing) }
     }
 
     init() {

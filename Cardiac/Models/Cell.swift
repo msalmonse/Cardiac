@@ -39,7 +39,7 @@ extension CellStatus: CustomStringConvertible {
 }
 
 fileprivate let cellRange: ClosedRange<UInt16> = 0...999
-fileprivate let bigRange: ClosedRange<UInt16> = 0...1999
+fileprivate let bigRange: ClosedRange<UInt16> = 0...9999
 
 class Cell: ObservableObject, Identifiable {
     private var range = cellRange
@@ -107,12 +107,8 @@ class Cell: ObservableObject, Identifiable {
         return left.value < right
     }
 
-    var opcode: UInt16 {
-        return value/100
-    }
-
-    var address: UInt16 {
-        return value % 100
+    var opcode: OpCode {
+        return OpCode.opcode(value/100, value % 100)
     }
 
     let location: String
