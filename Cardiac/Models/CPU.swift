@@ -11,12 +11,10 @@ import Foundation
 class CPU {
     var memory = Memory()
 
-    // System registers
-    var operandA: Int = 0
-    var operandB: Int = 0
-    var result: Int = 0
+    let alu = ALU()
 
-    var programCounter: UInt8 = 0
+    var execAddr: UInt8 = 0
+    var execNext: UInt8 = 0
 
     var inTape = Tape(.input)
     var outTape = Tape(.output)
@@ -40,7 +38,7 @@ class CPU {
 
         var err: Error? = nil
 
-        programCounter = UInt8(dump.programCounter)
+        execAddr = UInt8(dump.programCounter)
 
         for mem in dump.memory {
             let addr = mem["addr"]
