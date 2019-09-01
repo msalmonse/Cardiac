@@ -53,6 +53,14 @@ class CardiacTests: XCTestCase {
         alu.add(999)
         XCTAssertEqual(res(), 222)
         XCTAssertFalse(alu.isNegative)
+
+        alu.result.setValue(1234)
+        alu.shiftLeft(2)
+        XCTAssertEqual(res(), 3400)
+
+        alu.result.setValue(1234)
+        alu.shiftRight(2)
+        XCTAssertEqual(res(), 12)
     }
 
     func testPerformanceExample() {
