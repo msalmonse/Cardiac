@@ -30,6 +30,7 @@
 		C446BBFE23190EA5004B8146 /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBFD23190EA5004B8146 /* CellDetail.swift */; };
 		C446BC0123191450004B8146 /* CellLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBFF231910DD004B8146 /* CellLink.swift */; };
 		C446BC0323199EAC004B8146 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC0223199EAC004B8146 /* Shapes.swift */; };
+		C446BC45231BAD38004B8146 /* ALU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC44231BAD38004B8146 /* ALU.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		C446BBFD23190EA5004B8146 /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		C446BBFF231910DD004B8146 /* CellLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellLink.swift; sourceTree = "<group>"; };
 		C446BC0223199EAC004B8146 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		C446BC44231BAD38004B8146 /* ALU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,12 +186,13 @@
 		C446BBE12317C270004B8146 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C446BC44231BAD38004B8146 /* ALU.swift */,
 				C446BBE32317C298004B8146 /* Cell.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
 				C446BBEF23185035004B8146 /* Dump.swift */,
+				C446BBFB2318FB18004B8146 /* Instruction.swift */,
 				C446BBE92317C6CD004B8146 /* Memory.swift */,
 				C446BBED2318492A004B8146 /* Tape.swift */,
-				C446BBFB2318FB18004B8146 /* Instruction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
 				C446BBE62317C3C6004B8146 /* CellView.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
+				C446BC45231BAD38004B8146 /* ALU.swift in Sources */,
 				C446BC0123191450004B8146 /* CellLink.swift in Sources */,
 				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
 				C446BBF52318E3AD004B8146 /* Files.swift in Sources */,
@@ -555,7 +559,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -575,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.5;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

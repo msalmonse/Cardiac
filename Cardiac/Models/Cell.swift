@@ -38,21 +38,12 @@ extension CellStatus: CustomStringConvertible {
     }
 }
 
-// get a Formatter for Cell values
-
-fileprivate func cellFormatter() -> NumberFormatter {
-    let fmt = NumberFormatter()
-    fmt.minimum = 0
-    fmt.maximum = 999
-    fmt.positiveFormat = "000"
-
-    return fmt
-}
+fileprivate let cellRange: ClosedRange<UInt16> = 0...999
+fileprivate let bigRange: ClosedRange<UInt16> = 0...1999
 
 class Cell: ObservableObject, Identifiable {
-    static let formatter: NumberFormatter = cellFormatter()
-
-    private let range: ClosedRange<UInt16> = 0...999
+    private var range = cellRange
+    private var format = "%03d"
 
     let id = UUID()
 
@@ -74,13 +65,46 @@ class Cell: ObservableObject, Identifiable {
 
     var formattedValue: String {
         get {
-            guard let str = Self.formatter.string(for: value) else { return "???" }
-            return str
+            return String(format: format, Int(value))
         }
         set {
             guard let num = UInt16(newValue) else { return }
             setValue(num)
         }
+    }
+
+    // Add 2 cells
+    static func + (left: Cell, right: Cell) -> UInt16 {
+        return left.value + right.value
+    }
+
+    // Add UInt to cell
+    static func + (left: Cell, right: UInt16) -> UInt16 {
+        return left.value + right
+    }
+
+    // Subtract 2 cells
+    static func - (left: Cell, right: Cell) -> (UInt16, Bool) {
+        return left < right
+            ? (right.value - left.value, true)
+            : (left.value - right.value, false)
+    }
+
+    // Subtract UInt from cell
+    static func - (left: Cell, right: UInt16) -> (UInt16, Bool) {
+        return left < right
+            ? (right - left.value, true)
+            : (left.value - right, false)
+    }
+
+    // Less than
+    static func < (left: Cell, right: Cell) -> Bool {
+        return left.value < right.value
+    }
+
+    // Less than
+    static func < (left: Cell, right: UInt16) -> Bool {
+        return left.value < right
     }
 
     var opcode: UInt16 {
@@ -124,6 +148,14 @@ class Cell: ObservableObject, Identifiable {
         case (.rw, .writing):  activity = .writing
         case (_, .writing):    activity = .noactivity
         }
+
+        return self
+    }
+
+    @discardableResult
+    func makeBig() -> Cell {
+        range = bigRange
+        format = "%04d"
 
         return self
     }
