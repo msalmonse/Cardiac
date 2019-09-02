@@ -17,12 +17,14 @@ enum RunState {
     case running, stepping, halted, iowait, loading
 }
 
-class CPU {
+class CPU: ObservableObject, Identifiable {
+    let id = UUID()
+
     var memory = Memory()
 
     let alu = ALU()
 
-    var execAddr: UInt16 = 0
+    var execAddr: UInt16 = 0 { willSet { objectWillChange.send() } }
     var execNext: UInt16 = 0
     var runState = RunState.halted
 
@@ -54,6 +56,7 @@ class CPU {
         var err: Error? = nil
 
         execNext = UInt16(dump.next)
+        execAddr = execNext
 
         for mem in dump.memory {
             switch oneCell(mem) {

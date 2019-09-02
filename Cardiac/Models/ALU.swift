@@ -22,6 +22,7 @@ class ALU: ObservableObject, Identifiable {
     let result = Cell(-1)
     var isNegative = false
 
+    @Published
     var operation: ALU.PlusMinus = .nosign
     var sign: ALU.PlusMinus {
         return isNegative ? .minus : .plus

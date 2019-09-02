@@ -23,10 +23,10 @@ struct ContentView: View {
                         .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
                         .frame(width: 200)
                         Spacer()
-                        Button(
-                            action: { self.cpu.execOne() },
-                            label: { Text("Exec 1") }
-                        )
+                        ExecView(cpu: cpu)
+                        .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                        .frame(width: 200)
+                        Spacer()
                         Button(
                             action: {
                                 switch self.cpu.loadJsonResource("nim") {
