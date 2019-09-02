@@ -16,12 +16,12 @@ struct ContentView: View {
             ZStack {
                 Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
                 HStack {
-                    Spacer()
                     TapeView(tape: cpu.outTape)
                     VStack {
                         Spacer()
                         ALUview(alu: cpu.alu)
                         .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                        .frame(width: 200)
                         Spacer()
                         Button(
                             action: { self.cpu.execOne() },

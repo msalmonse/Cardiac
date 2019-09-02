@@ -13,6 +13,10 @@ fileprivate struct AddressAndData {
     let data: UInt16
 }
 
+enum RunState {
+    case running, stepping, halted, iowait, loading
+}
+
 class CPU {
     var memory = Memory()
 
@@ -20,6 +24,7 @@ class CPU {
 
     var execAddr: UInt16 = 0
     var execNext: UInt16 = 0
+    var runState = RunState.halted
 
     var readAddr: UInt16 = 0
     var writeAddr: UInt16 = 0
@@ -38,6 +43,8 @@ class CPU {
     }
 
     func loadJsonURL(_ url: URL) -> Result<Void, Error> {
+        runState = .loading
+
         var dump: DumpData
         switch loadFromJSON(url, as: DumpData.self) {
         case .success(let data): dump = data
@@ -64,6 +71,7 @@ class CPU {
             }
         }
 
+        runState = .halted
         return err == nil ? .success(Void()) : .failure(err!)
     }
 

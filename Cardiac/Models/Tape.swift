@@ -34,20 +34,21 @@ class Tape: ObservableObject, Identifiable {
     var cells: [Cell] = range.map { Cell($0) }
 
     var inOut: TapeInOut
+    @Published
     var head = 0
 
-    func readNext() -> Result<UInt16, Error> {
-        if inOut != .input { return .failure(TapeError.woDevice)}
-        if head >= cells.count { return .failure(TapeError.endOfTape) }
-        if !cells[head].valid { return .failure(TapeError.endOfTape) }
+    func readNext() -> Result<UInt16, TapeError> {
+        if inOut != .input { return .failure(.woDevice)}
+        if head >= cells.count { return .failure(.endOfTape) }
+        if !cells[head].valid { return .failure(.endOfTape) }
         let ret = cells[head].value
         head += 1
         return .success(ret)
     }
 
-    func writeNext(_ value: UInt16) -> Result<Void, Error> {
-        if inOut != .output { return .failure(TapeError.roDevice)}
-        if head >= Tape.size { return .failure(TapeError.endOfTape) }
+    func writeNext(_ value: UInt16) -> Result<Void, TapeError> {
+        if inOut != .output { return .failure(.roDevice)}
+        if head >= Tape.size { return .failure(.endOfTape) }
         cells[head].setValue(value)
         head += 1
         return .success(Void())

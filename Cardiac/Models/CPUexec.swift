@@ -28,6 +28,13 @@ extension CPU {
         return
     }
 
+    func iotrap(_ reason: TapeError) {
+        print("Trap @\(execAddr): " + (reason.errorDescription ?? "Unknown"))
+        execNext = execAddr     // Instruction not completed
+        halt()
+        return
+    }
+
     func halt() {
         return
     }
@@ -39,6 +46,21 @@ extension CPU {
 
     func ioOp(_ opcode: OpCode) {
         switch opcode {
+        case let .inp(addr):
+            switch inTape.readNext() {
+            case let .success(val):
+                memory[addr].setValue(val % 999)
+                writeAddr = addr
+            case let .failure(err):
+                iotrap(err)
+            }
+        case let .out(addr):
+            switch outTape.writeNext(memory[addr].value) {
+            case .success:
+                readAddr = addr
+            case let .failure(err):
+                iotrap(err)
+            }
         default: trap(.illegal(opcode))
         }
         return
@@ -56,9 +78,17 @@ extension CPU {
 
     func jumpOp(_ opcode: OpCode) {
         switch opcode {
-        case let .tac(addr): if alu.isNegative { execNext = addr }
-        case let .jmp(addr): execNext = addr
-        case let .hrs(addr): execNext = addr; halt()
+        case let .tac(addr):
+            if alu.isNegative {
+                execNext = addr
+                writeAddr = 99
+            }
+        case let .jmp(addr):
+            execNext = addr
+            writeAddr = 99
+        case let .hrs(addr):
+            execNext = addr
+            halt()
         default: trap(.illegal(opcode))
         }
         return
@@ -71,6 +101,7 @@ extension CPU {
     }
 
     func execOne() {
+        if runState == .halted { runState = .stepping }
         execAddr = execNext
         execNext += 1
         readAddr = UInt16.max
@@ -90,5 +121,6 @@ extension CPU {
         }
 
         memory.setActivity(read: readAddr, write: writeAddr, exec: execAddr)
+        if runState == .stepping { runState = .halted }
     }
 }
