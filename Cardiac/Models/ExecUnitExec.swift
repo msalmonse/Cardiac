@@ -106,6 +106,7 @@ extension ExecUnit {
         next += 1
         readAddr = UInt16.max
         writeAddr = UInt16.max
+        let opcode = self.opcode    // local cache
 
         switch opcode {
         case .inp, .out: ioOp(opcode)
