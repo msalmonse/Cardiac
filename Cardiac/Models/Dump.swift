@@ -11,13 +11,15 @@ import Foundation
 // Class used to load data from JSON dump
 
 class DumpData: Codable {
-    var programCounter = 0
-    var memory = [[String: Int]]()
-    var input: [[String: Int]]? = nil
+    var next = 0                            // next address to execute
+    var memory = [[String: Int]]()          // memory contents as a dict
+    var input: [[String: Int]]? = nil       // optional input as dict
+    var comment: [String]? = nil            // optional comment, an array of one string per line
 
     enum CodingKeys: String, CodingKey {
-        case programCounter = "PC"
+        case next = "PC"
         case memory
         case input
+        case comment
     }
 }

@@ -21,5 +21,8 @@
    ],
    "input": [
       { "addr":  0, "data": 123 }
+   ],
+   "comment": [
+       "Reverse the number read from the input i.e. 123 becomes 321"
    ]
 }

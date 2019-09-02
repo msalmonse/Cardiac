@@ -8,6 +8,11 @@
 
 import Foundation
 
+fileprivate struct AddressAndData {
+    let address: UInt16
+    let data: UInt16
+}
+
 class CPU {
     var memory = Memory()
 
@@ -41,18 +46,33 @@ class CPU {
 
         var err: Error? = nil
 
-        execNext = UInt16(dump.programCounter)
+        execNext = UInt16(dump.next)
 
         for mem in dump.memory {
-            let addr = mem["addr"]
-            let data = mem["data"]
-            if addr == nil || data == nil {
-                err = FileError.dataFormatError
-                continue
+            switch oneCell(mem) {
+            case let .success(addrData):
+                memory[addrData.address].setValue(addrData.data)
+            case let .failure(error): err = error
             }
-            memory[addr!].setValue(UInt16(data!))
+        }
+
+        for inp in dump.input ?? [] {
+            switch oneCell(inp) {
+            case let .success(addrData):
+                inTape.data.append(addrData.data)   // FixME
+            case let .failure(error): err = error
+            }
         }
 
         return err == nil ? .success(Void()) : .failure(err!)
+    }
+
+    fileprivate func oneCell(_ dataIn: [String: Int]) -> Result<AddressAndData, Error> {
+        let addr = dataIn["addr"]
+        let data = dataIn["data"]
+        if addr == nil || data == nil {
+            return .failure(FileError.dataFormatError)
+        }
+        return .success(AddressAndData(address: UInt16(addr!), data: UInt16(data!)))
     }
 }
