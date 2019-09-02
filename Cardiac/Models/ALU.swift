@@ -11,12 +11,21 @@ import Foundation
 // Arithmatic and logic unit
 
 class ALU: ObservableObject, Identifiable {
+    enum PlusMinus {
+        case plus, minus, nosign
+    }
+
     let id = UUID()
 
     let opA = Cell(-1)
     let opB = Cell(-1)
     let result = Cell(-1)
     var isNegative = false
+
+    var operation: ALU.PlusMinus = .nosign
+    var sign: ALU.PlusMinus {
+        return isNegative ? .minus : .plus
+    }
 
     func cla(_ opB: UInt16) {
         self.opA.setValue(0)

@@ -17,19 +17,26 @@ struct ContentView: View {
                 Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
                 HStack {
                     Spacer()
-                    Button(
-                        action: { self.cpu.execOne() },
-                        label: { Text("Exec 1") }
-                    )
-                    Button(
-                        action: {
-                            switch self.cpu.loadJsonResource("nim") {
-                            case .success: break
-                            case .failure(let err): print(err)
-                            }
-                    },
-                        label: { Text("Load nim") }
-                    )
+                    VStack {
+                        Spacer()
+                        ALUview(alu: cpu.alu)
+                        .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                        Spacer()
+                        Button(
+                            action: { self.cpu.execOne() },
+                            label: { Text("Exec 1") }
+                        )
+                        Button(
+                            action: {
+                                switch self.cpu.loadJsonResource("nim") {
+                                case .success: break
+                                case .failure(let err): print(err)
+                                }
+                        },
+                            label: { Text("Load nim") }
+                        )
+                        Spacer()
+                    }
                     Spacer()
                     MemoryView(memory: cpu.memory)
                     .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))

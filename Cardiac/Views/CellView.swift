@@ -18,9 +18,11 @@ struct CellView: View {
                 Text("")
             } else {
                 Text(cell.location)
+                .foregroundColor(cell.activity.color)
                 .padding(3)
                 Spacer()
                 Text(cell.formattedValue)
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.trailing)
                 .padding(3)
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))

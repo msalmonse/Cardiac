@@ -113,6 +113,7 @@ class Cell: ObservableObject, Identifiable {
 
     let location: String
 
+    @Published
     var activity: CellActivity = .noactivity
     var status: CellStatus = .rw
 

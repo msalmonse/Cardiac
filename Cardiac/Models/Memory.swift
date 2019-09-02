@@ -31,7 +31,7 @@ class Memory: Identifiable {
 
     // set the activity indicators for all cells
     func setActivity(read: UInt16, write: UInt16, exec: UInt16) {
-        _ = cells.map { $0.setActivity(.noactivity) }
+        _ = cells.filter({ $0.activity != .noactivity}).map { $0.setActivity(.noactivity) }
         if Self.range.contains(Int(read)) { self[read].setActivity(.reading) }
         if Self.range.contains(Int(write)) { self[write].setActivity(.writing) }
         if Self.range.contains(Int(exec)) { self[exec].setActivity(.executing) }

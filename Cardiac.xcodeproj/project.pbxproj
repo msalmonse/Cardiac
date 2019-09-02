@@ -32,6 +32,7 @@
 		C446BC0323199EAC004B8146 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC0223199EAC004B8146 /* Shapes.swift */; };
 		C446BC45231BAD38004B8146 /* ALU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC44231BAD38004B8146 /* ALU.swift */; };
 		C446BC47231BF7D1004B8146 /* CPUexec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC46231BF7D1004B8146 /* CPUexec.swift */; };
+		C446BC49231CE810004B8146 /* ALUview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC48231CE810004B8146 /* ALUview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		C446BC0223199EAC004B8146 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		C446BC44231BAD38004B8146 /* ALU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALU.swift; sourceTree = "<group>"; };
 		C446BC46231BF7D1004B8146 /* CPUexec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUexec.swift; sourceTree = "<group>"; };
+		C446BC48231CE810004B8146 /* ALUview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALUview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +179,11 @@
 		C446BBE02317C264004B8146 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C446BBE52317C3C6004B8146 /* CellView.swift */,
-				C446BBE72317C696004B8146 /* MemoryView.swift */,
+				C446BC48231CE810004B8146 /* ALUview.swift */,
 				C446BBFD23190EA5004B8146 /* CellDetail.swift */,
 				C446BBFF231910DD004B8146 /* CellLink.swift */,
+				C446BBE52317C3C6004B8146 /* CellView.swift */,
+				C446BBE72317C696004B8146 /* MemoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				C446BBE82317C696004B8146 /* MemoryView.swift in Sources */,
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
 				C446BBE62317C3C6004B8146 /* CellView.swift in Sources */,
+				C446BC49231CE810004B8146 /* ALUview.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
 				C446BC45231BAD38004B8146 /* ALU.swift in Sources */,
 				C446BC0123191450004B8146 /* CellLink.swift in Sources */,
