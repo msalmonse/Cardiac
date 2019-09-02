@@ -13,26 +13,18 @@ fileprivate struct AddressAndData {
     let data: UInt16
 }
 
-enum RunState {
-    case running, stepping, halted, iowait, loading
-}
-
-class CPU: ObservableObject, Identifiable {
+class CPU: Identifiable {
     let id = UUID()
 
-    var memory = Memory()
-
-    let alu = ALU()
-
-    var execAddr: UInt16 = 0 { willSet { objectWillChange.send() } }
-    var execNext: UInt16 = 0
-    var runState = RunState.halted
-
-    var readAddr: UInt16 = 0
-    var writeAddr: UInt16 = 0
+    let memory = Memory()
+    let exec: ExecUnit
 
     var inTape = Tape(.input)
     var outTape = Tape(.output)
+
+    init() {
+        self.exec = ExecUnit(memory: memory, inTape: inTape, outTape: outTape)
+    }
 
     func loadJsonResource(_ name: String) -> Result<Void, Error> {
         var url: URL
@@ -45,7 +37,7 @@ class CPU: ObservableObject, Identifiable {
     }
 
     func loadJsonURL(_ url: URL) -> Result<Void, Error> {
-        runState = .loading
+        exec.runState = .loading
 
         var dump: DumpData
         switch loadFromJSON(url, as: DumpData.self) {
@@ -55,8 +47,8 @@ class CPU: ObservableObject, Identifiable {
 
         var err: Error? = nil
 
-        execNext = UInt16(dump.next)
-        execAddr = execNext
+        exec.next = UInt16(dump.next)
+        exec.address = exec.next
 
         for mem in dump.memory {
             switch oneCell(mem) {
@@ -74,7 +66,7 @@ class CPU: ObservableObject, Identifiable {
             }
         }
 
-        runState = .halted
+        exec.runState = .halted
         return err == nil ? .success(Void()) : .failure(err!)
     }
 

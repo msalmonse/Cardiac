@@ -1,5 +1,5 @@
 //
-//  CPUexec.swift
+//  ExexUnitExec.swift
 //  Cardiac
 //
 //  Created by Michael Salmon on 2019-09-01.
@@ -20,17 +20,17 @@ extension ExecError: LocalizedError {
     }
 }
 
-extension CPU {
+extension ExecUnit {
 
     func trap(_ reason: ExecError) {
-        print("Trap @\(execAddr): " + (reason.errorDescription ?? "Unknown"))
+        print("Trap @\(address): " + (reason.errorDescription ?? "Unknown"))
         halt()
         return
     }
 
     func iotrap(_ reason: TapeError) {
-        print("Trap @\(execAddr): " + (reason.errorDescription ?? "Unknown"))
-        execNext = execAddr     // Instruction not completed
+        print("IOtrap @\(address): " + (reason.errorDescription ?? "Unknown"))
+        next = address     // Instruction not completed
         halt()
         return
     }
@@ -80,14 +80,14 @@ extension CPU {
         switch opcode {
         case let .tac(addr):
             if alu.isNegative {
-                execNext = addr
+                next = addr
                 writeAddr = 99
             }
         case let .jmp(addr):
-            execNext = addr
+            next = addr
             writeAddr = 99
         case let .hrs(addr):
-            execNext = addr
+            next = addr
             halt()
         default: trap(.illegal(opcode))
         }
@@ -102,12 +102,10 @@ extension CPU {
 
     func execOne() {
         if runState == .halted { runState = .stepping }
-        execAddr = execNext
-        execNext += 1
+        address = next
+        next += 1
         readAddr = UInt16.max
         writeAddr = UInt16.max
-
-        let opcode = memory[execAddr].opcode
 
         switch opcode {
         case .inp, .out: ioOp(opcode)
@@ -120,7 +118,7 @@ extension CPU {
         default: trap(.illegal(opcode))
         }
 
-        memory.setActivity(read: readAddr, write: writeAddr, exec: execAddr)
+        memory.setActivity(read: readAddr, write: writeAddr, exec: address)
         if runState == .stepping { runState = .halted }
     }
 }

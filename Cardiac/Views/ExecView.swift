@@ -9,27 +9,27 @@
 import SwiftUI
 
 struct ExecView: View {
-    @ObservedObject var cpu: CPU
+    @ObservedObject var exec: ExecUnit
 
     var body: some View {
         VStack {
             HStack {
-                Text("Executing")
+                Text("Executing address")
                 Spacer()
-                Text(String(format: "%02d", Int(cpu.execAddr)))
+                Text(String(format: "%02d", Int(exec.intAddress)))
             }
-            Text(instruction(cpu.memory[cpu.execAddr]))
+            Text(instruction(exec.opcode))
             Button(
-                action: { self.cpu.execOne() },
+                action: { self.exec.execOne() },
                 label: { Text("Exec 1") }
             )
-
         }
+        .padding(2)
     }
 }
 
 struct ExecView_Previews: PreviewProvider {
     static var previews: some View {
-        ExecView(cpu: CPU())
+        ExecView(exec: ExecUnit(memory: Memory(), inTape: Tape(.input), outTape: Tape(.output)))
     }
 }

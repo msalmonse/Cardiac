@@ -19,11 +19,11 @@ struct ContentView: View {
                     TapeView(tape: cpu.outTape)
                     VStack {
                         Spacer()
-                        ALUview(alu: cpu.alu)
+                        ALUview(alu: cpu.exec.alu)
                         .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
                         .frame(width: 200)
                         Spacer()
-                        ExecView(cpu: cpu)
+                        ExecView(exec: cpu.exec)
                         .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
                         .frame(width: 200)
                         Spacer()

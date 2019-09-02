@@ -59,11 +59,13 @@ enum OpCode {
 /// Convert a cell's opcode and address into a string
 
 func instruction(_ cell: Cell, verbose: Bool = true) -> String {
+    return instruction(cell.opcode, verbose: verbose)
+}
+
+func instruction(_ opcode: OpCode, verbose: Bool = false) -> String {
     func sl(_ val: UInt16) -> UInt16 { return val / 10 }
     func sr(_ val: UInt16) -> UInt16 { return val % 10 }
     func fmt(_ addr: UInt16) -> String { return String(format: "%02d", Int(addr)) }
-
-    let opcode = cell.opcode
 
     switch (opcode, verbose) {
     case (let .inp(addr), true):  return "Read from tape to " + fmt(addr)
