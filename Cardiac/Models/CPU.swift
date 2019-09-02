@@ -59,7 +59,7 @@ class CPU {
         for inp in dump.input ?? [] {
             switch oneCell(inp) {
             case let .success(addrData):
-                inTape.data.append(addrData.data)   // FixME
+                inTape[addrData.address].setValue(addrData.data)
             case let .failure(error): err = error
             }
         }

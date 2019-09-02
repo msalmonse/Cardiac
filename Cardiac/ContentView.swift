@@ -17,6 +17,7 @@ struct ContentView: View {
                 Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
                 HStack {
                     Spacer()
+                    TapeView(tape: cpu.outTape)
                     VStack {
                         Spacer()
                         ALUview(alu: cpu.alu)
@@ -35,8 +36,18 @@ struct ContentView: View {
                         },
                             label: { Text("Load nim") }
                         )
+                        Button(
+                            action: {
+                                switch self.cpu.loadJsonResource("reverse") {
+                                case .success: break
+                                case .failure(let err): print(err)
+                                }
+                        },
+                            label: { Text("Load reverse") }
+                        )
                         Spacer()
                     }
+                    TapeView(tape: cpu.inTape)
                     Spacer()
                     MemoryView(memory: cpu.memory)
                     .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))

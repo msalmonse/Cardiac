@@ -56,6 +56,7 @@ class Cell: ObservableObject, Identifiable {
             switch (status, overwrite) {
             case (.rw, _), (.ro, true):
                 value = newValue
+                valid = true
             default: break
             }
         }
@@ -116,6 +117,7 @@ class Cell: ObservableObject, Identifiable {
     @Published
     var activity: CellActivity = .noactivity
     var status: CellStatus = .rw
+    private(set) var valid = false
 
     @discardableResult
     func lock() -> Cell {
@@ -155,6 +157,10 @@ class Cell: ObservableObject, Identifiable {
         format = "%04d"
 
         return self
+    }
+
+    func inValidate() {
+        valid = false
     }
 
     init(_ location: Int, _ value: UInt16 = 0) {

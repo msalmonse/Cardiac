@@ -33,6 +33,7 @@
 		C446BC45231BAD38004B8146 /* ALU.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC44231BAD38004B8146 /* ALU.swift */; };
 		C446BC47231BF7D1004B8146 /* CPUexec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC46231BF7D1004B8146 /* CPUexec.swift */; };
 		C446BC49231CE810004B8146 /* ALUview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC48231CE810004B8146 /* ALUview.swift */; };
+		C446BC4B231D0846004B8146 /* TapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC4A231D0846004B8146 /* TapeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		C446BC44231BAD38004B8146 /* ALU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALU.swift; sourceTree = "<group>"; };
 		C446BC46231BF7D1004B8146 /* CPUexec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUexec.swift; sourceTree = "<group>"; };
 		C446BC48231CE810004B8146 /* ALUview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALUview.swift; sourceTree = "<group>"; };
+		C446BC4A231D0846004B8146 /* TapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				C446BBFF231910DD004B8146 /* CellLink.swift */,
 				C446BBE52317C3C6004B8146 /* CellView.swift */,
 				C446BBE72317C696004B8146 /* MemoryView.swift */,
+				C446BC4A231D0846004B8146 /* TapeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				C446BC49231CE810004B8146 /* ALUview.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
 				C446BC45231BAD38004B8146 /* ALU.swift in Sources */,
+				C446BC4B231D0846004B8146 /* TapeView.swift in Sources */,
 				C446BC0123191450004B8146 /* CellLink.swift in Sources */,
 				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
 				C446BBF52318E3AD004B8146 /* Files.swift in Sources */,
@@ -567,11 +571,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -587,11 +591,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.Cardiac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

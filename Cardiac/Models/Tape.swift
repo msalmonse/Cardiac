@@ -8,8 +8,6 @@
 
 import Foundation
 
-fileprivate let tapeLength = 50
-
 enum TapeError: Error {
     case endOfTape, roDevice, woDevice
 }
@@ -28,24 +26,46 @@ enum TapeInOut {
     case input, output
 }
 
-class Tape {
-    var data = [UInt16]()
+class Tape: ObservableObject, Identifiable {
+    static let size = 50
+    static let range = 0..<size
+
+    let id = UUID()
+    var cells: [Cell] = range.map { Cell($0) }
+
     var inOut: TapeInOut
     var head = 0
 
     func readNext() -> Result<UInt16, Error> {
         if inOut != .input { return .failure(TapeError.woDevice)}
-        if head >= data.count { return .failure(TapeError.endOfTape) }
-        let ret = data[head]
+        if head >= cells.count { return .failure(TapeError.endOfTape) }
+        if !cells[head].valid { return .failure(TapeError.endOfTape) }
+        let ret = cells[head].value
         head += 1
         return .success(ret)
     }
 
     func writeNext(_ value: UInt16) -> Result<Void, Error> {
         if inOut != .output { return .failure(TapeError.roDevice)}
-        if data.count >= tapeLength { return .failure(TapeError.endOfTape) }
-        data.append(value)
+        if head >= Tape.size { return .failure(TapeError.endOfTape) }
+        cells[head].setValue(value)
+        head += 1
         return .success(Void())
+    }
+
+    func rewind() {
+        _ = cells.map { $0.inValidate() }
+        head = 0
+    }
+
+    subscript(index: Int) -> Cell {
+        get { return Self.range.contains(index) ? cells[index] : Cell.empty }
+        set { if Self.range.contains(index) { cells[index] = newValue } }
+    }
+
+    subscript(uindex: UInt16) -> Cell {
+        get { return self[Int(uindex)] }
+        set { self[Int(uindex)] = newValue }
     }
 
     init(_ inOut: TapeInOut) {
