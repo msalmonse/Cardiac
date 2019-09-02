@@ -1,5 +1,5 @@
 //
-//  CellLink.swift
+//  MemoryCellLink.swift
 //  Cardiac
 //
 //  Created by Michael Salmon on 2019-08-30.
@@ -10,18 +10,18 @@ import SwiftUI
 
 fileprivate let dummyCell = Cell(-1, 0)
 
-struct CellLink: View {
+struct MemoryCellLink: View {
     let memory: Memory
     let index: Int
 
     var body: some View {
         Group {
             if index < 0 {
-                CellView(index: -1, cell: dummyCell)
+                MemoryCellView(index: -1, cell: dummyCell)
             } else {
                 NavigationLink(
-                    destination: CellDetail(index: index, memory: memory),
-                    label: { CellView(index: index, cell: memory[index]) }
+                    destination: MemoryDetail(index: index, memory: memory),
+                    label: { MemoryCellView(index: index, cell: memory[index]) }
                 )
             }
         }
@@ -30,6 +30,6 @@ struct CellLink: View {
 
 struct CellLink_Previews: PreviewProvider {
     static var previews: some View {
-        CellLink(memory: Memory(), index: 0)
+        MemoryCellLink(memory: Memory(), index: 0)
     }
 }

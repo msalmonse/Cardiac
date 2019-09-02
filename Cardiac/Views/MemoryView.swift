@@ -16,8 +16,8 @@ struct MemoryView: View {
 
     func conditionalCellView(_ index: Int) -> some View {
         return Memory.contains(index)
-            ? CellLink(memory: memory, index: index)
-            : CellLink(memory: memory, index: -1)
+            ? MemoryCellLink(memory: memory, index: index)
+            : MemoryCellLink(memory: memory, index: -1)
     }
 
     var body: some View {

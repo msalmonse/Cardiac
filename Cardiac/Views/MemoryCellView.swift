@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CellView: View {
+struct MemoryCellView: View {
     let index: Int
     @ObservedObject var cell: Cell
 
@@ -36,6 +36,6 @@ struct CellView: View {
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(index: 0, cell: Cell(0))
+        MemoryCellView(index: 0, cell: Cell(0))
     }
 }

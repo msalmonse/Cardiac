@@ -1,5 +1,5 @@
 //
-//  CellDetail.swift
+//  MemoryDetail.swift
 //  Cardiac
 //
 //  Created by Michael Salmon on 2019-08-30.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CellDetail: View {
+struct MemoryDetail: View {
     @State var index: Int
     var memory: Memory
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -81,6 +81,6 @@ struct DetailView: View {
 
 struct CellDetail_Previews: PreviewProvider {
     static var previews: some View {
-        CellDetail(index: 0, memory: Memory())
+        MemoryDetail(index: 0, memory: Memory())
     }
 }
