@@ -31,6 +31,7 @@ extension ExecUnit {
     func iotrap(_ reason: TapeError) {
         print("IOtrap @\(address): " + (reason.errorDescription ?? "Unknown"))
         next = address     // Instruction not completed
+        if reason == TapeError.endOfTape { runState = .iowait }
         halt()
         return
     }

@@ -14,9 +14,9 @@ struct ExecView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Executing")
+                Text(exec.runDescription)
                 Spacer()
-                Text(String(format: "%02d", Int(exec.intAddress)))
+                Text(String(format: "@%02d", Int(exec.intAddress)))
             }
             Text(instruction(exec.opcode))
             Button(

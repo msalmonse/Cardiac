@@ -15,7 +15,14 @@ struct TapeInView: View {
 
     var body: some View {
         VStack {
-            Text("In").modifier(ContentView.Heading())
+            VStack {
+                Text("In")
+                NavigationLink(
+                    destination: TapeDetailView(tape: tape),
+                    label: { ButtonImage(systemName: "pencil") }
+                )
+            }
+            .modifier(ContentView.Heading())
             TapeView(tape: tape)
         }
     }
@@ -26,7 +33,14 @@ struct TapeOutView: View {
 
     var body: some View {
         VStack {
-            Text("Out").modifier(ContentView.Heading())
+            VStack {
+                Text("Out")
+                Button(
+                    action: { self.tape.rewind() },
+                    label: { ButtonImage(systemName: "gobackward") }
+                )
+            }
+            .modifier(ContentView.Heading())
             TapeView(tape: tape)
         }
     }

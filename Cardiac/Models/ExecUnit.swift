@@ -10,6 +10,15 @@ import Foundation
 
 enum RunState {
     case running, stepping, halted, iowait, loading
+
+    var description: String {
+        switch self {
+        case .halted: return "Halted"
+        case .iowait: return "Waiting"
+        case .loading: return "Loading"
+        default: return "Executing"
+        }
+    }
 }
 
 class ExecUnit: ObservableObject, Identifiable {
@@ -17,10 +26,12 @@ class ExecUnit: ObservableObject, Identifiable {
 
     @Published
     var intAddress = 0
-    var address: UInt16 = 0 { didSet { intAddress = Int(address) } }
+    var address: UInt16 = 0 { willSet { intAddress = Int(newValue) } }
     var next: UInt16 = 0
 
-    var runState = RunState.halted
+    @Published
+    var runDescription = ""
+    var runState: RunState { willSet { runDescription = newValue.description } }
 
     let alu = ALU()
     let memory: Memory
@@ -38,5 +49,7 @@ class ExecUnit: ObservableObject, Identifiable {
         self.memory = memory
         self.inTape = inTape
         self.outTape = outTape
+        self.runState = .halted
+        self.runDescription = self.runState.description
     }
 }
