@@ -19,7 +19,7 @@ struct TapeInView: View {
                 Text("In")
                 NavigationLink(
                     destination: TapeDetailView(tape: tape),
-                    label: { ButtonImage(systemName: "pencil") }
+                    label: { Image(systemName: "pencil").padding() }
                 )
             }
             .modifier(ContentView.Heading())
@@ -37,7 +37,7 @@ struct TapeOutView: View {
                 Text("Out")
                 Button(
                     action: { self.tape.rewind() },
-                    label: { ButtonImage(systemName: "gobackward") }
+                    label: { Image(systemName: "gobackward").padding() }
                 )
             }
             .modifier(ContentView.Heading())
