@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-fileprivate let dummyCell = Cell(-1, 0)
+fileprivate let emptyCell = Cell.empty
 
 struct MemoryCellLink: View {
     let memory: Memory
@@ -21,7 +21,7 @@ struct MemoryCellLink: View {
     var body: some View {
         Group {
             if index < 0 {
-                MemoryCellView(index: -1, cell: dummyCell)
+                MemoryCellView(index: -1, cell: emptyCell)
             } else {
                 NavigationLink(
                     destination: MemoryDetail(index: minMax(), memory: memory),
