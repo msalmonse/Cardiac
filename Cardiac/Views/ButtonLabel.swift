@@ -31,11 +31,18 @@ fileprivate let linearLight = LinearGradient(
 struct ButtonBackground: ViewModifier {
     let font: Font
 
+    func padBy() -> CGFloat {
+        switch font {
+        case .largeTitle: return 15
+        default: return 8
+        }
+    }
+
     func body(content: Content) -> some View {
         content
             .foregroundColor(.primary)
             .font(font)
-            .padding(.all, 8)
+            .padding(.all, padBy())
             .background(linearLight)
             .clipShape(Capsule())
             .overlay(strokedCapsule(stroke: 1, color: .green))

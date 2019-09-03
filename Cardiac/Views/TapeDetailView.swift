@@ -27,7 +27,7 @@ struct TapeDetailView: View {
                 Spacer()
                 Button(
                     action: { self.tape.rewind()},
-                    label: { Image(systemName: "gobackward") }
+                    label: { ButtonImage(systemName: "gobackward", font: .largeTitle) }
                 )
                 Spacer()
 

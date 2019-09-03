@@ -15,14 +15,17 @@ struct TapeInView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                Text("In")
-                NavigationLink(
-                    destination: TapeDetailView(tape: tape),
-                    label: { Image(systemName: "pencil").padding() }
-                )
-            }
-            .modifier(ContentView.Heading())
+            NavigationLink(
+                destination: TapeDetailView(tape: tape),
+                label: {
+                    VStack {
+                        Text("In")
+                        Image(systemName: "pencil").padding()
+                    }
+                    .foregroundColor(.primary)
+                    .modifier(ContentView.Heading())
+                }
+            )
             TapeView(tape: tape)
         }
     }
@@ -33,14 +36,17 @@ struct TapeOutView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                Text("Out")
-                Button(
-                    action: { self.tape.rewind() },
-                    label: { Image(systemName: "gobackward").padding() }
-                )
-            }
-            .modifier(ContentView.Heading())
+            Button(
+                action: { self.tape.rewind() },
+                label: {
+                    VStack {
+                        Text("Out")
+                        Image(systemName: "gobackward").padding()
+                    }
+                    .foregroundColor(.primary)
+                    .modifier(ContentView.Heading())
+                }
+            )
             TapeView(tape: tape)
         }
     }
