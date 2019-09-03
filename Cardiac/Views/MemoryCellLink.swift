@@ -14,13 +14,17 @@ struct MemoryCellLink: View {
     let memory: Memory
     let index: Int
 
+    func minMax() -> Int {
+        return max(1, min(index, Memory.size - 3))
+    }
+
     var body: some View {
         Group {
             if index < 0 {
                 MemoryCellView(index: -1, cell: dummyCell)
             } else {
                 NavigationLink(
-                    destination: MemoryDetail(index: index, memory: memory),
+                    destination: MemoryDetail(index: minMax(), memory: memory),
                     label: { MemoryCellView(index: index, cell: memory[index]) }
                 )
             }

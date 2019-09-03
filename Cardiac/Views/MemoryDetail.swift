@@ -14,35 +14,38 @@ struct MemoryDetail: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
-        VStack {
-            HStack {
-                Button(
-                    action: { self.index -= 1 },
-                    label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
-                )
-                .disabled(index <= 0)
+        ZStack {
+            bgColor
+            VStack {
+                HStack {
+                    Button(
+                        action: { self.index -= 1 },
+                        label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
+                    )
+                    .disabled(index <= 0)
 
-                VStack(spacing: 1) {
-                    DetailView(cell: memory[index - 1])
-                    DetailView(cell: memory[index])
-                    DetailView(cell: memory[index + 1])
-                    DetailView(cell: memory[index + 2])
+                    VStack(spacing: 1) {
+                        DetailView(cell: memory[index - 1])
+                        DetailView(cell: memory[index])
+                        DetailView(cell: memory[index + 1])
+                        DetailView(cell: memory[index + 2])
+                    }
+                    .padding()
+                    .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
+
+                    Button(
+                        action: { self.index += 1 },
+                        label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
+                    )
+                    .disabled(index + 1 >= Memory.size)
+
                 }
-                .padding()
-                .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
 
                 Button(
-                    action: { self.index += 1 },
-                    label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
+                    action: { self.mode.wrappedValue.dismiss() },
+                    label: { Text("Dismiss") }
                 )
-                .disabled(index + 1 >= Memory.size)
-
             }
-
-            Button(
-                action: { self.mode.wrappedValue.dismiss() },
-                label: { Text("Dismiss") }
-            )
         }
     }
 }

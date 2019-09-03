@@ -8,49 +8,81 @@
 
 import SwiftUI
 
+let bgColor = Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
+
 struct ContentView: View {
     var cpu = CPU()
+
+    func strokedStandard() -> some View {
+        return strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green)
+    }
 
     var body: some View {
         NavigationView {
             ZStack {
-                Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
+                bgColor
                 HStack {
-                    TapeView(tape: cpu.outTape)
+                    VStack {
+                        Text("Out")
+                        TapeView(tape: cpu.outTape)
+                    }
+                    .overlay(strokedStandard())
+                    .frame(width: 200)
+
                     VStack {
                         Spacer()
+
                         ALUview(alu: cpu.exec.alu)
-                        .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                        .overlay(strokedStandard())
                         .frame(width: 200)
+
                         Spacer()
+
                         ExecView(exec: cpu.exec)
-                        .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                        .overlay(strokedStandard())
                         .frame(width: 200)
-                        Spacer()
-                        Button(
-                            action: {
-                                switch self.cpu.loadJsonResource("nim") {
-                                case .success: break
-                                case .failure(let err): print(err)
-                                }
-                        },
-                            label: { Text("Load nim") }
-                        )
-                        Button(
-                            action: {
-                                switch self.cpu.loadJsonResource("reverse") {
-                                case .success: break
-                                case .failure(let err): print(err)
-                                }
-                        },
-                            label: { Text("Load reverse") }
-                        )
+
                         Spacer()
                     }
-                    TapeView(tape: cpu.inTape)
+
+                    VStack {
+                        Text("In")
+                        TapeView(tape: cpu.inTape)
+                    }
+                    .overlay(strokedStandard())
+                    .frame(width: 200)
+
                     Spacer()
-                    MemoryView(memory: cpu.memory)
-                    .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+
+                    VStack {
+                        Text("Memory")
+                        MemoryView(memory: cpu.memory)
+                        .overlay(strokedStandard())
+
+                        HStack {
+                            Button(
+                                action: {
+                                    switch self.cpu.loadJsonResource("nim") {
+                                    case .success: break
+                                    case .failure(let err): print(err)
+                                    }
+                                },
+                                label: { Text("Load nim") }
+                            )
+                            Button(
+                                action: {
+                                    switch self.cpu.loadJsonResource("reverse") {
+                                    case .success: break
+                                    case .failure(let err): print(err)
+                                    }
+                                },
+                                label: { Text("Load reverse") }
+                            )
+                        }
+                    }
+                    .overlay(strokedStandard())
+                    .frame(width: 200)
+
                     Spacer()
                 }
             }
