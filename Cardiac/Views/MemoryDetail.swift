@@ -20,7 +20,9 @@ struct MemoryDetail: View {
                 HStack {
                     Button(
                         action: { self.index -= 1 },
-                        label: { Image(systemName: "chevron.up.circle.fill").font(.largeTitle) }
+                        label: {
+                            ButtonImage(systemName: "chevron.up.circle.fill", font: .largeTitle)
+                        }
                     )
                     .disabled(index <= 0)
 
@@ -31,11 +33,13 @@ struct MemoryDetail: View {
                         DetailView(cell: memory[index + 2])
                     }
                     .padding()
-                    .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
+                    .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .green))
 
                     Button(
                         action: { self.index += 1 },
-                        label: { Image(systemName: "chevron.down.circle.fill").font(.largeTitle) }
+                        label: {
+                            ButtonImage(systemName: "chevron.down.circle.fill", font: .largeTitle)
+                        }
                     )
                     .disabled(index + 1 >= Memory.size)
 
@@ -43,7 +47,7 @@ struct MemoryDetail: View {
 
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
-                    label: { Text("Dismiss") }
+                    label: { ButtonText("Dismiss", font: .title) }
                 )
             }
         }

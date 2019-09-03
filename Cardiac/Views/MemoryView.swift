@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-fileprivate let columnOffset = 20
-fileprivate let columns = 5
+fileprivate let columnOffset = 17
+fileprivate let columns = 6
 
 struct MemoryView: View {
     var memory: Memory

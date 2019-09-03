@@ -31,6 +31,7 @@ struct TapeCell: View {
 
     var body: some View {
         Text(cell.formattedValue)
+        .foregroundColor(cell.valid ? .primary : .clear)
         .padding(2)
         .overlay(strokedRectangle(stroke: 1, color: isHead ? .red : .primary))
     }

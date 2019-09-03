@@ -20,17 +20,24 @@ struct MemoryCellView: View {
                 Text(cell.location)
                 .foregroundColor(cell.activity.color)
                 .padding(3)
+
                 Spacer()
+
                 Text(cell.formattedValue)
                 .foregroundColor(.primary)
                 .multilineTextAlignment(.trailing)
-                .padding(3)
+                .padding(4)
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))
             }
         }
         .font(.system(.headline, design: .monospaced))
         .frame(width: 80)
-        .overlay(strokedRoundedRectangle(cornerRadius: 2, stroke: 2))
+        .overlay(strokedRoundedRectangle(
+                cornerRadius: 2,
+                stroke: 2,
+                color: index < 0 ? .clear : .primary
+            )
+        )
     }
 }
 

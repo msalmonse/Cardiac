@@ -14,14 +14,14 @@ struct ExecView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Executing address")
+                Text("Executing")
                 Spacer()
                 Text(String(format: "%02d", Int(exec.intAddress)))
             }
             Text(instruction(exec.opcode))
             Button(
                 action: { self.exec.execOne() },
-                label: { Text("Exec 1") }
+                label: { ButtonText("Single Step") }
             )
         }
         .padding(2)

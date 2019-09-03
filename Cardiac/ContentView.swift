@@ -8,13 +8,23 @@
 
 import SwiftUI
 
-let bgColor = Color(hue: 0.4, saturation: 0.1, brightness: 1.0)
+let bgHue = 0.4
+let bgColor = Color(hue: bgHue, saturation: 0.1, brightness: 1.0)
 
 struct ContentView: View {
     var cpu = CPU()
 
     func strokedStandard() -> some View {
         return strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green)
+    }
+
+    struct Standard: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .padding(.all, 12)
+                .overlay(strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green))
+                .padding(.horizontal, 10)
+        }
     }
 
     var body: some View {
@@ -26,64 +36,43 @@ struct ContentView: View {
                         Text("Out")
                         TapeView(tape: cpu.outTape)
                     }
-                    .overlay(strokedStandard())
-                    .frame(width: 200)
+                    .modifier(Standard())
 
                     VStack {
                         Spacer()
 
-                        ALUview(alu: cpu.exec.alu)
-                        .overlay(strokedStandard())
-                        .frame(width: 200)
+                        VStack {
+                            Text("Arithmatic Unit")
+                            ALUview(alu: cpu.exec.alu)
+                        }
+                        .modifier(Standard())
 
                         Spacer()
 
-                        ExecView(exec: cpu.exec)
-                        .overlay(strokedStandard())
-                        .frame(width: 200)
+                        VStack {
+                            Text("Execution Unit")
+                            ExecView(exec: cpu.exec)
+                        }
+                        .modifier(Standard())
 
                         Spacer()
                     }
+                    .frame(width: 200)
 
                     VStack {
                         Text("In")
                         TapeView(tape: cpu.inTape)
                     }
-                    .overlay(strokedStandard())
-                    .frame(width: 200)
-
-                    Spacer()
+                    .modifier(Standard())
 
                     VStack {
                         Text("Memory")
                         MemoryView(memory: cpu.memory)
-                        .overlay(strokedStandard())
+                        .modifier(Standard())
 
-                        HStack {
-                            Button(
-                                action: {
-                                    switch self.cpu.loadJsonResource("nim") {
-                                    case .success: break
-                                    case .failure(let err): print(err)
-                                    }
-                                },
-                                label: { Text("Load nim") }
-                            )
-                            Button(
-                                action: {
-                                    switch self.cpu.loadJsonResource("reverse") {
-                                    case .success: break
-                                    case .failure(let err): print(err)
-                                    }
-                                },
-                                label: { Text("Load reverse") }
-                            )
-                        }
+                        LoadButtons(cpu: cpu)
                     }
-                    .overlay(strokedStandard())
-                    .frame(width: 200)
-
-                    Spacer()
+                    .modifier(Standard())
                 }
             }
             .navigationBarHidden(true)
