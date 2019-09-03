@@ -18,6 +18,14 @@ struct ContentView: View {
         return strokedRoundedRectangle(cornerRadius: 3, stroke: 3, color: .green)
     }
 
+    struct Heading: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .padding(.horizontal, 2)
+                .overlay(strokedRoundedRectangle(cornerRadius: 2, stroke: 2, color: .green))
+        }
+    }
+
     struct Standard: ViewModifier {
         func body(content: Content) -> some View {
             content
@@ -32,17 +40,15 @@ struct ContentView: View {
             ZStack {
                 bgColor
                 HStack {
-                    VStack {
-                        Text("Out")
-                        TapeView(tape: cpu.outTape)
-                    }
+                    TapeOutView(tape: cpu.outTape)
                     .modifier(Standard())
+                    .padding(.vertical, 8)
 
                     VStack {
                         Spacer()
 
                         VStack {
-                            Text("Arithmatic Unit")
+                            Text("Arithmatic Unit").modifier(Heading())
                             ALUview(alu: cpu.exec.alu)
                         }
                         .modifier(Standard())
@@ -50,7 +56,7 @@ struct ContentView: View {
                         Spacer()
 
                         VStack {
-                            Text("Execution Unit")
+                            Text("Execution Unit").modifier(Heading())
                             ExecView(exec: cpu.exec)
                         }
                         .modifier(Standard())
@@ -59,14 +65,12 @@ struct ContentView: View {
                     }
                     .frame(width: 200)
 
-                    VStack {
-                        Text("In")
-                        TapeView(tape: cpu.inTape)
-                    }
+                    TapeInView(tape: cpu.inTape)
                     .modifier(Standard())
+                    .padding(.vertical, 8)
 
                     VStack {
-                        Text("Memory")
+                        Text("Memory").modifier(Heading())
                         MemoryView(memory: cpu.memory)
                         .modifier(Standard())
 

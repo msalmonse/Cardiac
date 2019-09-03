@@ -161,6 +161,7 @@ class Cell: ObservableObject, Identifiable {
 
     func inValidate() {
         valid = false
+        value = 0
     }
 
     init(_ location: Int, _ value: UInt16 = 0) {

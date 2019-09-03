@@ -10,15 +10,39 @@ import SwiftUI
 
 fileprivate let emptyCell = Cell.empty
 
+struct TapeInView: View {
+    @ObservedObject var tape: Tape
+
+    var body: some View {
+        VStack {
+            Text("In").modifier(ContentView.Heading())
+            TapeView(tape: tape)
+        }
+    }
+}
+
+struct TapeOutView: View {
+    @ObservedObject var tape: Tape
+
+    var body: some View {
+        VStack {
+            Text("Out").modifier(ContentView.Heading())
+            TapeView(tape: tape)
+        }
+    }
+}
+
 struct TapeView: View {
     @ObservedObject var tape: Tape
+
     var body: some View {
         ScrollView {
             VStack(spacing: 1) {
+                ForEach(0..<(10 - tape.head), id: \.self) {_ in
+                        TapeCell(cell: emptyCell, isHead: false)
+                }
                 ForEach(Tape.range, id: \.self) {index in
-                    index < 0
-                        ? TapeCell(cell: emptyCell, isHead: false)
-                        : TapeCell(cell: self.tape[index], isHead: index == self.tape.head)
+                        TapeCell(cell: self.tape[index], isHead: index == self.tape.head)
                 }
             }
         }
@@ -29,11 +53,19 @@ struct TapeCell: View {
     @ObservedObject var cell: Cell
     let isHead: Bool
 
+    var borderColor: Color {
+        switch (isHead, cell.status == .empty) {
+        case (_, true): return .clear
+        case (true, false): return .red
+        case (false, false): return .primary
+        }
+    }
+
     var body: some View {
         Text(cell.formattedValue)
         .foregroundColor(cell.valid ? .primary : .clear)
         .padding(2)
-        .overlay(strokedRectangle(stroke: 1, color: isHead ? .red : .primary))
+        .overlay(strokedRectangle(stroke: 1, color: borderColor))
     }
 }
 struct TapeView_Previews: PreviewProvider {
