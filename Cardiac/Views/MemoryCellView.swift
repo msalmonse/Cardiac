@@ -24,7 +24,7 @@ struct MemoryCellView: View {
                 Spacer()
 
                 Text(cell.formattedValue)
-                .foregroundColor(.primary)
+                .foregroundColor(cell.valid ? .primary : .secondary)
                 .multilineTextAlignment(.trailing)
                 .padding(4)
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))
