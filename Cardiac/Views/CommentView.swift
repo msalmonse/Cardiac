@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct CommentLink: View {
-    @ObservedObject var exec: ExecUnit
+    let comment: Comment
 
     var body: some View {
         NavigationLink(
-            destination: CommentView(comment: exec.comment),
+            destination: CommentView(comment: comment),
             label: { ButtonText("Show Comment") }
         )
-        .disabled(exec.comment.isEmpty)
+        .disabled(comment.isEmpty)
     }
 }
 
@@ -28,13 +28,20 @@ struct CommentView: View {
         ZStack {
             bgColor
             VStack {
+                Spacer()
+
                 ForEach(comment.lines, id: \.self) { line in
                     Text(line)
                     .font(.headline)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.primary)
+                    .padding(5)
                 }
+                .foregroundColor(.primary)
+                .background(Color(.systemBackground))
+                .modifier(ContentView.Standard())
+
                 Spacer()
+
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
                     label: { ButtonText("Dismiss", font: .title) }
