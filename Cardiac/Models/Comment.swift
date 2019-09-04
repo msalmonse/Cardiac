@@ -8,20 +8,22 @@
 
 import Foundation
 
-class Comment: Identifiable {
+struct Comment: Identifiable {
     let id = UUID()
 
     var lines: [String]
+
+    var isEmpty: Bool { return lines.isEmpty }
 
     init(_ lines: [String]) {
         self.lines = lines
     }
 
-    convenience init(_ line: String) {
+    init(_ line: String) {
         self.init([line])
     }
 
-    convenience init() {
+    init() {
         self.init([])
     }
 }

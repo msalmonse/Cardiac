@@ -26,10 +26,8 @@ struct ExecView: View {
                 label: { ButtonText("Single Step") }
             )
 
-            NavigationLink(
-                destination: CommentView(comment: exec.comment),
-                label: { ButtonText("Show Comment") }
-            )
+            CommentLink(exec: exec)
+
         }
         .padding(2)
     }
