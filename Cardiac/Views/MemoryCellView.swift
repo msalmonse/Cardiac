@@ -29,9 +29,11 @@ struct MemoryCellView: View {
                 .padding(4)
                 .overlay(strokedRoundedRectangle(cornerRadius: 2))
             }
+
         }
         .font(.system(.headline, design: .monospaced))
         .frame(width: 80)
+        .background(PositionBackground("Memory:" + cell.location))
         .overlay(strokedRoundedRectangle(
                 cornerRadius: 2,
                 stroke: 2,
