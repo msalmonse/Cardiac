@@ -66,6 +66,8 @@ class CPU: Identifiable {
             }
         }
 
+        exec.comment = Comment(dump.comment ?? [])
+
         exec.runState = .halted
         return err == nil ? .success(Void()) : .failure(err!)
     }

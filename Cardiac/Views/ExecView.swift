@@ -18,10 +18,17 @@ struct ExecView: View {
                 Spacer()
                 Text(String(format: "@%02d", Int(exec.intAddress)))
             }
+
             Text(instruction(exec.opcode))
+
             Button(
                 action: { self.exec.execOne() },
                 label: { ButtonText("Single Step") }
+            )
+
+            NavigationLink(
+                destination: CommentView(comment: exec.comment),
+                label: { ButtonText("Show Comment") }
             )
         }
         .padding(2)

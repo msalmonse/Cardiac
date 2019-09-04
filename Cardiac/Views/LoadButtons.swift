@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct LoadButtons: View {
-    let cpu: CPU
+    var cpu: CPU
 
     func loadJSON(_ name: String) {
         switch self.cpu.loadJsonResource(name) {

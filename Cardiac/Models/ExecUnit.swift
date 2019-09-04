@@ -33,6 +33,9 @@ class ExecUnit: ObservableObject, Identifiable {
     var runDescription = ""
     var runState: RunState { willSet { runDescription = newValue.description } }
 
+    @Published
+    var comment = Comment()
+
     let alu = ALU()
     let memory: Memory
     let inTape: Tape

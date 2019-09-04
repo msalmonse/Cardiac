@@ -39,6 +39,8 @@
 		C446BC56231E3002004B8146 /* ButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC55231E3002004B8146 /* ButtonLabel.swift */; };
 		C446BC58231E417F004B8146 /* LoadButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC57231E417F004B8146 /* LoadButtons.swift */; };
 		C446BC5A231EC489004B8146 /* TapeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC59231EC489004B8146 /* TapeDetailView.swift */; };
+		C446BC5C231F8215004B8146 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC5B231F8215004B8146 /* CommentView.swift */; };
+		C446BC5E231F93E4004B8146 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC5D231F93E4004B8146 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		C446BC55231E3002004B8146 /* ButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLabel.swift; sourceTree = "<group>"; };
 		C446BC57231E417F004B8146 /* LoadButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadButtons.swift; sourceTree = "<group>"; };
 		C446BC59231EC489004B8146 /* TapeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeDetailView.swift; sourceTree = "<group>"; };
+		C446BC5B231F8215004B8146 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		C446BC5D231F93E4004B8146 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,14 +197,15 @@
 			children = (
 				C446BC48231CE810004B8146 /* ALUview.swift */,
 				C446BC55231E3002004B8146 /* ButtonLabel.swift */,
+				C446BC5B231F8215004B8146 /* CommentView.swift */,
 				C446BC51231D65AA004B8146 /* ExecView.swift */,
 				C446BC57231E417F004B8146 /* LoadButtons.swift */,
 				C446BBFF231910DD004B8146 /* MemoryCellLink.swift */,
 				C446BBE52317C3C6004B8146 /* MemoryCellView.swift */,
 				C446BBFD23190EA5004B8146 /* MemoryDetail.swift */,
 				C446BBE72317C696004B8146 /* MemoryView.swift */,
-				C446BC4A231D0846004B8146 /* TapeView.swift */,
 				C446BC59231EC489004B8146 /* TapeDetailView.swift */,
+				C446BC4A231D0846004B8146 /* TapeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			children = (
 				C446BC44231BAD38004B8146 /* ALU.swift */,
 				C446BBE32317C298004B8146 /* Cell.swift */,
+				C446BC5D231F93E4004B8146 /* Comment.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
 				C446BBEF23185035004B8146 /* Dump.swift */,
 				C446BC53231D9109004B8146 /* ExecUnit.swift */,
@@ -408,6 +414,7 @@
 				C446BC58231E417F004B8146 /* LoadButtons.swift in Sources */,
 				C446BC5A231EC489004B8146 /* TapeDetailView.swift in Sources */,
 				C446BBF52318E3AD004B8146 /* Files.swift in Sources */,
+				C446BC5C231F8215004B8146 /* CommentView.swift in Sources */,
 				C446BBF32318E09B004B8146 /* LoadAndSave.swift in Sources */,
 				C446BC52231D65AB004B8146 /* ExecView.swift in Sources */,
 				C446BBF023185035004B8146 /* Dump.swift in Sources */,
@@ -418,6 +425,7 @@
 				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
 				C446BBEE2318492A004B8146 /* Tape.swift in Sources */,
+				C446BC5E231F93E4004B8146 /* Comment.swift in Sources */,
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
