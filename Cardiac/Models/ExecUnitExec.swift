@@ -31,7 +31,7 @@ extension ExecUnit {
     func iotrap(_ reason: TapeError) {
         print("IOtrap @\(address): " + (reason.errorDescription ?? "Unknown"))
         next = address     // Instruction not completed
-        if reason == TapeError.endOfTape { runState = .iowait }
+        if reason == TapeError.endOfTape { halt(.iowait) }
         halt()
         return
     }
@@ -98,7 +98,7 @@ extension ExecUnit {
     }
 
     func execOne() {
-        if runState == RunState.halted { runState = .stepping }
+        if runState == .halted { runState = .stepping }
         address = next
         next += 1
         readAddr = UInt16.max

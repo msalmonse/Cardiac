@@ -37,7 +37,7 @@ class CPU: Identifiable {
     }
 
     func loadJsonURL(_ url: URL) -> Result<Void, Error> {
-        exec.runState = .loading
+        exec.halt(.loading)
 
         var dump: DumpData
         switch loadFromJSON(url, as: DumpData.self) {
@@ -71,7 +71,7 @@ class CPU: Identifiable {
 
         exec.comment = Comment(dump.comment ?? [])
 
-        exec.runState = .halted
+        exec.halt()
         return err == nil ? .success(Void()) : .failure(err!)
     }
 
