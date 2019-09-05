@@ -42,6 +42,9 @@
 		C446BC5C231F8215004B8146 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC5B231F8215004B8146 /* CommentView.swift */; };
 		C446BC5E231F93E4004B8146 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC5D231F93E4004B8146 /* Comment.swift */; };
 		C446BC60231FF002004B8146 /* Positioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BC5F231FF002004B8146 /* Positioning.swift */; };
+		C463550423218830008551AC /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550323218830008551AC /* Arrow.swift */; };
+		C463550623218A88008551AC /* ArrowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550523218A88008551AC /* ArrowsView.swift */; };
+		C463550823218B04008551AC /* ExecUnitRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550723218B04008551AC /* ExecUnitRun.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,9 @@
 		C446BC5B231F8215004B8146 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		C446BC5D231F93E4004B8146 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		C446BC5F231FF002004B8146 /* Positioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioning.swift; sourceTree = "<group>"; };
+		C463550323218830008551AC /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
+		C463550523218A88008551AC /* ArrowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsView.swift; sourceTree = "<group>"; };
+		C463550723218B04008551AC /* ExecUnitRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecUnitRun.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				C446BC48231CE810004B8146 /* ALUview.swift */,
+				C463550323218830008551AC /* Arrow.swift */,
+				C463550523218A88008551AC /* ArrowsView.swift */,
 				C446BC55231E3002004B8146 /* ButtonLabel.swift */,
 				C446BC5B231F8215004B8146 /* CommentView.swift */,
 				C446BC51231D65AA004B8146 /* ExecView.swift */,
@@ -222,6 +230,7 @@
 				C446BBEF23185035004B8146 /* Dump.swift */,
 				C446BC53231D9109004B8146 /* ExecUnit.swift */,
 				C446BC46231BF7D1004B8146 /* ExecUnitExec.swift */,
+				C463550723218B04008551AC /* ExecUnitRun.swift */,
 				C446BBFB2318FB18004B8146 /* Instruction.swift */,
 				C446BBE92317C6CD004B8146 /* Memory.swift */,
 				C446BC5F231FF002004B8146 /* Positioning.swift */,
@@ -411,6 +420,7 @@
 				C446BC45231BAD38004B8146 /* ALU.swift in Sources */,
 				C446BC56231E3002004B8146 /* ButtonLabel.swift in Sources */,
 				C446BC4B231D0846004B8146 /* TapeView.swift in Sources */,
+				C463550623218A88008551AC /* ArrowsView.swift in Sources */,
 				C446BC0123191450004B8146 /* MemoryCellLink.swift in Sources */,
 				C446BC54231D9109004B8146 /* ExecUnit.swift in Sources */,
 				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
@@ -421,7 +431,9 @@
 				C446BBF32318E09B004B8146 /* LoadAndSave.swift in Sources */,
 				C446BC52231D65AB004B8146 /* ExecView.swift in Sources */,
 				C446BBF023185035004B8146 /* Dump.swift in Sources */,
+				C463550823218B04008551AC /* ExecUnitRun.swift in Sources */,
 				C446BBFE23190EA5004B8146 /* MemoryDetail.swift in Sources */,
+				C463550423218830008551AC /* Arrow.swift in Sources */,
 				C446BC47231BF7D1004B8146 /* ExecUnitExec.swift in Sources */,
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BC0323199EAC004B8146 /* Shapes.swift in Sources */,
