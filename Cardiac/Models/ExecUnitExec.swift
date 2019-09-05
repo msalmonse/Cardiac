@@ -36,10 +36,6 @@ extension ExecUnit {
         return
     }
 
-    func halt() {
-        return
-    }
-
     func opB(_ addr: UInt16) -> UInt16 {
         readAddr = addr
         return memory[addr].value
@@ -102,7 +98,7 @@ extension ExecUnit {
     }
 
     func execOne() {
-        if runState == .halted { runState = .stepping }
+        if runState == RunState.halted { runState = .stepping }
         address = next
         next += 1
         readAddr = UInt16.max

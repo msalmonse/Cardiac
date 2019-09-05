@@ -26,6 +26,11 @@ struct ExecView: View {
                 label: { ButtonText("Single Step") }
             )
 
+            Button(
+                action: { self.exec.startRunning(3.0) },
+                label: { ButtonText("Run (20 ips)") }
+            )
+
             CommentLink(comment: exec.comment)
 
         }
