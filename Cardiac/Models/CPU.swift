@@ -62,6 +62,9 @@ class CPU: Identifiable {
             switch oneCell(inp) {
             case let .success(addrData):
                 inTape[addrData.address].setValue(addrData.data)
+                if inTape.head > addrData.address {
+                    inTape.head = Int(addrData.address)
+                }
             case let .failure(error): err = error
             }
         }
