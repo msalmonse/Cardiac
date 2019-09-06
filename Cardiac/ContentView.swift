@@ -78,6 +78,7 @@ struct ContentView: View {
                     }
                     .modifier(Standard())
                 }
+                ArrowsView(exec: cpu.exec)
             }
             .navigationBarHidden(true)
             .navigationBarTitle(Text("Cardiac"), displayMode: .inline)
