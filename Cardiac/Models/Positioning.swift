@@ -33,6 +33,7 @@ struct PositionBackground: View {
 
         return color
     }
+
     var body: some View {
         GeometryReader { gp in
             Rectangle()

@@ -86,8 +86,10 @@ struct TapeCell: View {
         .foregroundColor(cell.valid ? .primary : .clear)
         .padding(2)
         .overlay(strokedRectangle(stroke: 1, color: borderColor))
+        .background(PositionBackground(cell.tag))
     }
 }
+
 struct TapeView_Previews: PreviewProvider {
     static var previews: some View {
         HStack {

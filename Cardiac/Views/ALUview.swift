@@ -40,6 +40,7 @@ struct ALUregister: View {
             Text(reg.formattedValue)
             .multilineTextAlignment(.trailing)
             .font(.system(.headline, design: .monospaced))
+            .background(PositionBackground(reg.tag))
         }
     }
 }

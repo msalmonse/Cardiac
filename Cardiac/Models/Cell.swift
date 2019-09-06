@@ -46,6 +46,7 @@ class Cell: ObservableObject, Identifiable {
     private var format = "%03d"
 
     let id = UUID()
+    var tag: String
 
     @Published
     private(set) var value: UInt16
@@ -167,6 +168,7 @@ class Cell: ObservableObject, Identifiable {
     init(_ location: Int, _ value: UInt16 = 0) {
         self.location = Memory.contains(location) ? String(format: "%02d", location) : ""
         self.value = value
+        self.tag = self.id.uuidString
     }
 
     static var empty: Cell {

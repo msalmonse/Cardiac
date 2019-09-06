@@ -104,7 +104,9 @@ extension ExecUnit {
         next += 1
         readAddr = UInt16.max
         writeAddr = UInt16.max
-        let opcode = self.opcode    // local cache
+
+        clearArrows()
+        execArrow = ArrowData(memory[address].tag, "Instruction", .blue)
 
         switch opcode {
         case .inp, .out: ioOp(opcode)

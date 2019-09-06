@@ -8,11 +8,22 @@
 
 import SwiftUI
 
+struct ArrowData {
+    let startTag: String
+    let stopTag: String
+    let color: Color
+
+    init(_ start: String, _ stop: String, _ color: Color) {
+        self.startTag = start
+        self.stopTag = stop
+        self.color = color
+    }
+}
+
 fileprivate let delta: CGFloat = 2.0
 fileprivate let delta2 = delta + delta
 fileprivate let delta3 = delta2 + delta
 fileprivate let delta4 = delta3 + delta
-fileprivate let midX = delta3/2
 
 fileprivate let circleRect = CGRect(
     origin: CGPoint(x: -delta2, y: -delta2),

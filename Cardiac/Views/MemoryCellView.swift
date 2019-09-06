@@ -33,7 +33,7 @@ struct MemoryCellView: View {
         }
         .font(.system(.headline, design: .monospaced))
         .frame(width: 80)
-        .background(PositionBackground("Memory:" + cell.location))
+        .background(PositionBackground(cell.tag))
         .overlay(strokedRoundedRectangle(
                 cornerRadius: 2,
                 stroke: 2,

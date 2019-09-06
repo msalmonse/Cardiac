@@ -20,6 +20,7 @@ struct ExecView: View {
             }
 
             Text(instruction(exec.opcode))
+            .background(PositionBackground("Instruction"))
 
             Button(
                 action: { self.exec.execOne(true) },

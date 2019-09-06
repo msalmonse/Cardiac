@@ -44,7 +44,10 @@ class ExecUnit: ObservableObject, Identifiable {
 
     @Published
     var intAddress = 0
-    var address: UInt16 = 0 { willSet { intAddress = Int(newValue) } }
+    var address: UInt16 = 0 {
+        willSet { intAddress = Int(newValue) }
+        didSet { opcode = memory[address].opcode }
+    }
     var next: UInt16 = 0
 
     var clock: AnyCancellable? = nil
@@ -64,8 +67,17 @@ class ExecUnit: ObservableObject, Identifiable {
     var readAddr: UInt16 = 0
     var writeAddr: UInt16 = 0
 
-    var opcode: OpCode {
-        return memory[address].opcode
+    var opcode: OpCode = .unk(0)
+
+    // Arrows
+    var execArrow: ArrowData? = nil
+    var readArrow: ArrowData? = nil
+    var writeArrow: ArrowData? = nil
+
+    func clearArrows() {
+        execArrow = nil
+        readArrow = nil
+        writeArrow = nil
     }
 
     init(memory: Memory, inTape: Tape, outTape: Tape) {
