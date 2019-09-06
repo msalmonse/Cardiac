@@ -26,15 +26,41 @@ struct ExecView: View {
                 label: { ButtonText("Single Step") }
             )
 
-            Button(
-                action: { self.exec.startRunning(3.0) },
-                label: { ButtonText("Run (20 ips)") }
-            )
+            RunButton(exec, pace: 3.0)
+            RunButton(exec, pace: 1.2)
 
             CommentLink(comment: exec.comment)
 
         }
         .padding(2)
+    }
+}
+
+struct RunButton: View {
+    @ObservedObject var exec: ExecUnit
+    let pace: Double
+    let label: String
+
+    init(_ exec: ExecUnit, pace: Double) {
+        self.exec = exec
+        self.pace = pace
+        self.label = String(format: "Run (%.0f ips)", 60/pace)
+    }
+
+    var body: some View {
+        Group {
+            if exec.runState == .running(pace) {
+                Button(
+                    action: { self.exec.halt() },
+                    label: { ButtonText("Stop running") }
+                )
+            } else {
+                Button(
+                    action: { self.exec.startRunning(self.pace) },
+                    label: { ButtonText(label) }
+                )
+            }
+        }
     }
 }
 
