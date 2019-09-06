@@ -15,7 +15,7 @@ extension ExecUnit {
             clock = nil
             clock = Timer.publish(every: pace, on: .main, in: .default)
                 .autoconnect()
-                .sink(receiveValue: { [weak self] in self?.execOne(); _ = $0 })
+                .sink(receiveValue: { [weak self] _ in self?.execOne() })
             runState = .running(pace)
         }
     }
