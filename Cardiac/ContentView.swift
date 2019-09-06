@@ -63,7 +63,7 @@ struct ContentView: View {
 
                         Spacer()
                     }
-                    .frame(width: 200)
+                    .frame(width: 225)
 
                     TapeInView(tape: cpu.inTape)
                     .modifier(Standard())

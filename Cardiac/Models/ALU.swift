@@ -32,6 +32,7 @@ class ALU: ObservableObject, Identifiable {
         self.opA.setValue(0)
         self.opB.setValue(opB)
         self.result.setValue(self.opA + self.opB)
+        self.isNegative = false
     }
 
     func add(_ opB: UInt16) {
