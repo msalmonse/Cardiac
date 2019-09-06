@@ -21,41 +21,51 @@ class ALU: ObservableObject, Identifiable {
     let opB = Cell(-1)
     let result = Cell(-1)
     var isNegative = false
+    var negativeOpA = false
 
     @Published
     var operation: ALU.PlusMinus = .nosign
     var sign: ALU.PlusMinus {
         return isNegative ? .minus : .plus
     }
-
-    func cla(_ opB: UInt16) {
-        self.opA.setValue(0)
-        self.opB.setValue(opB)
-        self.result.setValue(self.opA + self.opB)
-        self.isNegative = false
+    var opAsign: ALU.PlusMinus {
+        return negativeOpA ? .minus : .plus
     }
 
-    func add(_ opB: UInt16) {
-        self.opA.setValue(result.value % 999)
-        self.opB.setValue(opB)
-        if isNegative {
-            let (res, neg) = self.opB - self.opA
+    func cla(_ opBvalue: UInt16) {
+        opA.setValue(0)
+        negativeOpA = false
+        opB.setValue(opBvalue)
+        operation = .plus
+        result.setValue(opA + opB)
+        isNegative = false
+    }
+
+    func add(_ opBvalue: UInt16) {
+        opA.setValue(result.value % 999)
+        negativeOpA = isNegative
+        opB.setValue(opBvalue)
+        operation = .plus
+        if negativeOpA {
+            let (res, neg) = opB - opA
             result.setValue(res)
             isNegative = neg
         } else {
-            self.result.setValue(opA + opB)
+            result.setValue(opA + opB)
         }
     }
 
-    func sub(_ opB: UInt16) {
-        self.opA.setValue(result.value % 999)
-        self.opB.setValue(opB)
-        if !isNegative {
-            let (res, neg) = self.opA - self.opB
+    func sub(_ opBvalue: UInt16) {
+        opA.setValue(result.value % 999)
+        negativeOpA = isNegative
+        opB.setValue(opBvalue)
+        operation = .minus
+        if !negativeOpA {
+            let (res, neg) = opA - opB
             result.setValue(res)
             isNegative = neg
         } else {
-            self.result.setValue(opA + opB)
+            result.setValue(opA + opB)
         }
     }
 
@@ -85,6 +95,11 @@ class ALU: ObservableObject, Identifiable {
         case 3: srResult(1000)
         default: result.setValue(0)
         }
+    }
+
+    // clear the operation flag
+    func noop() {
+        operation = .nosign
     }
 
     init() {

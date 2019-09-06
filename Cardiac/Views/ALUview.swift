@@ -11,7 +11,7 @@ import SwiftUI
 fileprivate var signImage: [ALU.PlusMinus: String] = [
     .nosign: "square",
     .plus: "plus.square",
-    .minus: "minus.square.fill"
+    .minus: "minus.square"
 ]
 
 struct ALUview: View {
@@ -19,9 +19,9 @@ struct ALUview: View {
 
     var body: some View {
         VStack {
-            ALUregister(reg: alu.opA, label: "Operand A", sign: .nosign)
-            ALUregister(reg: alu.opB, label: "Operand B", sign: alu.operation)
-            ALUregister(reg: alu.result, label: "Result", sign: alu.sign)
+            ALUregister(reg: alu.opA, label: "Operand A", sign: { self.alu.opAsign })
+            ALUregister(reg: alu.opB, label: "Operand B", sign: { self.alu.operation })
+            ALUregister(reg: alu.result, label: "Result", sign: { self.alu.sign })
         }
         .padding(3)
     }
@@ -30,15 +30,16 @@ struct ALUview: View {
 struct ALUregister: View {
     @ObservedObject var reg: Cell
     let label: String
-    let sign: ALU.PlusMinus
+    let sign: () -> ALU.PlusMinus
 
     var body: some View {
         HStack {
             Text(label)
             Spacer()
-            Image(systemName: signImage[sign] ?? "square")
+            Image(systemName: signImage[sign()] ?? "square")
             Text(reg.formattedValue)
             .multilineTextAlignment(.trailing)
+            .font(.system(.headline, design: .monospaced))
         }
     }
 }
