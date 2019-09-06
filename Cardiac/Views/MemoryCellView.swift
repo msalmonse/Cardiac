@@ -20,6 +20,7 @@ struct MemoryCellView: View {
                 Text(cell.location)
                 .foregroundColor(cell.activity.color)
                 .padding(3)
+                .background(PositionBackground(cell.tag))
 
                 Spacer()
 
@@ -33,7 +34,6 @@ struct MemoryCellView: View {
         }
         .font(.system(.headline, design: .monospaced))
         .frame(width: 80)
-        .background(PositionBackground(cell.tag))
         .overlay(strokedRoundedRectangle(
                 cornerRadius: 2,
                 stroke: 2,

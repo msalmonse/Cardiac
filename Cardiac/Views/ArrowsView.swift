@@ -9,28 +9,32 @@
 import SwiftUI
 
 fileprivate let dummyArrow =
-    Arrow(CGPoint(x: -100, y: -100), CGPoint(x: -100, y: -200), fill: .clear)
+    Arrow(CGPoint(x: -100, y: -100), CGPoint(x: -200, y: -200), fill: .clear)
 
-fileprivate func drawArrow(_ arrow: ArrowData) -> some View {
-    guard let startRect = Position.self[arrow.startTag] else { return dummyArrow }
-    let startPoint = CGPoint(x: startRect.minX, y: startRect.midY)
+fileprivate func drawArrow(_ arrow: ArrowData?) -> some View {
+    if arrow == nil { return dummyArrow }
+    guard let startRect = Position.self[arrow!.startTag] else { return dummyArrow }
+    guard let stopRect = Position.self[arrow!.stopTag] else { return dummyArrow }
 
-    guard let stopRect = Position.self[arrow.stopTag] else { return dummyArrow }
-    let stopPoint = CGPoint(x: stopRect.maxX, y: stopRect.midY)
-
-    return Arrow(startPoint, stopPoint, fill: arrow.color)
+    if startRect.midX > stopRect.midX {
+        let startPoint = CGPoint(x: startRect.minX, y: startRect.minY)
+        let stopPoint = CGPoint(x: stopRect.maxX, y: stopRect.midY)
+        return Arrow(startPoint, stopPoint, fill: arrow!.color)
+    } else {
+        let startPoint = CGPoint(x: startRect.maxX, y: startRect.midY)
+        let stopPoint = CGPoint(x: stopRect.minX, y: stopRect.minY)
+        return Arrow(startPoint, stopPoint, fill: arrow!.color)
+    }
 }
 
 struct ArrowsView: View {
-    let exec: ExecUnit
+    @ObservedObject var exec: ExecUnit
 
     var body: some View {
-        Group {
-            if exec.execArrow != nil {
-                drawArrow(exec.execArrow!)
-            } else {
-                Text("").hidden()
-            }
+        ZStack {
+            drawArrow(exec.execArrow)
+            drawArrow(exec.readArrow)
+            drawArrow(exec.writeArrow)
         }
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 mesme. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 enum ExecError: Error {
     case illegal(OpCode)    // Illegal opcode
@@ -19,6 +19,10 @@ extension ExecError: LocalizedError {
         }
     }
 }
+
+fileprivate let execColor = Color.blue.opacity(0.4)
+fileprivate let readColor = Color.green.opacity(0.4)
+fileprivate let writeColor = Color.red.opacity(0.4)
 
 extension ExecUnit {
 
@@ -38,6 +42,7 @@ extension ExecUnit {
 
     func opB(_ addr: UInt16) -> UInt16 {
         readAddr = addr
+        readArrow = ArrowData(memory[addr].tag, alu.opB.tag, readColor)
         return memory[addr].value
     }
 
@@ -106,7 +111,7 @@ extension ExecUnit {
         writeAddr = UInt16.max
 
         clearArrows()
-        execArrow = ArrowData(memory[address].tag, "Instruction", .blue)
+        execArrow = ArrowData(memory[address].tag, "Execution Unit", execColor)
 
         switch opcode {
         case .inp, .out: ioOp(opcode)
@@ -116,6 +121,7 @@ extension ExecUnit {
         case let .sto(addr):
             memory[addr].setValue(alu.result.value % 999)
             writeAddr = addr
+            writeArrow = ArrowData(alu.result.tag, memory[addr].tag, writeColor)
         default: trap(.illegal(opcode))
         }
 

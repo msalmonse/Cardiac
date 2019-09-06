@@ -60,6 +60,7 @@ struct ContentView: View {
                             ExecView(exec: cpu.exec)
                         }
                         .modifier(Standard())
+                        .background(PositionBackground("Execution Unit"))
 
                         Spacer()
                     }

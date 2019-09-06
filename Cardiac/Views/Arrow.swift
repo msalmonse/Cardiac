@@ -20,6 +20,19 @@ struct ArrowData {
     }
 }
 
+enum ArrowError: Error {
+    case noArrow, noPoint
+}
+
+extension ArrowError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .noArrow: return "There is no arrow defined"
+        case .noPoint: return "The point is not defined"
+        }
+    }
+}
+
 fileprivate let delta: CGFloat = 2.0
 fileprivate let delta2 = delta + delta
 fileprivate let delta3 = delta2 + delta
