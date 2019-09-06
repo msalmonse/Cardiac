@@ -17,7 +17,8 @@ struct ArrowsView: View {
 }
 
 struct ArrowsView_Previews: PreviewProvider {
+    static let cpu = CPU()
     static var previews: some View {
-        ArrowsView(exec: ExecUnit())
+        ArrowsView(exec: cpu.exec)
     }
 }

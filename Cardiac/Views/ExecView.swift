@@ -39,7 +39,8 @@ struct ExecView: View {
 }
 
 struct ExecView_Previews: PreviewProvider {
+    static let cpu = CPU()
     static var previews: some View {
-        ExecView(exec: ExecUnit(memory: Memory(), inTape: Tape(.input), outTape: Tape(.output)))
+        ExecView(exec: cpu.exec)
     }
 }
