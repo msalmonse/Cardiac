@@ -97,7 +97,8 @@ extension ExecUnit {
         return
     }
 
-    func execOne() {
+    func execOne(_ doHalt: Bool = false) {
+        if doHalt { halt(.stepping) }
         if runState == .halted { runState = .stepping }
         address = next
         next += 1

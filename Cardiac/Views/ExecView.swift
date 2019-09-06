@@ -22,7 +22,7 @@ struct ExecView: View {
             Text(instruction(exec.opcode))
 
             Button(
-                action: { self.exec.execOne() },
+                action: { self.exec.execOne(true) },
                 label: { ButtonText("Single Step") }
             )
 
