@@ -52,6 +52,7 @@ struct ContentView: View {
                             ALUview(alu: cpu.exec.alu)
                         }
                         .modifier(Standard())
+                        .background(PositionBackground("Arithmatic Unit"))
 
                         Spacer()
 

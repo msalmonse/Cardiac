@@ -42,24 +42,28 @@ extension ExecUnit {
 
     func opB(_ addr: UInt16) -> UInt16 {
         readAddr = addr
-        readArrow = ArrowData(memory[addr].tag, alu.opB.tag, readColor)
+        readArrow = ArrowData(memory[addr].tag, "Arithmatic Unit", readColor)
         return memory[addr].value
     }
 
     func ioOp(_ opcode: OpCode) {
         switch opcode {
         case let .inp(addr):
+            let prevHead = inTape.head
             switch inTape.readNext() {
             case let .success(val):
                 memory[addr].setValue(val % 999)
                 writeAddr = addr
+                writeArrow = ArrowData(inTape[prevHead].tag, memory[addr].tag, writeColor)
             case let .failure(err):
                 iotrap(err)
             }
         case let .out(addr):
+            let prevHead = inTape.head
             switch outTape.writeNext(memory[addr].value) {
             case .success:
                 readAddr = addr
+                readArrow = ArrowData(memory[addr].tag, outTape[prevHead].tag, readColor)
             case let .failure(err):
                 iotrap(err)
             }
@@ -97,6 +101,7 @@ extension ExecUnit {
     }
 
     func shiftOp(_ left: UInt16, _ right: UInt16) {
+        alu.operation = .nosign
         alu.shiftLeft(left)
         alu.shiftRight(right)
         return
@@ -121,7 +126,7 @@ extension ExecUnit {
         case let .sto(addr):
             memory[addr].setValue(alu.result.value % 999)
             writeAddr = addr
-            writeArrow = ArrowData(alu.result.tag, memory[addr].tag, writeColor)
+            writeArrow = ArrowData("Arithmatic Unit", memory[addr].tag, writeColor)
         default: trap(.illegal(opcode))
         }
 

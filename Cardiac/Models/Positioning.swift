@@ -36,8 +36,7 @@ struct PositionBackground: View {
 
     var body: some View {
         GeometryReader { gp in
-            Rectangle()
-            .fill(self.setPosition(gp))
+            self.setPosition(gp)
         }
     }
 }

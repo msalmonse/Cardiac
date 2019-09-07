@@ -33,7 +33,7 @@ extension ArrowError: LocalizedError {
     }
 }
 
-fileprivate let delta: CGFloat = 2.0
+fileprivate let delta: CGFloat = 3.0
 fileprivate let delta2 = delta + delta
 fileprivate let delta3 = delta2 + delta
 fileprivate let delta4 = delta3 + delta
