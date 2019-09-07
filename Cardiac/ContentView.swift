@@ -11,6 +11,8 @@ import SwiftUI
 let bgHue = 0.4
 let bgColor = Color(hue: bgHue, saturation: 0.1, brightness: 1.0)
 
+let coordinateSpaceName = "Cardiac!"
+
 struct ContentView: View {
     var cpu = CPU()
 
@@ -82,6 +84,7 @@ struct ContentView: View {
                 }
                 ArrowsView(exec: cpu.exec)
             }
+            .coordinateSpace(name: coordinateSpaceName)
             .navigationBarHidden(true)
             .navigationBarTitle(Text("Cardiac"), displayMode: .inline)
         }
