@@ -86,6 +86,7 @@ struct Arrow: View {
         }
         .transform(transform)
         .fill(fill)
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

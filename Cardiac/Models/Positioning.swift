@@ -29,7 +29,7 @@ struct PositionBackground: View {
     }
 
     func setPosition(_ gp: GeometryProxy) -> Color {
-        Position[tag] = gp.frame(in: .named(coordinateSpaceName))
+        Position[tag] = gp.frame(in: .global)
 
         return color
     }

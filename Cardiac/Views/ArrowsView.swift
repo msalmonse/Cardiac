@@ -16,15 +16,10 @@ fileprivate func drawArrow(_ arrow: ArrowData?) -> some View {
     guard let startRect = Position.self[arrow!.startTag] else { return dummyArrow }
     guard let stopRect = Position.self[arrow!.stopTag] else { return dummyArrow }
 
-    if startRect.midX > stopRect.midX {
-        let startPoint = CGPoint(x: startRect.minX, y: startRect.minY)
-        let stopPoint = CGPoint(x: stopRect.maxX, y: stopRect.midY)
-        return Arrow(startPoint, stopPoint, fill: arrow!.color)
-    } else {
-        let startPoint = CGPoint(x: startRect.maxX, y: startRect.midY)
-        let stopPoint = CGPoint(x: stopRect.minX, y: stopRect.minY)
-        return Arrow(startPoint, stopPoint, fill: arrow!.color)
-    }
+    let rtl = startRect.midX > stopRect.midX
+    let startPoint = CGPoint(x: rtl ? startRect.minX : startRect.maxX, y: startRect.midY)
+    let stopPoint = CGPoint(x: rtl ? stopRect.maxX : stopRect.minX, y: stopRect.midY)
+    return Arrow(startPoint, stopPoint, fill: arrow!.color)
 }
 
 struct ArrowsView: View {
