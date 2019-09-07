@@ -45,5 +45,18 @@
       { "addr": 72, "data": 514 },
       { "addr": 73, "data": 952 },
       { "addr": 99, "data": 800 }
+   ],
+   "comment": [
+       "Rules of Single Pile Nim",
+       "A number of pebbles are placed between two players. During a player's turn he may remove one, two or three pebbles - provided that his opponent has not removed a similar number of pebbles during his turn.",
+       "A player loses when he cannot move because:",
+       "(1) There are no pebbles left.",
+       "(2) There is one pebble left and his opponent has just taken one pebble.",
+       "",
+       "Directions",
+       "The number of pebbles is loaded into locations 17 and 14",
+       "Start at location 53 if CARDIAC is to go first or 52 if the player is to go first.",
+       "The player enters his choice, one, two or, three into the input",
+       "CARDIAC prints the remaining pebbles after each turn."
    ]
 }
