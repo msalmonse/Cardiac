@@ -29,15 +29,11 @@ struct CommentView: View {
             bgColor
             VStack {
                 Spacer()
-
-                ForEach(comment.lines, id: \.self) { line in
-                    Text(line)
-                    .font(.headline)
-                    .multilineTextAlignment(.leading)
-                    .padding(5)
-                }
+                Text(comment.lines.joined(separator: "\n"))
                 .foregroundColor(.primary)
                 .background(Color(.systemBackground))
+                .lineLimit(100)
+                .font(.title)
                 .modifier(ContentView.Standard())
 
                 Spacer()
