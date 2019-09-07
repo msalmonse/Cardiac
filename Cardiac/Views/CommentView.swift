@@ -29,6 +29,7 @@ struct CommentView: View {
             bgColor
             VStack {
                 Spacer()
+
                 Text(comment.lines.joined(separator: "\n"))
                 .foregroundColor(.primary)
                 .background(Color(.systemBackground))
