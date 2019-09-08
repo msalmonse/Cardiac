@@ -80,6 +80,26 @@ struct ButtonImage: View {
     }
 }
 
+struct ButtonLabel: View {
+    let text: String
+    let name: String
+    let font: Font
+
+    init(_ text: String, systemName: String, font: Font = .headline) {
+        self.text = text
+        self.name = systemName
+        self.font = font
+    }
+
+    var body: some View {
+        HStack {
+            Text(text)
+            Image(systemName: name)
+        }
+        .modifier(ButtonBackground(font: font))
+    }
+}
+
 struct ButtonLabel_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
