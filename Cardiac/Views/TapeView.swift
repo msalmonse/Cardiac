@@ -24,6 +24,7 @@ struct TapeInView: View {
                     }
                     .foregroundColor(.primary)
                     .modifier(ContentView.Heading())
+                    .background(PositionBackground("Input"))
                 }
             )
             TapeView(tape: tape)
@@ -45,6 +46,7 @@ struct TapeOutView: View {
                     }
                     .foregroundColor(.primary)
                     .modifier(ContentView.Heading())
+                    .background(PositionBackground("Output"))
                 }
             )
             TapeView(tape: tape)
@@ -86,7 +88,6 @@ struct TapeCell: View {
         .foregroundColor(cell.valid ? .primary : .clear)
         .padding(2)
         .overlay(strokedRectangle(stroke: 1, color: borderColor))
-        .background(PositionBackground(cell.tag))
     }
 }
 
