@@ -36,7 +36,7 @@ extension ExecUnit {
         print("IOtrap @\(address): " + (reason.errorDescription ?? "Unknown"))
         next = address     // Instruction not completed
         if reason == TapeError.endOfTape { halt(.iowait) }
-        halt()
+        halt(.iowait)
         return
     }
 

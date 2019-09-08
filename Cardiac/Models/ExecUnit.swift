@@ -15,7 +15,7 @@ enum RunState {
     var description: String {
         switch self {
         case .halted: return "Halted"
-        case .iowait: return "Waiting"
+        case .iowait: return "Waiting for IO"
         case .loading: return "Loading"
         case let .running(pace): return "Run @\(String(format: "%.1f ips", 60/pace))"
         default: return "Executing"
