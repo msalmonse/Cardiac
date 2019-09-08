@@ -78,6 +78,16 @@ struct DetailView: View {
                 }
                 Text(instruction(cell))
                 Text("Status: \(cell.status.description)")
+                Button(
+                    action: {
+                        BreakPoint[self.cell.tag] += 1
+                        self.cell.objectWillChange.send()
+                    },
+                    label: {
+                        Text("Break: \(BreakPoint[self.cell.tag].description)")
+                        .foregroundColor(.primary)
+                    }
+                )
             }
         }
         .font(.system(.headline, design: .monospaced))
