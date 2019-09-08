@@ -45,6 +45,7 @@
 		C463550423218830008551AC /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550323218830008551AC /* Arrow.swift */; };
 		C463550623218A88008551AC /* ArrowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550523218A88008551AC /* ArrowsView.swift */; };
 		C463550823218B04008551AC /* ExecUnitRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550723218B04008551AC /* ExecUnitRun.swift */; };
+		C463550C23257C1E008551AC /* Breakpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550B23257C1E008551AC /* Breakpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		C463550323218830008551AC /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		C463550523218A88008551AC /* ArrowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsView.swift; sourceTree = "<group>"; };
 		C463550723218B04008551AC /* ExecUnitRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecUnitRun.swift; sourceTree = "<group>"; };
+		C463550B23257C1E008551AC /* Breakpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breakpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				C446BC44231BAD38004B8146 /* ALU.swift */,
+				C463550B23257C1E008551AC /* Breakpoint.swift */,
 				C446BBE32317C298004B8146 /* Cell.swift */,
 				C446BC5D231F93E4004B8146 /* Comment.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
@@ -438,6 +441,7 @@
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BC0323199EAC004B8146 /* Shapes.swift in Sources */,
 				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
+				C463550C23257C1E008551AC /* Breakpoint.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
 				C446BBEE2318492A004B8146 /* Tape.swift in Sources */,
 				C446BC5E231F93E4004B8146 /* Comment.swift in Sources */,

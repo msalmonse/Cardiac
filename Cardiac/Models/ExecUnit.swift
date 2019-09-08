@@ -47,7 +47,10 @@ class ExecUnit: ObservableObject, Identifiable {
     var intAddress = 0
     var address: UInt16 = 0 {
         willSet { intAddress = Int(newValue) }
-        didSet { opcode = memory[address].opcode }
+        didSet {
+            opcode = memory[address].opcode
+            breakPoint = BreakPoint[memory[address].tag]
+        }
     }
     var next: UInt16 = 0
 
@@ -69,6 +72,7 @@ class ExecUnit: ObservableObject, Identifiable {
     var writeAddr: UInt16 = 0
 
     var opcode: OpCode = .unk(0)
+    var breakPoint = BreakOn.never
 
     // Arrows
     var showArrows: Bool = true {
@@ -98,6 +102,22 @@ class ExecUnit: ObservableObject, Identifiable {
         if !(1...98).contains(tryValue) { return false }
         next = tryValue
         return true
+    }
+
+    func breakPointCheck() -> Bool {
+        switch breakPoint {
+        case .never: return false
+        case .execute: return true
+        default: break
+        }
+
+        switch opcode {
+        case let .inp(addr), let .sto(addr):
+            return BreakPoint[memory[addr].tag] == .write
+        case let .out(addr), let .cla(addr), let .add(addr), let .sub(addr):
+            return BreakPoint[memory[addr].tag] == .read
+        default: return false
+        }
     }
 
     init(memory: Memory, inTape: Tape, outTape: Tape) {

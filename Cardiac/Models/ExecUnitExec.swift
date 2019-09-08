@@ -108,7 +108,13 @@ extension ExecUnit {
     func execOne(_ doHalt: Bool = false) {
         if doHalt { halt(.stepping) }
         if runState == .halted { runState = .stepping }
+
         address = next
+        if runState != .stepping && breakPointCheck() {
+            halt()
+            return
+        }
+
         next += 1
         readAddr = UInt16.max
         writeAddr = UInt16.max
