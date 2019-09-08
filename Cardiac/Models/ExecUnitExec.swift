@@ -83,15 +83,15 @@ extension ExecUnit {
     func jumpOp(_ opcode: OpCode) {
         switch opcode {
         case let .tac(addr):
-            if alu.isNegative {
-                next = addr
-                writeAddr = 99
-            }
+            if alu.isNegative { next = addr }
         case let .jmp(addr):
-            next = addr
             writeAddr = 99
+            writeArrow = generateArrow("Execution Unit", memory[99].tag, writeColor)
+            memory[99].setRW().setValue(800 + next).setRO()
+            next = addr
         case let .hrs(addr):
             next = addr
+            clearArrows()
             halt()
         default: trap(.illegal(opcode))
         }
