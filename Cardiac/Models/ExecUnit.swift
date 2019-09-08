@@ -7,6 +7,7 @@
 //
 
 import Combine
+import SwiftUI
 
 enum RunState {
     case running(Double), stepping, halted, iowait, loading
@@ -70,6 +71,13 @@ class ExecUnit: ObservableObject, Identifiable {
     var opcode: OpCode = .unk(0)
 
     // Arrows
+    var showArrows: Bool = true {
+        willSet {
+            if !newValue { clearArrows() }
+            objectWillChange.send()
+        }
+    }
+
     var execArrow: ArrowData? = nil
     var readArrow: ArrowData? = nil
     var writeArrow: ArrowData? = nil
@@ -78,6 +86,10 @@ class ExecUnit: ObservableObject, Identifiable {
         execArrow = nil
         readArrow = nil
         writeArrow = nil
+    }
+
+    func generateArrow(_ start: String, _ stop: String, _ color: Color) -> ArrowData? {
+        return showArrows ? ArrowData(start, stop, color) : nil
     }
 
     init(memory: Memory, inTape: Tape, outTape: Tape) {

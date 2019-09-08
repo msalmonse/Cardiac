@@ -29,6 +29,17 @@ struct ExecView: View {
             RunButton(exec, pace: 3.0)
             RunButton(exec, pace: 1.2)
 
+            Button(
+                action: { self.exec.showArrows.toggle() },
+                label: {
+                    HStack(alignment: .firstTextBaseline) {
+                        ButtonLabel("Show Arrows",
+                            systemName: self.exec.showArrows ? "checkmark.square" : "square"
+                        )
+                    }
+                }
+            )
+
             CommentLink(comment: exec.comment)
 
         }
