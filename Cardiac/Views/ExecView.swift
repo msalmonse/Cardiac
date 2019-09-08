@@ -10,13 +10,32 @@ import SwiftUI
 
 struct ExecView: View {
     @ObservedObject var exec: ExecUnit
+    @State var setPC: Bool = false
+    @State var nextPC: String = "00"
 
     var body: some View {
         VStack {
             HStack {
-                Text(exec.runDescription)
-                Spacer()
-                Text(String(format: "@%02d", Int(exec.intAddress)))
+                if setPC {
+                    TextField("Next Instruction", text: $nextPC,
+                        onCommit: {
+                            self.exec.tryPC(self.nextPC)
+                            self.nextPC = "00"
+                            self.setPC = false
+                        }
+                    )
+                    .multilineTextAlignment(.trailing)
+                    .foregroundColor(.primary)
+                } else {
+                    Text(exec.runDescription)
+                    Spacer()
+                    Button(action: { self.setPC = true },
+                            label: {
+                                Text(String(format: "@%02d", Int(exec.intAddress)))
+                                .foregroundColor(.primary)
+                            }
+                    )
+                }
             }
 
             Text(instruction(exec.opcode))

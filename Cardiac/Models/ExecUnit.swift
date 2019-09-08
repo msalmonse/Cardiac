@@ -92,6 +92,14 @@ class ExecUnit: ObservableObject, Identifiable {
         return showArrows ? ArrowData(start, stop, color) : nil
     }
 
+    @discardableResult
+    func tryPC(_ tryNext: String) -> Bool {
+        guard let tryValue = UInt16(tryNext) else { return false }
+        if !(1...98).contains(tryValue) { return false }
+        next = tryValue
+        return true
+    }
+
     init(memory: Memory, inTape: Tape, outTape: Tape) {
         self.memory = memory
         self.inTape = inTape
