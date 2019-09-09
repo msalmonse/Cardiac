@@ -11,17 +11,20 @@ import SwiftUI
 struct ExecView: View {
     @ObservedObject var exec: ExecUnit
     @State var setPC: Bool = false
-    @State var nextPC: String = "00"
+    @State var nextPC: String = ""
 
     var body: some View {
         VStack {
             HStack {
                 if setPC {
-                    TextField("Next Instruction", text: $nextPC,
+                    TextField("Next Address", text: $nextPC,
                         onCommit: {
-                            self.exec.tryPC(self.nextPC)
-                            self.nextPC = "00"
-                            self.setPC = false
+                            switch self.exec.tryPC(self.nextPC) {
+                            case let .failure(err): print(err)
+                            case .success:
+                                self.nextPC = ""
+                                self.setPC = false
+                            }
                         }
                     )
                     .multilineTextAlignment(.trailing)
@@ -31,12 +34,15 @@ struct ExecView: View {
                     Spacer()
                     Button(action: { self.setPC = true },
                             label: {
-                                Text(String(format: "@%02d", Int(exec.intAddress)))
-                                .foregroundColor(.primary)
+                                HStack {
+                                    Text(String(format: "@%02d", Int(exec.intAddress)))
+                                    Image(systemName: "square.and.pencil")
+                                }
                             }
                     )
                 }
             }
+            .foregroundColor(.primary)
 
             Text(instruction(exec.opcode))
 

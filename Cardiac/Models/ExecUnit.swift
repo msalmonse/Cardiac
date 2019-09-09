@@ -97,11 +97,14 @@ class ExecUnit: ObservableObject, Identifiable {
     }
 
     @discardableResult
-    func tryPC(_ tryNext: String) -> Bool {
-        guard let tryValue = UInt16(tryNext) else { return false }
-        if !(1...98).contains(tryValue) { return false }
+    func tryPC(_ tryNext: String) -> Result<Void, Error> {
+        guard let tryValue = UInt16(tryNext) else { return .failure(ExecError.badNumber) }
+        if !(1...98).contains(tryValue) { return .failure(ExecError.outOfRange) }
         next = tryValue
-        return true
+        address = tryValue
+        clearArrows()
+        memory.setActivity(read: UInt16.max, write: UInt16.max, exec: UInt16.max)
+        return .success(Void())
     }
 
     func breakPointCheck() -> Bool {

@@ -10,12 +10,16 @@ import SwiftUI
 
 enum ExecError: Error {
     case illegal(OpCode)    // Illegal opcode
+    case badNumber          // failure during conversion
+    case outOfRange
 }
 
 extension ExecError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .badNumber: return "Not a number"
         case let .illegal(opcode): return "Illegal opcode: \(opcode.value)"
+        case .outOfRange: return "Out of range"
         }
     }
 }
