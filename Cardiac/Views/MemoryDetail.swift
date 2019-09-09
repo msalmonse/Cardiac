@@ -78,20 +78,37 @@ struct DetailView: View {
                 }
                 Text(instruction(cell))
                 Text("Status: \(cell.status.description)")
-                Button(
-                    action: {
-                        BreakPoint[self.cell.tag] += 1
-                        self.cell.objectWillChange.send()
-                    },
-                    label: {
-                        Text("Break: \(BreakPoint[self.cell.tag].description)")
-                        .foregroundColor(.primary)
-                    }
-                )
+                HStack {
+                    Text("Break: \(BreakPoint[self.cell.tag].description)")
+                    Spacer()
+                    Button(
+                        action: {
+                            BreakPoint[self.cell.tag] += 1
+                            self.cell.objectWillChange.send()
+                        },
+                        label: { Text(" + ").bold() }
+                    )
+                    Button(
+                        action: {
+                            BreakPoint[self.cell.tag] = .never
+                            self.cell.objectWillChange.send()
+                        },
+                        label: { Text(" 0 ").foregroundColor(.red) }
+                    )
+                    Button(
+                        action: {
+                            BreakPoint[self.cell.tag] -= 1
+                            self.cell.objectWillChange.send()
+                        },
+                        label: { Text(" - ").bold() }
+                    )
+                }
+                .foregroundColor(.primary)
             }
         }
         .font(.system(.headline, design: .monospaced))
         .padding()
+        .frame(width: 350)
         .overlay(strokedRoundedRectangle(cornerRadius: 5, stroke: 2, color: .primary))
     }
 }
