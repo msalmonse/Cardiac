@@ -76,7 +76,7 @@ func instruction(_ opcode: OpCode, verbose: Bool = false) -> String {
     case (let .add(addr), false): return "ADD " + fmt(addr)
     case (let .tac(addr), true):  return "Jump if -ve to " + fmt(addr)
     case (let .tac(addr), false): return "TAC " + fmt(addr)
-    case (let .slr(addr), true):  return "Shift left \(sl(addr)), right\(sr(addr))"
+    case (let .slr(addr), true):  return "Shift left \(sl(addr)), right \(sr(addr))"
     case (let .slr(addr), false): return "SL\(sl(addr)) SR\(sr(addr))"
     case (let .out(addr), true):  return "Write from \(addr) to tape"
     case (let .out(addr), false): return "OUT " + fmt(addr)
