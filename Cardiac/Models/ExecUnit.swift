@@ -49,7 +49,7 @@ class ExecUnit: ObservableObject, Identifiable {
         willSet { intAddress = Int(newValue) }
         didSet {
             opcode = memory[address].opcode
-            breakPoint = BreakPoint[memory[address].tag]
+            breakPoint = memory[address].breakPoint
         }
     }
     var next: UInt16 = 0
@@ -116,9 +116,9 @@ class ExecUnit: ObservableObject, Identifiable {
 
         switch opcode {
         case let .inp(addr), let .sto(addr):
-            return BreakPoint[memory[addr].tag] == .write
+            return memory[addr].breakPoint == .write
         case let .out(addr), let .cla(addr), let .add(addr), let .sub(addr):
-            return BreakPoint[memory[addr].tag] == .read
+            return memory[addr].breakPoint == .read
         default: return false
         }
     }

@@ -54,7 +54,7 @@ struct MemoryDetail: View {
     }
 }
 
-struct BreakPointBackground: ViewModifier {
+fileprivate struct BreakPointBackground: ViewModifier {
     let fg: Color
 
     func body(content: Content) -> some View {
@@ -94,7 +94,7 @@ struct DetailView: View {
                     Spacer()
                     Button(
                         action: {
-                            BreakPoint[self.cell.tag] += 1
+                            self.cell.breakPoint += 1
                             self.cell.objectWillChange.send()
                         },
                         label: {
@@ -104,7 +104,7 @@ struct DetailView: View {
                     )
                     Button(
                         action: {
-                            BreakPoint[self.cell.tag] = .never
+                            self.cell.breakPoint = .never
                             self.cell.objectWillChange.send()
                         },
                         label: {
@@ -114,7 +114,7 @@ struct DetailView: View {
                     )
                     Button(
                         action: {
-                            BreakPoint[self.cell.tag] -= 1
+                            self.cell.breakPoint -= 1
                             self.cell.objectWillChange.send()
                         },
                         label: {
