@@ -54,6 +54,17 @@ struct MemoryDetail: View {
     }
 }
 
+struct BreakPointBackground: ViewModifier {
+    let fg: Color
+
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(fg)
+            .font(.body)
+            .padding(2)
+            .clipShape(Capsule())
+    }
+}
 struct DetailView: View {
     @ObservedObject var cell: Cell
 
@@ -86,21 +97,30 @@ struct DetailView: View {
                             BreakPoint[self.cell.tag] += 1
                             self.cell.objectWillChange.send()
                         },
-                        label: { Text(" + ").bold() }
+                        label: {
+                            Image(systemName: "plus.square")
+                            .modifier(BreakPointBackground(fg: .primary))
+                        }
                     )
                     Button(
                         action: {
                             BreakPoint[self.cell.tag] = .never
                             self.cell.objectWillChange.send()
                         },
-                        label: { Text(" 0 ").foregroundColor(.red) }
+                        label: {
+                            Image(systemName: "clear")
+                            .modifier(BreakPointBackground(fg: .red))
+                        }
                     )
                     Button(
                         action: {
                             BreakPoint[self.cell.tag] -= 1
                             self.cell.objectWillChange.send()
                         },
-                        label: { Text(" - ").bold() }
+                        label: {
+                            Image(systemName: "minus.square")
+                            .modifier(BreakPointBackground(fg: .primary))
+                        }
                     )
                 }
                 .foregroundColor(.primary)
