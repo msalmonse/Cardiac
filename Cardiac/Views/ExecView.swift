@@ -20,7 +20,9 @@ struct ExecView: View {
                     TextField("Next Address", text: $nextPC,
                         onCommit: {
                             switch self.exec.tryPC(self.nextPC) {
-                            case let .failure(err): print(err)
+                            case let .failure(err):
+                                let message = errorMessage(err, "Setting next instruction address")
+                                MessagePublisher.publish(.error(message))
                             case .success:
                                 self.nextPC = ""
                                 self.setPC = false

@@ -14,7 +14,9 @@ struct LoadButtons: View {
     func loadJSON(_ name: String) {
         switch self.cpu.loadJsonResource(name) {
         case .success: break
-        case .failure(let err): print(err)
+        case .failure(let err):
+            let message = errorMessage(err, "loading: '\(name)")
+            MessagePublisher.publish(.error(message))
         }
     }
 

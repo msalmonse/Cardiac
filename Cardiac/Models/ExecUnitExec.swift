@@ -31,13 +31,15 @@ fileprivate let writeColor = Color.red.opacity(0.4)
 extension ExecUnit {
 
     func trap(_ reason: ExecError) {
-        print("Trap @\(address): " + (reason.errorDescription ?? "Unknown"))
+        let message = errorMessage(reason, "Trap @\(address)")
+        MessagePublisher.publish(.error(message))
         halt()
         return
     }
 
     func iotrap(_ reason: TapeError) {
-        print("IOtrap @\(address): " + (reason.errorDescription ?? "Unknown"))
+        let message = errorMessage(reason, "IO Trap @\(address)")
+        MessagePublisher.publish(.error(message))
         next = address     // Instruction not completed
         if reason == TapeError.endOfTape { halt(.iowait) }
         halt(.iowait)
