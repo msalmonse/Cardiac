@@ -51,6 +51,11 @@
 		C4635512232765AC008551AC /* MessagePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635511232765AC008551AC /* MessagePublisher.swift */; };
 		C463551423276776008551AC /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463551323276776008551AC /* Alerts.swift */; };
 		C4635516232769F9008551AC /* CardiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635515232769F9008551AC /* CardiacView.swift */; };
+		C463551E23281E5D008551AC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463551D23281E5D008551AC /* main.swift */; };
+		C4635523232829EF008551AC /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635522232829EF008551AC /* Parser.swift */; };
+		C463552523282A05008551AC /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552423282A05008551AC /* Tokenizer.swift */; };
+		C463552723282AF6008551AC /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552623282AF6008551AC /* OpCode.swift */; };
+		C463552F23282DA6008551AC /* CARDasmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552E23282DA6008551AC /* CARDasmTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,18 @@
 			remoteInfo = Cardiac;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C463551923281E5D008551AC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C446BBAC2317C07E004B8146 /* Cardiac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardiac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +138,14 @@
 		C4635511232765AC008551AC /* MessagePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePublisher.swift; sourceTree = "<group>"; };
 		C463551323276776008551AC /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		C4635515232769F9008551AC /* CardiacView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiacView.swift; sourceTree = "<group>"; };
+		C463551B23281E5D008551AC /* CARDasm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CARDasm; sourceTree = BUILT_PRODUCTS_DIR; };
+		C463551D23281E5D008551AC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C4635522232829EF008551AC /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		C463552423282A05008551AC /* Tokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
+		C463552623282AF6008551AC /* OpCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
+		C463552C23282DA6008551AC /* CARDasmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CARDasmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C463552E23282DA6008551AC /* CARDasmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CARDasmTests.swift; sourceTree = "<group>"; };
+		C463553023282DA6008551AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +170,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C463551823281E5D008551AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C463552923282DA6008551AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -154,6 +193,8 @@
 				C446BBAE2317C07E004B8146 /* Cardiac */,
 				C446BBC52317C085004B8146 /* CardiacTests */,
 				C446BBD02317C085004B8146 /* CardiacUITests */,
+				C463551C23281E5D008551AC /* CARDasm */,
+				C463552D23282DA6008551AC /* CARDasmTests */,
 				C446BBAD2317C07E004B8146 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,6 +205,8 @@
 				C446BBAC2317C07E004B8146 /* Cardiac.app */,
 				C446BBC22317C085004B8146 /* CardiacTests.xctest */,
 				C446BBCD2317C085004B8146 /* CardiacUITests.xctest */,
+				C463551B23281E5D008551AC /* CARDasm */,
+				C463552C23282DA6008551AC /* CARDasmTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -276,6 +319,26 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		C463551C23281E5D008551AC /* CARDasm */ = {
+			isa = PBXGroup;
+			children = (
+				C463551D23281E5D008551AC /* main.swift */,
+				C463552623282AF6008551AC /* OpCode.swift */,
+				C4635522232829EF008551AC /* Parser.swift */,
+				C463552423282A05008551AC /* Tokenizer.swift */,
+			);
+			path = CARDasm;
+			sourceTree = "<group>";
+		};
+		C463552D23282DA6008551AC /* CARDasmTests */ = {
+			isa = PBXGroup;
+			children = (
+				C463552E23282DA6008551AC /* CARDasmTests.swift */,
+				C463553023282DA6008551AC /* Info.plist */,
+			);
+			path = CARDasmTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -333,6 +396,40 @@
 			productReference = C446BBCD2317C085004B8146 /* CardiacUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C463551A23281E5D008551AC /* CARDasm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C463551F23281E5D008551AC /* Build configuration list for PBXNativeTarget "CARDasm" */;
+			buildPhases = (
+				C463551723281E5D008551AC /* Sources */,
+				C463551823281E5D008551AC /* Frameworks */,
+				C463551923281E5D008551AC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CARDasm;
+			productName = CARDasm;
+			productReference = C463551B23281E5D008551AC /* CARDasm */;
+			productType = "com.apple.product-type.tool";
+		};
+		C463552B23282DA6008551AC /* CARDasmTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C463553123282DA6008551AC /* Build configuration list for PBXNativeTarget "CARDasmTests" */;
+			buildPhases = (
+				C463552823282DA6008551AC /* Sources */,
+				C463552923282DA6008551AC /* Frameworks */,
+				C463552A23282DA6008551AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CARDasmTests;
+			productName = CARDasmTests;
+			productReference = C463552C23282DA6008551AC /* CARDasmTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -354,6 +451,12 @@
 						CreatedOnToolsVersion = 11.0;
 						TestTargetID = C446BBAB2317C07E004B8146;
 					};
+					C463551A23281E5D008551AC = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					C463552B23282DA6008551AC = {
+						CreatedOnToolsVersion = 11.0;
+					};
 				};
 			};
 			buildConfigurationList = C446BBA72317C07E004B8146 /* Build configuration list for PBXProject "Cardiac" */;
@@ -372,6 +475,8 @@
 				C446BBAB2317C07E004B8146 /* Cardiac */,
 				C446BBC12317C085004B8146 /* CardiacTests */,
 				C446BBCC2317C085004B8146 /* CardiacUITests */,
+				C463551A23281E5D008551AC /* CARDasm */,
+				C463552B23282DA6008551AC /* CARDasmTests */,
 			);
 		};
 /* End PBXProject section */
@@ -397,6 +502,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C446BBCB2317C085004B8146 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C463552A23282DA6008551AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -483,6 +595,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				C446BBD22317C085004B8146 /* CardiacUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C463551723281E5D008551AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4635523232829EF008551AC /* Parser.swift in Sources */,
+				C463552723282AF6008551AC /* OpCode.swift in Sources */,
+				C463552523282A05008551AC /* Tokenizer.swift in Sources */,
+				C463551E23281E5D008551AC /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C463552823282DA6008551AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C463552F23282DA6008551AC /* CARDasmTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +878,66 @@
 			};
 			name = Release;
 		};
+		C463552023281E5D008551AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C463552123281E5D008551AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C463553223282DA6008551AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CARDasmTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CARDasmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C463553323282DA6008551AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CARDasmTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = org.mesme.CARDasmTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -782,6 +973,24 @@
 			buildConfigurations = (
 				C446BBDD2317C085004B8146 /* Debug */,
 				C446BBDE2317C085004B8146 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C463551F23281E5D008551AC /* Build configuration list for PBXNativeTarget "CARDasm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C463552023281E5D008551AC /* Debug */,
+				C463552123281E5D008551AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C463553123282DA6008551AC /* Build configuration list for PBXNativeTarget "CARDasmTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C463553223282DA6008551AC /* Debug */,
+				C463553323282DA6008551AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
