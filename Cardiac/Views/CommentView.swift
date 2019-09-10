@@ -35,7 +35,7 @@ struct CommentView: View {
                 .background(Color(.systemBackground))
                 .lineLimit(100)
                 .font(.title)
-                .modifier(ContentView.Standard())
+                .modifier(CardiacView.Standard())
 
                 Spacer()
 

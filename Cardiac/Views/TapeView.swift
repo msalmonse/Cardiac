@@ -23,7 +23,7 @@ struct TapeInView: View {
                         Image(systemName: "pencil").padding()
                     }
                     .foregroundColor(.primary)
-                    .modifier(ContentView.Heading())
+                    .modifier(CardiacView.Heading())
                     .background(PositionBackground("Input"))
                 }
             )
@@ -45,7 +45,7 @@ struct TapeOutView: View {
                         Image(systemName: "gobackward").padding()
                     }
                     .foregroundColor(.primary)
-                    .modifier(ContentView.Heading())
+                    .modifier(CardiacView.Heading())
                     .background(PositionBackground("Output"))
                 }
             )

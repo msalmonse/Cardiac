@@ -50,6 +50,7 @@
 		C46355102327649C008551AC /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550F2327649C008551AC /* ErrorMessages.swift */; };
 		C4635512232765AC008551AC /* MessagePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635511232765AC008551AC /* MessagePublisher.swift */; };
 		C463551423276776008551AC /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463551323276776008551AC /* Alerts.swift */; };
+		C4635516232769F9008551AC /* CardiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635515232769F9008551AC /* CardiacView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		C463550F2327649C008551AC /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		C4635511232765AC008551AC /* MessagePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePublisher.swift; sourceTree = "<group>"; };
 		C463551323276776008551AC /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		C4635515232769F9008551AC /* CardiacView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiacView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				C463550323218830008551AC /* Arrow.swift */,
 				C463550523218A88008551AC /* ArrowsView.swift */,
 				C446BC55231E3002004B8146 /* ButtonLabel.swift */,
+				C4635515232769F9008551AC /* CardiacView.swift */,
 				C446BC5B231F8215004B8146 /* CommentView.swift */,
 				C446BC51231D65AA004B8146 /* ExecView.swift */,
 				C446BC57231E417F004B8146 /* LoadButtons.swift */,
@@ -429,6 +432,7 @@
 			files = (
 				C446BBE82317C696004B8146 /* MemoryView.swift in Sources */,
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
+				C4635516232769F9008551AC /* CardiacView.swift in Sources */,
 				C446BBE62317C3C6004B8146 /* MemoryCellView.swift in Sources */,
 				C446BC49231CE810004B8146 /* ALUview.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
