@@ -80,6 +80,7 @@ struct ContentView: View {
                     }
                     .modifier(Standard())
                 }
+                Alerts()
                 ArrowsView(exec: cpu.exec)
             }
             .navigationBarHidden(true)

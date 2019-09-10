@@ -46,6 +46,10 @@
 		C463550623218A88008551AC /* ArrowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550523218A88008551AC /* ArrowsView.swift */; };
 		C463550823218B04008551AC /* ExecUnitRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550723218B04008551AC /* ExecUnitRun.swift */; };
 		C463550C23257C1E008551AC /* Breakpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550B23257C1E008551AC /* Breakpoint.swift */; };
+		C463550E23276436008551AC /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550D23276436008551AC /* Messages.swift */; };
+		C46355102327649C008551AC /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463550F2327649C008551AC /* ErrorMessages.swift */; };
+		C4635512232765AC008551AC /* MessagePublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635511232765AC008551AC /* MessagePublisher.swift */; };
+		C463551423276776008551AC /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463551323276776008551AC /* Alerts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,10 @@
 		C463550523218A88008551AC /* ArrowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsView.swift; sourceTree = "<group>"; };
 		C463550723218B04008551AC /* ExecUnitRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecUnitRun.swift; sourceTree = "<group>"; };
 		C463550B23257C1E008551AC /* Breakpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breakpoint.swift; sourceTree = "<group>"; };
+		C463550D23276436008551AC /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		C463550F2327649C008551AC /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
+		C4635511232765AC008551AC /* MessagePublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePublisher.swift; sourceTree = "<group>"; };
+		C463551323276776008551AC /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +213,7 @@
 		C446BBE02317C264004B8146 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C463551323276776008551AC /* Alerts.swift */,
 				C446BC48231CE810004B8146 /* ALUview.swift */,
 				C463550323218830008551AC /* Arrow.swift */,
 				C463550523218A88008551AC /* ArrowsView.swift */,
@@ -231,11 +240,14 @@
 				C446BC5D231F93E4004B8146 /* Comment.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
 				C446BBEF23185035004B8146 /* Dump.swift */,
+				C463550F2327649C008551AC /* ErrorMessages.swift */,
 				C446BC53231D9109004B8146 /* ExecUnit.swift */,
 				C446BC46231BF7D1004B8146 /* ExecUnitExec.swift */,
 				C463550723218B04008551AC /* ExecUnitRun.swift */,
 				C446BBFB2318FB18004B8146 /* Instruction.swift */,
 				C446BBE92317C6CD004B8146 /* Memory.swift */,
+				C463550D23276436008551AC /* Messages.swift */,
+				C4635511232765AC008551AC /* MessagePublisher.swift */,
 				C446BC5F231FF002004B8146 /* Positioning.swift */,
 				C446BBED2318492A004B8146 /* Tape.swift */,
 			);
@@ -427,6 +439,7 @@
 				C446BC0123191450004B8146 /* MemoryCellLink.swift in Sources */,
 				C446BC54231D9109004B8146 /* ExecUnit.swift in Sources */,
 				C446BBEC23184621004B8146 /* CPU.swift in Sources */,
+				C4635512232765AC008551AC /* MessagePublisher.swift in Sources */,
 				C446BC58231E417F004B8146 /* LoadButtons.swift in Sources */,
 				C446BC5A231EC489004B8146 /* TapeDetailView.swift in Sources */,
 				C446BBF52318E3AD004B8146 /* Files.swift in Sources */,
@@ -443,9 +456,12 @@
 				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
 				C463550C23257C1E008551AC /* Breakpoint.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
+				C463550E23276436008551AC /* Messages.swift in Sources */,
 				C446BBEE2318492A004B8146 /* Tape.swift in Sources */,
+				C46355102327649C008551AC /* ErrorMessages.swift in Sources */,
 				C446BC5E231F93E4004B8146 /* Comment.swift in Sources */,
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
+				C463551423276776008551AC /* Alerts.swift in Sources */,
 				C446BC60231FF002004B8146 /* Positioning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
