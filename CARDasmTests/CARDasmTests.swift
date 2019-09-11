@@ -22,6 +22,7 @@ class CARDasmTests: XCTestCase {
     func testTokenizer() {
         let tokens = tokenize(testInput)
         print(tokens)
+        XCTAssertEqual(tokens.count, 6)
     }
 
     func testPerformanceExample() {
@@ -38,9 +39,11 @@ let testInput = """
 # This is a comment
 
 data1: dat 0
+data1: dat 1
 
 label1: loc 23
     inp data1
+    slr 3 1
     jmp label1
 
 """
