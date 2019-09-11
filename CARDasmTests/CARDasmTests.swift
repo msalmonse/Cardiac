@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import CARDasm
+// @testable import CARDasm
 
 class CARDasmTests: XCTestCase {
 
@@ -21,6 +21,7 @@ class CARDasmTests: XCTestCase {
 
     func testTokenizer() {
         let tokens = tokenize(testInput)
+        print(tokens)
     }
 
     func testPerformanceExample() {
@@ -36,7 +37,7 @@ let testInput = """
 
 # This is a comment
 
-data1 dat 0
+data1: dat 0
 
 label1: loc 23
     inp data1

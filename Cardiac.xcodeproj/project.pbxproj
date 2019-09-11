@@ -56,6 +56,8 @@
 		C463552523282A05008551AC /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552423282A05008551AC /* Tokenizer.swift */; };
 		C463552723282AF6008551AC /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552623282AF6008551AC /* OpCode.swift */; };
 		C463552F23282DA6008551AC /* CARDasmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552E23282DA6008551AC /* CARDasmTests.swift */; };
+		C4A847C32328C1FF00E76AF2 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552423282A05008551AC /* Tokenizer.swift */; };
+		C4A847C42328C21A00E76AF2 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552623282AF6008551AC /* OpCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -614,6 +616,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C463552F23282DA6008551AC /* CARDasmTests.swift in Sources */,
+				C4A847C42328C21A00E76AF2 /* OpCode.swift in Sources */,
+				C4A847C32328C1FF00E76AF2 /* Tokenizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
