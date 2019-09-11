@@ -11,9 +11,9 @@ import Foundation
 enum Tokens {
     case identifier(String)
     case number(String)
-    case data(Location?, String)
-    case opCode(Location?, OpCode)
-    case location(Location?, Int)
+    case data(Location, String)
+    case opCode(Location, OpCode)
+    case location(Location, Int)
     case error(Int, Error)
 }
 
@@ -38,58 +38,52 @@ fileprivate let expectedWords: [Substring: Int] = [
 
 func tokenize(_ indata: String) -> [Tokens] {
     var tokens: [Tokens] = []
-    var lineData = indata
 
     var lineCount = 0
     var lineAddress = 2
-    var lineStart = lineData.startIndex
-    while lineStart < lineData.endIndex {
-        let lineEnd = lineData.firstIndex(of: "\n") ?? lineData.endIndex
-        let lineStop = lineData.firstIndex(of: "#") ?? lineEnd  // Remove comments
-        let line = lineData[lineStart..<min(lineStop, lineEnd)]
+    for var line in indata.split(separator: "\n", omittingEmptySubsequences: false) {
+        if let commentStart = line.firstIndex(of: "#") {
+            line.removeSubrange(commentStart...)
+        }
         lineCount += 1
         var words = line.split(separator: " ")
 
         if words.count > 0 {
             lineAddress += 1
 
-            var label: Location? = nil
+            var location = Location(lineAddress)
             // Test for label
             if words[0].hasSuffix(":") {
-                label = Location.get(words[0].dropLast(1))
+                location = Location.get(words[0].dropLast(1))
+                if location.address == nil { location.address = lineAddress }
                 words.removeFirst()
             }
 
-            if label != nil && label!.address != nil {
+            if location.label != nil && location.address != lineAddress {
                 // redefined label
-                tokens.append(.error(lineCount, TokenError.redefinedLabel(label!.label!)))
+                tokens.append(.error(lineCount, TokenError.redefinedLabel(location.label!)))
             } else if words.count != expectedWords[words[0]] ?? 2 {
                 tokens.append(.error(lineCount, TokenError.wrongNumberOfArguments))
             } else {
-                label?.address = lineAddress
                 switch words[0] {
-                case "dat": tokens.append(.data(label, String(words[1])))
+                case "dat": tokens.append(.data(location, String(words[1])))
                 case "loc":
                     switch addressValue(words[1]) {
                     case let .success(addr):
                         lineAddress = addr
-                        label?.address = addr
-                        tokens.append(.location(label, addr))
+                        location.address = addr
+                        tokens.append(.location(location, addr))
                     case let .failure(err):
                         tokens.append(.error(lineCount, err))
                     }
                 default:
                     switch opCodeToken(words) {
-                    case let .success(opCode): tokens.append(.opCode(label, opCode))
+                    case let .success(opCode): tokens.append(.opCode(location, opCode))
                     case let .failure(err): tokens.append(.error(lineCount, err))
                     }
                 }
             }
         }
-
-        // move onto next line
-        lineData.removeSubrange(lineStart...lineEnd)
-        lineStart = lineData.startIndex
     }
 
     return tokens

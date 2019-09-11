@@ -13,6 +13,10 @@ class Location {
     var address: Int? = nil
     var used: [Int] = []
 
+    init(_ value: Int) {
+        self.address = value
+    }
+
     init(_ sub: Substring) {
         // check for numeric argument
         switch addressValue(sub) {

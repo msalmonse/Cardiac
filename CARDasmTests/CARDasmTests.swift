@@ -43,7 +43,7 @@ data1: dat 1
 
 label1: loc 23
     inp data1
-    slr 3 1
+    slr 3 1     # comment
     jmp label1
 
 """
