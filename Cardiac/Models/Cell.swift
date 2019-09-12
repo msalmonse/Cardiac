@@ -48,10 +48,8 @@ class Cell: ObservableObject, Identifiable {
     let id = UUID()
     var tag: String
 
-    var breakPoint: BreakOn {
-        get { return BreakPoint[tag] }
-        set { BreakPoint[tag] = newValue }
-    }
+    @Published
+    var breakPoint = BreakOn.never
 
     @Published
     private(set) var value: UInt16

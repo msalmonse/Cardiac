@@ -42,12 +42,3 @@ extension BreakOn: CustomStringConvertible {
         }
     }
 }
-
-struct BreakPoint {
-    static private var breakPoints: [String: BreakOn] = [:]
-
-    static subscript(_ tag: String) -> BreakOn {
-        get { return breakPoints[tag] ?? .never }
-        set { breakPoints[tag] = newValue }
-    }
-}

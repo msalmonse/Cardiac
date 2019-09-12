@@ -90,12 +90,11 @@ struct DetailView: View {
                 Text(instruction(cell))
                 Text("Status: \(cell.status.description)")
                 HStack {
-                    Text("Break: \(BreakPoint[self.cell.tag].description)")
+                    Text("Break: \(self.cell.breakPoint.description)")
                     Spacer()
                     Button(
                         action: {
                             self.cell.breakPoint += 1
-                            self.cell.objectWillChange.send()
                         },
                         label: {
                             Image(systemName: "plus.square")
@@ -105,7 +104,6 @@ struct DetailView: View {
                     Button(
                         action: {
                             self.cell.breakPoint = .never
-                            self.cell.objectWillChange.send()
                         },
                         label: {
                             Image(systemName: "clear")
@@ -115,7 +113,6 @@ struct DetailView: View {
                     Button(
                         action: {
                             self.cell.breakPoint -= 1
-                            self.cell.objectWillChange.send()
                         },
                         label: {
                             Image(systemName: "minus.square")

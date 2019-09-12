@@ -108,11 +108,7 @@ class ExecUnit: ObservableObject, Identifiable {
     }
 
     func breakPointCheck() -> Bool {
-        switch breakPoint {
-        case .never: return false
-        case .execute: return true
-        default: break
-        }
+        if breakPoint == .execute { return true }
 
         switch opcode {
         case let .inp(addr), let .sto(addr):
