@@ -19,7 +19,14 @@ func parse(_ indata: String) -> DumpData {
     for token in tokens {
         switch token {
         case let .data(location, value):
-            dump.memoryAppend(location.address!, Int(value)!)
+            guard let address = location.address else {
+                print("Address for \(location.label ?? "???") not defined")
+                continue
+            }
+            dump.memoryAppend(AddressAndData(address: address, data: Int(value)!))
+        case let .error(lineNr, err):
+            print("Error on line \(lineNr): \(err.localizedDescription)")
+        case .location: break
         default: print("Unknown token: \(token)")
         }
     }

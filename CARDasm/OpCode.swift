@@ -53,7 +53,7 @@ enum OpCode {
 }
 
 fileprivate func shiftVal(_ sub: Substring)  -> Result<Int, Error> {
-    guard let value = Int(sub) else { return .failure(TokenError.invalidNumber) }
+    guard let value = Int(sub) else { return .failure(TokenError.invalidNumber(String(sub))) }
     if !(0...9).contains(value) { return .failure(TokenError.shiftOutOfRange(value)) }
     return .success(value)
 }

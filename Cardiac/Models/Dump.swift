@@ -8,6 +8,13 @@
 
 import Foundation
 
+/// Memory and Input iare stored as a dict with keys of "addr" and "data"
+
+struct AddressAndData {
+    let address: Int
+    let data: Int
+}
+
 // Class used to load data from JSON dump
 
 class DumpData: Codable {
@@ -23,8 +30,8 @@ class DumpData: Codable {
         case comment
     }
 
-    func memoryAppend(_ addr: Int, _ data: Int ) {
-        let addrAndData: [String:Int] = [ "addr": addr, "data": data ]
+    func memoryAppend(_ indata: AddressAndData ) {
+        let addrAndData: [String:Int] = [ "addr": indata.address, "data": indata.data ]
         memory.append(addrAndData)
     }
 }

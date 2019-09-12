@@ -8,11 +8,6 @@
 
 import Foundation
 
-fileprivate struct AddressAndData {
-    let address: UInt16
-    let data: UInt16
-}
-
 class CPU: Identifiable {
     let id = UUID()
 
@@ -53,7 +48,7 @@ class CPU: Identifiable {
         for mem in dump.memory {
             switch oneCell(mem) {
             case let .success(addrData):
-                memory[addrData.address].setValue(addrData.data)
+                memory[UInt16(addrData.address)].setValue(UInt16(addrData.data))
             case let .failure(error): err = error
             }
         }
@@ -61,7 +56,7 @@ class CPU: Identifiable {
         for inp in dump.input ?? [] {
             switch oneCell(inp) {
             case let .success(addrData):
-                inTape[addrData.address].setValue(addrData.data)
+                inTape[UInt16(addrData.address)].setValue(UInt16(addrData.data))
                 if inTape.head > addrData.address {
                     inTape.head = Int(addrData.address)
                 }
@@ -75,12 +70,12 @@ class CPU: Identifiable {
         return err == nil ? .success(Void()) : .failure(err!)
     }
 
-    fileprivate func oneCell(_ dataIn: [String: Int]) -> Result<AddressAndData, Error> {
-        let addr = dataIn["addr"]
-        let data = dataIn["data"]
+    fileprivate func oneCell(_ indata: [String: Int]) -> Result<AddressAndData, Error> {
+        let addr = indata["addr"]
+        let data = indata["data"]
         if addr == nil || data == nil {
             return .failure(FileError.dataFormatError)
         }
-        return .success(AddressAndData(address: UInt16(addr!), data: UInt16(data!)))
+        return .success(AddressAndData(address: addr!, data: data!))
     }
 }

@@ -20,15 +20,28 @@ enum Tokens {
 
 enum TokenError: Error {
     case addressOutOfRange(Int)
-    case invalidNumber
+    case invalidNumber(String)
     case redefinedLabel(String)
     case shiftOutOfRange(Int)
     case unknownOperation(String)
     case wrongNumberOfArguments
 }
 
+extension TokenError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case let .addressOutOfRange(addr): return "Address \(addr) is not allowed"
+        case let .invalidNumber(string): return "\(string) is not a valid number"
+        case let .redefinedLabel(label): return "\(label) has been defined twice"
+        case let .shiftOutOfRange(shift): return "Can't shift by \(shift)"
+        case let .unknownOperation(opcode): return "Operation \(opcode) is not valid"
+        case .wrongNumberOfArguments: return "Wrong number of Arguments"
+        }
+    }
+}
+
 func addressValue(_ sub: Substring) -> Result<Int, Error> {
-    guard let value = Int(sub) else { return .failure(TokenError.invalidNumber) }
+    guard let value = Int(sub) else { return .failure(TokenError.invalidNumber(String(sub))) }
     if !(0...99).contains(value) { return .failure(TokenError.addressOutOfRange(value)) }
     return .success(value)
 }
