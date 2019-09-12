@@ -22,4 +22,9 @@ class DumpData: Codable {
         case input
         case comment
     }
+
+    func memoryAppend(_ addr: Int, _ data: Int ) {
+        let addrAndData: [String:Int] = [ "addr": addr, "data": data ]
+        memory.append(addrAndData)
+    }
 }

@@ -25,6 +25,11 @@ class CARDasmTests: XCTestCase {
         XCTAssertEqual(tokens.count, 6)
     }
 
+    func testParser() {
+        let dump = parse(testInput)
+        print(dump)
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         measure {
@@ -44,6 +49,7 @@ data1: dat 1
 label1: loc 23
     inp data1
     slr 3 1     # comment
+    sub one
     jmp label1
 
 """
