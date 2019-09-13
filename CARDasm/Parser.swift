@@ -26,12 +26,12 @@ func parse(_ indata: String) -> DumpData {
     for token in tokens {
         switch token {
         case let .comment(line): dump.commentAppend(line)
-        case let .data(location, value):
+        case let .data(lineNr, location, value):
             switch location.plus(0) {
-            case let .failure(err): print("Error: \(err.localizedDescription)")
+            case let .failure(err): print("Error on line \(lineNr): \(err.localizedDescription)")
             case let .success(address):
                 switch dataValue(Substring(value)) {
-                case let .failure(err): print("Error: \(err.localizedDescription)")
+                case let .failure(err): print("Error on line \(lineNr): \(err.localizedDescription)")
                 case let .success(data):
                     dump.memoryAppend(AddressAndData(address: address, data: data))
                 }
@@ -39,18 +39,23 @@ func parse(_ indata: String) -> DumpData {
         case let .error(lineNr, err):
             print("Error on line \(lineNr): \(err.localizedDescription)")
         case .location: break
-        case let .opCode(location, opcode):
+        case let .opCode(lineNr, location, opcode):
             switch opcode.generate() {
-            case let .failure(err): print("Error: \(err.localizedDescription)")
+            case let .failure(err): print("Error on line \(lineNr): \(err.localizedDescription)")
             case let .success(data):
                 switch location.plus(0) {
-                case let .failure(err): print("Error: \(err.localizedDescription)")
+                case let .failure(err): print("Error on line \(lineNr): \(err.localizedDescription)")
                 case let .success(address):
                     if dump.next == 0 { dump.next = address }   // start at first instruction
                     dump.memoryAppend(AddressAndData(address: address, data: data))
                 }
             }
-        case let .tape(value): dump.inputAppend(Int(value)!)
+        case let .tape(lineNr, value):
+            switch dataValue(Substring(value)) {
+            case let .failure(err): print("Error on line \(lineNr): \(err.localizedDescription)")
+            case let .success(data):
+                dump.inputAppend(data)
+            }
         }
     }
 

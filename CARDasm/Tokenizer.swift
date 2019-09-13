@@ -11,11 +11,11 @@ import Foundation
 
 enum Tokens {
     case comment(String)
-    case data(Location, String)
+    case data(Int, Location, String)
     case error(Int, Error)
-    case location(Location, Int)
-    case opCode(Location, OpCode)
-    case tape(String)
+    case location(Int, Location, Int)
+    case opCode(Int, Location, OpCode)
+    case tape(Int, String)
 }
 
 enum TokenError: Error {
@@ -103,20 +103,20 @@ func tokenize(_ indata: String) -> [Tokens] {
                     switch words[0] {
                     case "comment":
                         inComment = true
-                    case "dat": tokens.append(.data(location, String(words[1])))
+                    case "dat": tokens.append(.data(lineCount, location, String(words[1])))
                     case "loc":
                         switch addressValue(words[1]) {
                         case let .success(addr):
                             lineAddress = addr - 1      // will be incremented on next line
                             location.address = addr
-                            tokens.append(.location(location, addr))
+                            tokens.append(.location(lineCount, location, addr))
                         case let .failure(err):
                             tokens.append(.error(lineCount, err))
                         }
-                    case "tape": tokens.append(.tape(String(words[1])))
+                    case "tape": tokens.append(.tape(lineCount, String(words[1])))
                     default:
                         switch opCodeToken(words) {
-                        case let .success(opCode): tokens.append(.opCode(location, opCode))
+                        case let .success(opCode): tokens.append(.opCode(lineCount, location, opCode))
                         case let .failure(err): tokens.append(.error(lineCount, err))
                         }
                     }
