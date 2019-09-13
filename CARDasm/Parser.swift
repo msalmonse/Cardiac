@@ -16,13 +16,24 @@ func parse(_ indata: String) -> DumpData {
     one.address = 0
     let tokens = tokenize(indata)
 
+    // check for start label
+    let start = Location.get("start")
+    if let startAddress = start.address {
+        dump.next = startAddress
+    }
+
     for token in tokens {
         switch token {
+        case let .comment(line): dump.commentAppend(line)
         case let .data(location, value):
             switch location.plus(0) {
             case let .failure(err): print("Error: \(err.localizedDescription)")
             case let .success(address):
-                dump.memoryAppend(AddressAndData(address: address, data: Int(value)!))
+                switch dataValue(Substring(value)) {
+                case let .failure(err): print("Error: \(err.localizedDescription)")
+                case let .success(data):
+                    dump.memoryAppend(AddressAndData(address: address, data: data))
+                }
             }
         case let .error(lineNr, err):
             print("Error on line \(lineNr): \(err.localizedDescription)")
@@ -30,14 +41,15 @@ func parse(_ indata: String) -> DumpData {
         case let .opCode(location, opcode):
             switch opcode.generate() {
             case let .failure(err): print("Error: \(err.localizedDescription)")
-            case let .success(value):
+            case let .success(data):
                 switch location.plus(0) {
                 case let .failure(err): print("Error: \(err.localizedDescription)")
                 case let .success(address):
-                    dump.memoryAppend(AddressAndData(address: address, data: value))
+                    if dump.next == 0 { dump.next = address }   // start at first instruction
+                    dump.memoryAppend(AddressAndData(address: address, data: data))
                 }
             }
-        default: print("Unknown token: \(token)")
+        case let .tape(value): dump.inputAppend(Int(value)!)
         }
     }
 

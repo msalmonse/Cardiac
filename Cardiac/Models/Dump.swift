@@ -15,7 +15,7 @@ struct AddressAndData {
     let data: Int
 }
 
-// Class used to load data from JSON dump
+// Class used to load data from JSON dump and during assembly
 
 class DumpData: Codable {
     var next = 0                            // next address to execute
@@ -30,8 +30,19 @@ class DumpData: Codable {
         case comment
     }
 
-    func memoryAppend(_ indata: AddressAndData ) {
+    func memoryAppend(_ indata: AddressAndData) {
         let addrAndData: [String:Int] = [ "addr": indata.address, "data": indata.data ]
         memory.append(addrAndData)
+    }
+
+    func inputAppend(_ data: Int) {
+        if input == nil { input = [[String: Int]]() }
+        let addrAndData: [String:Int] = [ "addr": input!.count, "data": data ]
+        input!.append(addrAndData)
+    }
+
+    func commentAppend(_ line: String) {
+        if comment == nil { comment = [String]() }
+        comment!.append(line)
     }
 }

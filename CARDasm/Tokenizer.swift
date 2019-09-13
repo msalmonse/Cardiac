@@ -10,12 +10,12 @@
 import Foundation
 
 enum Tokens {
-    case identifier(String)
-    case number(String)
+    case comment(String)
     case data(Location, String)
-    case opCode(Location, OpCode)
-    case location(Location, Int)
     case error(Int, Error)
+    case location(Location, Int)
+    case opCode(Location, OpCode)
+    case tape(String)
 }
 
 enum TokenError: Error {
@@ -44,6 +44,13 @@ extension TokenError: LocalizedError {
     }
 }
 
+func dataValue(_ sub: Substring) -> Result<Int, Error> {
+    if let data = Int(sub) { return .success(data) }
+    let location = Location.get(sub)
+    if let data = location.address { return .success(data) }
+    return .failure(TokenError.invalidNumber(String(sub)))
+}
+
 func addressValue(_ sub: Substring) -> Result<Int, Error> {
     guard let value = Int(sub) else { return .failure(TokenError.invalidNumber(String(sub))) }
     if !(0...99).contains(value) { return .failure(TokenError.addressOutOfRange(value)) }
@@ -51,11 +58,13 @@ func addressValue(_ sub: Substring) -> Result<Int, Error> {
 }
 
 fileprivate let expectedWords: [Substring: Int] = [
+    "comment": 1,
     "slr":  3
 ]
 
 func tokenize(_ indata: String) -> [Tokens] {
     var tokens: [Tokens] = []
+    var inComment = false
 
     var lineCount = 0
     var lineAddress = 2
@@ -64,40 +73,52 @@ func tokenize(_ indata: String) -> [Tokens] {
             line.removeSubrange(commentStart...)
         }
         lineCount += 1
-        var words = line.split(separator: " ")
 
-        if words.count > 0 {
-            lineAddress += 1
-
-            var location = Location(lineAddress)
-            // Test for label
-            if words[0].hasSuffix(":") {
-                location = Location.get(words[0].dropLast(1))
-                if location.address == nil { location.address = lineAddress }
-                words.removeFirst()
-            }
-
-            if location.label != nil && location.address != lineAddress {
-                // redefined label
-                tokens.append(.error(lineCount, TokenError.redefinedLabel(location.label!)))
-            } else if words.count != expectedWords[words[0]] ?? 2 {
-                tokens.append(.error(lineCount, TokenError.wrongNumberOfArguments))
+        if inComment {
+            if line == "endcomment" {
+                inComment = false
             } else {
-                switch words[0] {
-                case "dat": tokens.append(.data(location, String(words[1])))
-                case "loc":
-                    switch addressValue(words[1]) {
-                    case let .success(addr):
-                        lineAddress = addr
-                        location.address = addr
-                        tokens.append(.location(location, addr))
-                    case let .failure(err):
-                        tokens.append(.error(lineCount, err))
-                    }
-                default:
-                    switch opCodeToken(words) {
-                    case let .success(opCode): tokens.append(.opCode(location, opCode))
-                    case let .failure(err): tokens.append(.error(lineCount, err))
+                tokens.append(.comment(String(line)))
+            }
+        } else {
+            var words = line.split(separator: " ")
+
+            if words.count > 0 {
+                lineAddress += 1
+
+                var location = Location(lineAddress)
+                // Test for label
+                if words[0].hasSuffix(":") {
+                    location = Location.get(words[0].dropLast(1))
+                    if location.address == nil { location.address = lineAddress }
+                    words.removeFirst()
+                }
+
+                if location.label != nil && location.address != lineAddress {
+                    // redefined label
+                    tokens.append(.error(lineCount, TokenError.redefinedLabel(location.label!)))
+                } else if words.count != expectedWords[words[0]] ?? 2 {
+                    tokens.append(.error(lineCount, TokenError.wrongNumberOfArguments))
+                } else {
+                    switch words[0] {
+                    case "comment":
+                        inComment = true
+                    case "dat": tokens.append(.data(location, String(words[1])))
+                    case "loc":
+                        switch addressValue(words[1]) {
+                        case let .success(addr):
+                            lineAddress = addr - 1      // will be incremented on next line
+                            location.address = addr
+                            tokens.append(.location(location, addr))
+                        case let .failure(err):
+                            tokens.append(.error(lineCount, err))
+                        }
+                    case "tape": tokens.append(.tape(String(words[1])))
+                    default:
+                        switch opCodeToken(words) {
+                        case let .success(opCode): tokens.append(.opCode(location, opCode))
+                        case let .failure(err): tokens.append(.error(lineCount, err))
+                        }
                     }
                 }
             }
