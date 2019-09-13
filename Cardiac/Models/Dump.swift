@@ -31,13 +31,13 @@ class DumpData: Codable {
     }
 
     func memoryAppend(_ indata: AddressAndData) {
-        let addrAndData: [String:Int] = [ "addr": indata.address, "data": indata.data ]
+        let addrAndData: [String: Int] = [ "addr": indata.address, "data": indata.data ]
         memory.append(addrAndData)
     }
 
     func inputAppend(_ data: Int) {
         if input == nil { input = [[String: Int]]() }
-        let addrAndData: [String:Int] = [ "addr": input!.count, "data": data ]
+        let addrAndData: [String: Int] = [ "addr": input!.count, "data": data ]
         input!.append(addrAndData)
     }
 
