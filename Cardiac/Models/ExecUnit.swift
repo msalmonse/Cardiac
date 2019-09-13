@@ -17,7 +17,7 @@ enum RunState {
         case .halted: return "Halted"
         case .iowait: return "Waiting for IO"
         case .loading: return "Loading"
-        case let .running(pace): return "Run @\(String(format: "%.1f ips", 60/pace))"
+        case let .running(pace): return "Run @\(String(format: "%.0f ips", 60/pace))"
         default: return "Executing"
         }
     }
