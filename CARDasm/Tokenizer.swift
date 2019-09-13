@@ -23,6 +23,8 @@ enum TokenError: Error {
     case invalidNumber(String)
     case redefinedLabel(String)
     case shiftOutOfRange(Int)
+    case undefinedLabel(String)
+    case unknownError
     case unknownOperation(String)
     case wrongNumberOfArguments
 }
@@ -34,6 +36,8 @@ extension TokenError: LocalizedError {
         case let .invalidNumber(string): return "\(string) is not a valid number"
         case let .redefinedLabel(label): return "\(label) has been defined twice"
         case let .shiftOutOfRange(shift): return "Can't shift by \(shift)"
+        case let .undefinedLabel(label): return "\(label) has not been defined"
+        case .unknownError: return "Something bad happened"
         case let .unknownOperation(opcode): return "Operation \(opcode) is not valid"
         case .wrongNumberOfArguments: return "Wrong number of Arguments"
         }

@@ -34,6 +34,13 @@ class Location {
         if let location = locations[label] { return location }
         return Location(sub)
     }
+
+
+    func plus(_ plus: Int) -> Result<Int, Error> {
+        if let address = self.address { return .success(address + plus)}
+        if let label = self.label { return .failure(TokenError.undefinedLabel(label))}
+        return .failure(TokenError.unknownError)
+    }
 }
 
 var locations = [String: Location]()
@@ -50,6 +57,22 @@ enum OpCode {
     case jmp(Location)
     case hrs(Location)
     case unk(Location)
+
+    func generate() -> Result<Int, Error> {
+        switch self {
+        case let .inp(location): return location.plus(0)
+        case let .cla(location): return location.plus(100)
+        case let .add(location): return location.plus(200)
+        case let .tac(location): return location.plus(300)
+        case let .slr(sl, sr): return .success(400 + sl * 10 + sr)
+        case let .out(location): return location.plus(500)
+        case let .sto(location): return location.plus(600)
+        case let .sub(location): return location.plus(700)
+        case let .jmp(location): return location.plus(800)
+        case let .hrs(location): return location.plus(900)
+        default: return .failure(TokenError.unknownError)
+        }
+    }
 }
 
 fileprivate func shiftVal(_ sub: Substring)  -> Result<Int, Error> {
