@@ -34,6 +34,7 @@ class CARDasmTests: XCTestCase {
         XCTAssertEqual(dump.input?.count, 2)
         XCTAssertNotNil(dump.comment)
         XCTAssertEqual(dump.comment?.count, 3)
+        XCTAssertEqual(dump.comment?.joined(separator: "\n"), testComment)
     }
 
     func testPerformanceExample() {
@@ -67,5 +68,11 @@ comment
 This is a comment
 
 endcomment
+
+"""
+
+let testComment = """
+
+This is a comment
 
 """
