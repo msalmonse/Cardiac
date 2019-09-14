@@ -53,6 +53,17 @@ class CARDasmTests: XCTestCase {
         }
     }
 
+    func testDisAssemble() {
+        switch parse(testInput) {
+        case .failure: break
+        case let .success(dump):
+            let result = disAssemble(dump)
+            print(result)
+            // print(result.difference(from: testDis))
+            XCTAssertEqual(result, testDis)
+        }
+    }
+
 /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -93,7 +104,7 @@ data1: dat 1
 label1: loc 23
     inp data1
     slr 3 1     # comment
-start: sub one
+start: sub data0
     jmp label1
 
     tape 23
@@ -111,4 +122,16 @@ let testComment = """
 
 This is a comment
 
+"""
+
+let testDis = """
+   loc 3
+loc03: data 0
+loc04: data 1
+   inp start # 25
+   loc 23
+loc23: inp loc04 # 4
+   slr 3 1 # 431
+start: sub loc03 # 703
+   jmp loc23 # 823
 """

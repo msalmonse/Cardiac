@@ -46,3 +46,12 @@ class DumpData: Codable {
         comment!.append(line)
     }
 }
+
+func oneCell(_ indata: [String: Int]) -> Result<AddressAndData, Error> {
+    let addr = indata["addr"]
+    let data = indata["data"]
+    if addr == nil || data == nil {
+        return .failure(FileError.dataFormatError)
+    }
+    return .success(AddressAndData(address: addr!, data: data!))
+}
