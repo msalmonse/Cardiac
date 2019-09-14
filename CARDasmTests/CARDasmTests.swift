@@ -22,7 +22,7 @@ class CARDasmTests: XCTestCase {
     func testTokenizer() {
         let tokens = tokenize(testInput)
         print(tokens)
-        XCTAssertEqual(tokens.count, 12)
+        XCTAssertEqual(tokens.count, 13)
     }
 
     func testParser() {
@@ -53,12 +53,14 @@ class CARDasmTests: XCTestCase {
         }
     }
 
+/*
     func testPerformanceExample() {
         // This is an example of a performance test case.
         measure {
             // Put the code you want to measure the time of here.
         }
     }
+*/
 
 }
 
