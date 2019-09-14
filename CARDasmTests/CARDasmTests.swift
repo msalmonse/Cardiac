@@ -26,15 +26,31 @@ class CARDasmTests: XCTestCase {
     }
 
     func testParser() {
-        let dump = parse(testInput)
-        // print(dump)
-        XCTAssertEqual(dump.next, 25)
-        XCTAssertEqual(dump.memory.count, 6)
-        XCTAssertNotNil(dump.input)
-        XCTAssertEqual(dump.input?.count, 2)
-        XCTAssertNotNil(dump.comment)
-        XCTAssertEqual(dump.comment?.count, 3)
-        XCTAssertEqual(dump.comment?.joined(separator: "\n"), testComment)
+        func checkDump(_ dump: DumpData) {
+            XCTAssertEqual(dump.next, 25)
+            XCTAssertEqual(dump.memory.count, 7)
+            XCTAssertNotNil(dump.input)
+            XCTAssertEqual(dump.input?.count, 2)
+            XCTAssertNotNil(dump.comment)
+            XCTAssertEqual(dump.comment?.count, 3)
+            XCTAssertEqual(dump.comment?.joined(separator: "\n"), testComment)
+        }
+
+        switch parse(badInput) {
+        case .success: XCTAssertFalse(true)
+        case let .failure(err):
+            switch err {
+            case let ParserError.errorsExist(errList):
+                XCTAssertEqual(errList.count, 3)
+            default:
+                XCTAssertFalse(true, "Wrong error")
+            }
+        }
+
+        switch parse(testInput) {
+        case let .success(dump): checkDump(dump)
+        case .failure: XCTAssertFalse(true, "Wrong error")
+        }
     }
 
     func testPerformanceExample() {
@@ -46,11 +62,29 @@ class CARDasmTests: XCTestCase {
 
 }
 
-let testInput = """
+let badInput = """
 
 # This is a comment
 
 data1: dat 0
+data1: dat 1
+    dat start
+
+label1: loc 23
+    inp data1
+    slr 3 1     # comment
+    sub one
+    jmp label1
+
+    tape 1001
+    tape 42
+"""
+
+let testInput = """
+
+# This is a comment
+
+data0: dat 0
 data1: dat 1
     dat start
 

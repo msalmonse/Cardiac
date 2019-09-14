@@ -35,6 +35,10 @@ class Location {
         return Location(sub)
     }
 
+    static func clear() {
+        locations.removeAll()
+    }
+
     func plus(_ plus: Int) -> Result<Int, Error> {
         if let address = self.address { return .success(address + plus)}
         if let label = self.label { return .failure(TokenError.undefinedLabel(label))}

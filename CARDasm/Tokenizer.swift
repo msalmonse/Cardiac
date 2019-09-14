@@ -26,6 +26,7 @@ enum TokenError: Error {
     case undefinedLabel(String)
     case unknownError
     case unknownOperation(String)
+    case valueOutOfRange(Int)
     case wrongNumberOfArguments
 }
 
@@ -39,13 +40,17 @@ extension TokenError: LocalizedError {
         case let .undefinedLabel(label): return "\(label) has not been defined"
         case .unknownError: return "Something bad happened"
         case let .unknownOperation(opcode): return "Operation \(opcode) is not valid"
+        case let .valueOutOfRange(value): return "Value \(value) is not allowed"
         case .wrongNumberOfArguments: return "Wrong number of Arguments"
         }
     }
 }
 
 func dataValue(_ sub: Substring) -> Result<Int, Error> {
-    if let data = Int(sub) { return .success(data) }
+    if let data = Int(sub) {
+        if (0...999).contains(data) { return .success(data) }
+        return .failure(TokenError.valueOutOfRange(data))
+    }
     let location = Location.get(sub)
     if let data = location.address { return .success(data) }
     return .failure(TokenError.invalidNumber(String(sub)))
