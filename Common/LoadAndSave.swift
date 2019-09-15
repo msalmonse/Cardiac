@@ -50,8 +50,10 @@ func saveAsJSON<T: Encodable>(_ obj: T, to url: URL) -> Result<Void,Error> {
     do {
         try data.write(to: url)
     } catch {
+        /*
         let message = errorMessage(error, "writing to \(url.path)")
         MessagePublisher.publish(.error(message))
+        */
         return .failure(error)
     }
 
