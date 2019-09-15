@@ -53,6 +53,14 @@ class CARDasmTests: XCTestCase {
         }
     }
 
+    func testOneString() {
+        switch oneString(testInput) {
+        case .failure: XCTAssertFalse(true, "Wrong error")
+        case let .success(json):
+            XCTAssertEqual(json.count, 284)
+        }
+    }
+
     func testDisAssemble(_ printDiff: Bool = true) {
         switch parse(testInput) {
         case .failure: XCTAssertFalse(true, "Wrong error")
@@ -67,6 +75,13 @@ class CARDasmTests: XCTestCase {
         measure {
             // Test the time for tokeniser, parser and dissassembler
             for _ in 0...99 { testDisAssemble(false) }
+        }
+    }
+
+    func testOneStringPerformance() {
+        measure {
+            // Test the time for tokeniser, parser and encoder
+            for _ in 0...99 { testOneString() }
         }
     }
 
