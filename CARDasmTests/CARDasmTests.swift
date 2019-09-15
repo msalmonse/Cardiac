@@ -22,13 +22,13 @@ class CARDasmTests: XCTestCase {
     func testTokenizer() {
         let tokens = tokenize(testInput)
         print(tokens)
-        XCTAssertEqual(tokens.count, 13)
+        XCTAssertEqual(tokens.count, 14)
     }
 
     func testParser() {
         func checkDump(_ dump: DumpData) {
             XCTAssertEqual(dump.next, 25)
-            XCTAssertEqual(dump.memory.count, 7)
+            XCTAssertEqual(dump.memory.count, 8)
             XCTAssertNotNil(dump.input)
             XCTAssertEqual(dump.input?.count, 2)
             XCTAssertNotNil(dump.comment)
@@ -41,7 +41,7 @@ class CARDasmTests: XCTestCase {
         case let .failure(err):
             switch err {
             case let ParserError.errorsExist(errList):
-                XCTAssertEqual(errList.count, 3)
+                XCTAssertEqual(errList.count, 4)
             default:
                 XCTAssertFalse(true, "Wrong error")
             }
@@ -55,23 +55,21 @@ class CARDasmTests: XCTestCase {
 
     func testDisAssemble() {
         switch parse(testInput) {
-        case .failure: break
+        case .failure: XCTAssertFalse(true, "Wrong error")
         case let .success(dump):
             let result = disAssemble(dump)
-            print(result)
+            // print(result)
             // print(result.difference(from: testDis))
             XCTAssertEqual(result, testDis)
         }
     }
 
-/*
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testDisAssPerformance() {
         measure {
-            // Put the code you want to measure the time of here.
+            // Test the time for tokeniser, parser and dissassembler
+            for _ in 0...99 { testDisAssemble() }
         }
     }
-*/
 
 }
 
@@ -82,6 +80,9 @@ let badInput = """
 data1: dat 0
 data1: dat 1
     dat start
+
+    loc 80
+bss0: bss 20
 
 label1: loc 23
     inp data1
@@ -100,11 +101,13 @@ let testInput = """
 data0: dat 0
 data1: dat 1
     dat start
+bss0: bss 10
 
 label1: loc 23
     inp data1
     slr 3 1     # comment
 start: sub data0
+    sto bss0
     jmp label1
 
     tape 23
@@ -133,5 +136,13 @@ loc04: data 1
 loc23: inp loc04 # 4
    slr 3 1 # 431
 start: sub loc03 # 703
+   sto loc06 # 606
    jmp loc23 # 823
+   tape 23
+   tape 42
+comment
+
+This is a comment
+
+endcomment
 """
