@@ -53,6 +53,34 @@ fileprivate func memPass1(_ dump: DumpData) -> Destinations {
     return destinations
 }
 
+fileprivate func labelAdjust(_ label: String) -> String {
+    return label != "  " ? label + ":" : label
+}
+
+fileprivate func dataDest(_ label: String, _ data: Int) -> String {
+    return "\(labelAdjust(label)) data \(data)"
+}
+
+fileprivate func instructionDest(
+    _ label: String,
+    _ data: Int,
+    _ destinations: Destinations
+) -> String {
+    let opVal = data/100
+    let oper = opVal < opCodeName.count ? opCodeName[opVal] : "???"
+    if oper == "slr" {
+        return "\(labelAdjust(label)) slr \((data/10) % 10) \(data % 10) # \(data)"
+    } else {
+        var destLabel: String
+        switch destinations[ data % 100 ] {
+        case let .data(label): destLabel = label
+        case let .instruction(label): destLabel = label
+        default: destLabel = String(format: "%03d", data)
+        }
+        return "\(labelAdjust(label)) \(oper) \(destLabel) # \(data)"
+    }
+}
+
 fileprivate func memPhase2(_ dump: DumpData, _ destinations: Destinations) -> [String] {
     var lines = [String]()
     var address = 0
@@ -68,24 +96,10 @@ fileprivate func memPhase2(_ dump: DumpData, _ destinations: Destinations) -> [S
             }
             let dest = destinations[address] ?? .instruction("  ")
             switch dest {
-            case var .data(label):
-                if label != "  " { label += ":" }
-                lines.append("\(label) data \(data)")
-            case var .instruction(label):
-                if label != "  " { label += ":" }
-                let opVal = data/100
-                let oper = opVal < opCodeName.count ? opCodeName[opVal] : "???"
-                if oper == "slr" {
-                    lines.append("\(label) slr \((data/10) % 10) \(data % 10) # \(data)")
-                } else {
-                    var destLabel: String
-                    switch destinations[ data % 100 ] {
-                    case let .data(label): destLabel = label
-                    case let .instruction(label): destLabel = label
-                    default: destLabel = String(format: "%03d", data)
-                    }
-                    lines.append("\(label) \(oper) \(destLabel) # \(data)")
-                }
+            case let .data(label):
+                lines.append(dataDest(label, data))
+            case let .instruction(label):
+                lines.append(instructionDest(label, data, destinations))
             }
         case .failure: break
         }

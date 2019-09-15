@@ -13,15 +13,7 @@ enum ParserError: Error {
     case errorsExist([Error])
 }
 
-func parse(_ indata: String) -> Result<DumpData, Error> {
-    let dump = DumpData()
-    var errors = [Error]()
-
-    func errPrint(_ lineNr: Int, _ err: Error) {
-        print("Error on line \(lineNr): \(err.localizedDescription)")
-        errors.append(err)
-    }
-
+func locationInitialize() {
     // Remove any previous parse data
     Location.clear()
 
@@ -31,6 +23,18 @@ func parse(_ indata: String) -> Result<DumpData, Error> {
     // Add location 99, return jump
     let ninety9 = Location.get("return")
     ninety9.address = 99
+}
+
+func parse(_ indata: String) -> Result<DumpData, Error> {
+    let dump = DumpData()
+    var errors = [Error]()
+
+    func errPrint(_ lineNr: Int, _ err: Error) {
+        print("Error on line \(lineNr): \(err.localizedDescription)")
+        errors.append(err)
+    }
+
+    locationInitialize()
 
     let tokens = tokenize(indata)
 
