@@ -53,13 +53,12 @@ class CARDasmTests: XCTestCase {
         }
     }
 
-    func testDisAssemble() {
+    func testDisAssemble(_ printDiff: Bool = true) {
         switch parse(testInput) {
         case .failure: XCTAssertFalse(true, "Wrong error")
         case let .success(dump):
             let result = disAssemble(dump)
-            // print(result)
-            // print(result.difference(from: testDis))
+            if printDiff { print(result.difference(from: testDis)) }
             XCTAssertEqual(result, testDis)
         }
     }
@@ -67,7 +66,7 @@ class CARDasmTests: XCTestCase {
     func testDisAssPerformance() {
         measure {
             // Test the time for tokeniser, parser and dissassembler
-            for _ in 0...99 { testDisAssemble() }
+            for _ in 0...99 { testDisAssemble(false) }
         }
     }
 
