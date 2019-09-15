@@ -98,5 +98,20 @@ func disAssemble(_ dump: DumpData) -> String {
     let destinations = memPass1(dump)
     var lines = memPhase2(dump, destinations)
 
+    for tape in dump.input ?? [] {
+        switch oneCell(tape) {
+        case let .success(addrData):
+            let data = addrData.data
+            lines.append("   tape \(data)")
+        case .failure: break
+        }
+    }
+
+    if dump.comment != nil {
+        lines.append("comment")
+        lines.append(contentsOf: dump.comment!)
+        lines.append("endcomment")
+    }
+
     return lines.joined(separator: "\n")
 }
