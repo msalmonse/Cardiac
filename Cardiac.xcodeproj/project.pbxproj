@@ -414,6 +414,7 @@
 				C463551723281E5D008551AC /* Sources */,
 				C463551823281E5D008551AC /* Frameworks */,
 				C463551923281E5D008551AC /* CopyFiles */,
+				C4AC9B53232E0E530015892D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -530,6 +531,23 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		C446BBDF2317C136004B8146 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftlint\n";
+		};
+		C4AC9B53232E0E530015892D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
