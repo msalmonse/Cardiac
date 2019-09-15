@@ -5,11 +5,13 @@
 //  Created by Michael Salmon on 2019-09-01.
 //  Copyright © 2019 mesme. All rights reserved.
 //
+// swiftlint:disable cyclomatic_complexity
 
 import SwiftUI
 
 enum ExecError: Error {
     case illegal(OpCode)    // Illegal opcode
+    case invalid(UInt16)    // Invalid opcode
     case badNumber          // failure during conversion
     case outOfRange
 }
@@ -19,6 +21,7 @@ extension ExecError: LocalizedError {
         switch self {
         case .badNumber: return "Not a number"
         case let .illegal(opcode): return "Illegal opcode: \(opcode.value)"
+        case let .invalid(value): return "Invalid opcode: \(value)"
         case .outOfRange: return "Out of range"
         }
     }
@@ -111,6 +114,12 @@ extension ExecUnit {
         return
     }
 
+    func storeOp(_ addr: UInt16) {
+        memory[addr].setValue(alu.result.value % 999)
+        writeAddr = addr
+        writeArrow = generateArrow("Arithmatic Unit", memory[addr].tag, writeColor)
+    }
+
     func execOne(_ doHalt: Bool = false) {
         if doHalt { halt(.stepping) }
         if runState == .halted { runState = .stepping }
@@ -133,10 +142,8 @@ extension ExecUnit {
         case .cla, .add, .sub: aluOp(opcode)
         case .tac, .jmp, .hrs: jumpOp(opcode)
         case let .slr(slr): shiftOp(slr/10, slr % 10)
-        case let .sto(addr):
-            memory[addr].setValue(alu.result.value % 999)
-            writeAddr = addr
-            writeArrow = generateArrow("Arithmatic Unit", memory[addr].tag, writeColor)
+        case let .sto(addr): storeOp(addr)
+        case let .inv(value): trap(.invalid(value))
         default: trap(.illegal(opcode))
         }
 

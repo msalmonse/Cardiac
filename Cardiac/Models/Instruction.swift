@@ -21,6 +21,7 @@ enum OpCode {
     case sub(UInt16)
     case jmp(UInt16)
     case hrs(UInt16)
+    case inv(UInt16)
     case unk(UInt16)
 
     static func opcode(_ val: UInt16, _ extra: UInt16) -> OpCode {
@@ -51,6 +52,7 @@ enum OpCode {
         case .sub: return 7
         case .jmp: return 8
         case .hrs: return 9
+        case let .inv(val): return val
         case let .unk(val): return val
         }
     }
@@ -88,7 +90,9 @@ func instruction(_ opcode: OpCode, verbose: Bool = false) -> String {
     case (let .jmp(addr), false): return "JMP " + fmt(addr)
     case (let .hrs(addr), true):  return "Halt and reset to " + fmt(addr)
     case (let .hrs(addr), false): return "HRS " + fmt(addr)
-    case (let .unk(val), true):  return "Unkown opcode \(val)"
-    case (let .unk(val), false): return "UNK \(val)"
+    case (let .inv(val), true):   return "Invalid value \(val)"
+    case (let .inv(val), false):  return "INV \(val)"
+    case (let .unk(val), true):   return "Unkown opcode \(val)"
+    case (let .unk(val), false):  return "UNK \(val)"
     }
 }

@@ -113,7 +113,7 @@ class Cell: ObservableObject, Identifiable {
     }
 
     var opcode: OpCode {
-        return OpCode.opcode(value/100, value % 100)
+        return valid ? OpCode.opcode(value/100, value % 100) : .inv(value)
     }
 
     let location: String
