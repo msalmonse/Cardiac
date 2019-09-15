@@ -8,8 +8,25 @@
 
 import Foundation
 
-func oneFile(inFile: String, outFile: String? = nil) -> Result<Void, Error> {
-    return .success(Void())
+func oneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, Error> {
+    var inString = ""
+    do {
+        let data = try Data(contentsOf: inFile)
+        inString = String(decoding: data, as: UTF8.self)
+    } catch {
+        return .failure(error)
+    }
+
+    var outData = Data()
+    switch oneData(inString) {
+    case let .failure(err): return .failure(err)
+    case let .success(data): outData = data
+    }
+
+    switch saveToOutFile(outData, to: outFile, from: inFile) {
+    case let .failure(err): return .failure(err)
+    case .success: return .success(Void())
+    }
 }
 
 func oneData(_ inData: String) -> Result<Data, Error> {
@@ -24,13 +41,5 @@ func oneData(_ inData: String) -> Result<Data, Error> {
             return .failure(error)
         }
 
-    }
-}
-
-func oneString(_ inData: String) -> Result<String, Error> {
-    switch oneData(inData) {
-    case let .failure(err): return .failure(err)
-    case let .success(data):
-        return .success(String(decoding: data, as: UTF8.self))
     }
 }

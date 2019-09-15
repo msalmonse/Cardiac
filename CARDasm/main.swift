@@ -9,7 +9,7 @@
 import Foundation
 
 var inFiles: [String] = []
-var outFile: String? = nil
+var outFile = OutFileType.notspecified
 
 enum NextArgDestination {
     case noDestination
@@ -20,12 +20,13 @@ var argDestination = NextArgDestination.noDestination
 
 for arg in CommandLine.arguments.dropFirst() {
     switch argDestination {
-    case .outFile: outFile = arg
+    case .outFile: outFile = .toFile(URL(fileReferenceLiteralResourceName: arg))
     default:
         switch arg {
         case "-output":
             argDestination = .outFile
             continue
+        case "--stdour": outFile = .stdout
         default:
             inFiles.append(arg)
         }
