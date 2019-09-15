@@ -106,6 +106,23 @@ func tokenize(_ indata: String) -> [Tokens] {
                     tokens.append(.error(lineCount, TokenError.wrongNumberOfArguments))
                 } else {
                     switch words[0] {
+                    case "bss":     // block started by symbol
+                        switch addressValue(words[1]) {
+                        case let .success(addr):
+                            if addr + lineAddress > 98 {
+                                tokens.append(
+                                    .error(
+                                        lineCount,
+                                        TokenError.addressOutOfRange(addr + lineAddress)
+                                    )
+                                )
+                            } else {
+                                lineAddress += addr - 1
+                                tokens.append(.location(lineCount, location, lineAddress + 1))
+                            }
+                        case let .failure(err):
+                            tokens.append(.error(lineCount, err))
+                        }
                     case "comment":
                         inComment = true
                     case "dat": tokens.append(.data(lineCount, location, String(words[1])))

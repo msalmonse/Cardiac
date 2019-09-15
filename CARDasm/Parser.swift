@@ -28,6 +28,10 @@ func parse(_ indata: String) -> Result<DumpData, Error> {
     // Add location 00
     let one = Location.get("one")
     one.address = 0
+    // Add location 99, return jump
+    let ninety9 = Location.get("return")
+    ninety9.address = 99
+
     let tokens = tokenize(indata)
 
     // check for start label
