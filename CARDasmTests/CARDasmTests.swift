@@ -76,10 +76,8 @@ class CARDasmTests: XCTestCase {
         }
         let tmpOut = tempDirURL().appendingPathComponent("test.json")
         do {
-            let attributes =
-                try FileManager.default.attributesOfItem(atPath: tmpOut.path)
-                    as NSDictionary
-            XCTAssertEqual(attributes.fileSize(), UInt64(testJsonSize))
+            let values = try tmpOut.resourceValues(forKeys: [.fileSizeKey])
+            XCTAssertEqual(values.fileSize!, testJsonSize)
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
