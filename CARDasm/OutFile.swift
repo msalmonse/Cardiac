@@ -22,6 +22,18 @@ enum OutFileType {
     }
 }
 
+enum FileExt {
+    case cardasm, json, tape
+
+    var ext: String {
+        switch self {
+        case .cardasm: return ".cardasm"
+        case .json: return ".json"
+        case .tape: return ".tape"
+        }
+    }
+}
+
 fileprivate func saveToURL(_ data: Data, _ url: URL) -> Result<Void, Error> {
     switch createDirectoryContaining(url: url) {
     case .success: break
@@ -36,26 +48,34 @@ fileprivate func saveToURL(_ data: Data, _ url: URL) -> Result<Void, Error> {
     return .success(Void())
 }
 
-fileprivate func saveToDir(_ data: Data, _ dir: URL, _ inFile: URL) -> Result<Void, Error> {
+fileprivate func saveToDir(
+    _ data: Data,
+    _ dir: URL,
+    _ inFile: URL,
+    _ newExt: FileExt
+) -> Result<Void, Error> {
+
     var name = inFile.lastPathComponent
     let ext = inFile.pathExtension
     if !ext.isEmpty { name.removeLast(ext.count + 1) }
-    name += ".json"
+    name += newExt.ext
     return saveToURL(data, dir.appendingPathComponent(name))
 }
 
 func saveToOutFile(
     _ data: Data,
     to outFile: OutFileType,
-    from inFile: URL
+    from inFile: URL,
+    as newExt: FileExt
 ) -> Result<Void, Error> {
+
     switch outFile {
     case .stdout: print(String(decoding: data, as: UTF8.self))
     case let .toFile(url): return saveToURL(data, url)
     case .notspecified:
-        return saveToDir(data, inFile.deletingLastPathComponent(), inFile)
+        return saveToDir(data, inFile.deletingLastPathComponent(), inFile, newExt)
     case let .toDir(url):
-        return saveToDir(data, url, inFile)
+        return saveToDir(data, url, inFile, newExt)
     }
 
     return .success(Void())

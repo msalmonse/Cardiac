@@ -8,7 +8,7 @@
 
 import Foundation
 
-func oneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, Error> {
+func assembleOneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, Error> {
     var inString = ""
     do {
         let data = try Data(contentsOf: inFile)
@@ -23,7 +23,7 @@ func oneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, E
     case let .success(data): outData = data
     }
 
-    switch saveToOutFile(outData, to: outFile, from: inFile) {
+    switch saveToOutFile(outData, to: outFile, from: inFile, as: .json) {
     case let .failure(err): return .failure(err)
     case .success: return .success(Void())
     }
@@ -42,5 +42,23 @@ func oneData(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
             return .failure(error)
         }
 
+    }
+}
+
+func disassembleOneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, Error> {
+    var dump: DumpData
+
+    switch loadFromJSON(inFile, as: DumpData.self) {
+    case .success(let data): dump = data
+    case .failure(let err): return .failure(err)
+    }
+
+    let asm = disAssemble(dump)
+    guard let data = asm.data(using: .utf8) else {
+        return .failure(TokenError.unknownError)
+    }
+    switch saveToOutFile(data, to: outFile, from: inFile, as: .cardasm) {
+    case let .failure(err): return .failure(err)
+    case .success: return .success(Void())
     }
 }

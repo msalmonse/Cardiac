@@ -63,24 +63,40 @@ class CARDasmTests: XCTestCase {
     }
 
     func testOneFile() {
-        let tmpIn = tempDirURL().appendingPathComponent("test.cardasm")
+        let tmpIn = tempDirURL().appendingPathComponent("test.txt")
         do {
             try testInput.write(to: tmpIn, atomically: true, encoding: .utf8)
         } catch {
             XCTFail("Error writing to file: \(error)")
             return
         }
-        switch oneFile(tmpIn, to: .notspecified) {
+
+        switch assembleOneFile(tmpIn, to: .notspecified) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
         case .success: break
         }
-        let tmpOut = tempDirURL().appendingPathComponent("test.json")
+
+        let tmpJson = tempDirURL().appendingPathComponent("test.json")
         do {
-            let values = try tmpOut.resourceValues(forKeys: [.fileSizeKey])
+            let values = try tmpJson.resourceValues(forKeys: [.fileSizeKey])
             XCTAssertEqual(values.fileSize!, testJsonSize)
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+
+        switch disassembleOneFile(tmpJson, to: .notspecified) {
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
+        case .success: break
+        }
+
+        let tmpAsm = tempDirURL().appendingPathComponent("test.cardasm")
+        do {
+            let values = try tmpAsm.resourceValues(forKeys: [.fileSizeKey])
+            XCTAssertEqual(values.fileSize!, testAsmSize)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
     }
 
     func testDisAssemble() {
@@ -105,6 +121,19 @@ class CARDasmTests: XCTestCase {
         measure {
             // Test the time for tokeniser, parser and encoder
             for _ in 0...99 { testOneData() }
+        }
+    }
+
+    func testURL() {
+        let paths = [
+            "a/b/c",
+            "/a/b/c",
+            "../a/b/c"
+        ]
+
+        for path in paths {
+            let url = URL(fileURLWithPath: path)
+            print(path, url.path)
         }
     }
 
@@ -158,6 +187,7 @@ endcomment
 
 """
 
+let testAsmSize = 224
 let testJsonSize = 284
 
 let testComment = """
