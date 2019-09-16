@@ -58,22 +58,30 @@ class CARDasmTests: XCTestCase {
         switch oneData(testInput) {
         case .failure: XCTAssertFalse(true, "Wrong error")
         case let .success(data):
-            XCTAssertEqual(data.count, 284)
+            XCTAssertEqual(data.count, testJsonSize)
         }
     }
 
     func testOneFile() {
-        var tmp = tempDirURL()
-        tmp.appendPathComponent("testInput.cardasm")
+        let tmpIn = tempDirURL().appendingPathComponent("test.cardasm")
         do {
-            try testInput.write(to: tmp, atomically: true, encoding: .utf8)
+            try testInput.write(to: tmpIn, atomically: true, encoding: .utf8)
         } catch {
             XCTFail("Error writing to file: \(error)")
             return
         }
-        switch oneFile(tmp) {
+        switch oneFile(tmpIn, to: .notspecified) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
         case .success: break
+        }
+        let tmpOut = tempDirURL().appendingPathComponent("test.json")
+        do {
+            let attributes =
+                try FileManager.default.attributesOfItem(atPath: tmpOut.path)
+                    as NSDictionary
+            XCTAssertEqual(attributes.fileSize(), UInt64(testJsonSize))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
         }
     }
 
@@ -151,6 +159,8 @@ This is a comment
 endcomment
 
 """
+
+let testJsonSize = 284
 
 let testComment = """
 
