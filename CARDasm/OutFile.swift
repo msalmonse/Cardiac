@@ -13,6 +13,13 @@ enum OutFileType {
     case toDir(URL)
     case toFile(URL)
     case stdout
+
+    var pretty: Bool {
+        switch self {
+        case .stdout: return true
+        default: return false
+        }
+    }
 }
 
 func saveToOutFile(

@@ -18,7 +18,7 @@ func oneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, E
     }
 
     var outData = Data()
-    switch oneData(inString) {
+    switch oneData(inString, pretty: outFile.pretty) {
     case let .failure(err): return .failure(err)
     case let .success(data): outData = data
     }
@@ -29,12 +29,13 @@ func oneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result<Void, E
     }
 }
 
-func oneData(_ inData: String) -> Result<Data, Error> {
+func oneData(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
     switch parse(inData) {
     case let .failure(err): return .failure(err)
     case let .success(dump):
         do {
             let encoder = JSONEncoder()
+            if pretty { encoder.outputFormatting = .prettyPrinted }
             let data = try encoder.encode(dump)
             return .success(data)
         } catch {
