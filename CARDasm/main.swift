@@ -26,6 +26,11 @@ enum NextArgDestination {
 
 var argDestination = NextArgDestination.noDestination
 
+if CommandLine.arguments.count <= 1 {
+    usage()
+    exit(1)
+}
+
 for arg in CommandLine.arguments.dropFirst() {
     switch argDestination {
     case .inFile:
@@ -43,7 +48,7 @@ for arg in CommandLine.arguments.dropFirst() {
         case "-O", "--output":
             argDestination = .outFile
             continue
-        case "--stdour": outFile = .stdout
+        case "--stdout": outFile = .stdout
         case "--to":
             argDestination = .outDir
         default:

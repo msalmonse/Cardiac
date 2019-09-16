@@ -71,6 +71,7 @@
 		C4AC9B59232E35080015892D /* OneFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC9B57232E30B10015892D /* OneFile.swift */; };
 		C4AC9B5B232E7ECB0015892D /* OutFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC9B5A232E7ECB0015892D /* OutFile.swift */; };
 		C4AC9B5C232F4BF10015892D /* OutFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC9B5A232E7ECB0015892D /* OutFile.swift */; };
+		C4AC9B5E233004F60015892D /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC9B5D233004F60015892D /* Usage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		C4AC9B4C232CDE810015892D /* DisAsm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisAsm.swift; sourceTree = "<group>"; };
 		C4AC9B57232E30B10015892D /* OneFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneFile.swift; sourceTree = "<group>"; };
 		C4AC9B5A232E7ECB0015892D /* OutFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutFile.swift; sourceTree = "<group>"; };
+		C4AC9B5D233004F60015892D /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 			children = (
 				C4AC9B4C232CDE810015892D /* DisAsm.swift */,
 				C463551D23281E5D008551AC /* main.swift */,
+				C4AC9B5D233004F60015892D /* Usage.swift */,
 				C4AC9B57232E30B10015892D /* OneFile.swift */,
 				C4AC9B5A232E7ECB0015892D /* OutFile.swift */,
 				C463552623282AF6008551AC /* OpCode.swift */,
@@ -653,6 +656,7 @@
 				C4AC9B49232A415F0015892D /* Dump.swift in Sources */,
 				C4635523232829EF008551AC /* Parser.swift in Sources */,
 				C4AC9B4F232CE00F0015892D /* Files.swift in Sources */,
+				C4AC9B5E233004F60015892D /* Usage.swift in Sources */,
 				C4AC9B4D232CDE810015892D /* DisAsm.swift in Sources */,
 				C463552723282AF6008551AC /* OpCode.swift in Sources */,
 				C4AC9B58232E30B10015892D /* OneFile.swift in Sources */,
