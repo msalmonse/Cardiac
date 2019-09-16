@@ -10,6 +10,7 @@ import XCTest
 // @testable import CARDasm
 
 class CARDasmTests: XCTestCase {
+    var printDiff = true
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -61,7 +62,22 @@ class CARDasmTests: XCTestCase {
         }
     }
 
-    func testDisAssemble(_ printDiff: Bool = true) {
+    func testOneFile() {
+        var tmp = tempDirURL()
+        tmp.appendPathComponent("testInput.cardasm")
+        do {
+            try testInput.write(to: tmp, atomically: true, encoding: .utf8)
+        } catch {
+            XCTFail("Error writing to file: \(error)")
+            return
+        }
+        switch oneFile(tmp) {
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
+        case .success: break
+        }
+    }
+
+    func testDisAssemble() {
         switch parse(testInput) {
         case .failure: XCTAssertFalse(true, "Wrong error")
         case let .success(dump):
@@ -72,9 +88,10 @@ class CARDasmTests: XCTestCase {
     }
 
     func testDisAssPerformance() {
+        printDiff = false
         measure {
             // Test the time for tokeniser, parser and dissassembler
-            for _ in 0...99 { testDisAssemble(false) }
+            for _ in 0...99 { testDisAssemble() }
         }
     }
 
