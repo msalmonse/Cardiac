@@ -44,19 +44,19 @@ class CARDasmTests: XCTestCase {
             case let ParserError.errorsExist(errList):
                 XCTAssertEqual(errList.count, 4)
             default:
-                XCTAssertFalse(true, "Wrong error")
+                XCTFail("Unexpected error: \(err)")
             }
         }
 
         switch parse(testInput) {
         case let .success(dump): checkDump(dump)
-        case .failure: XCTAssertFalse(true, "Wrong error")
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
         }
     }
 
     func testOneData() {
         switch oneData(testInput) {
-        case .failure: XCTAssertFalse(true, "Wrong error")
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
         case let .success(data):
             XCTAssertEqual(data.count, testJsonSize)
         }
