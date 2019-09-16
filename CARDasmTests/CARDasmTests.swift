@@ -78,7 +78,7 @@ class CARDasmTests: XCTestCase {
         }
     }
 
-    func testOneStringPerformance() {
+    func testOneDataPerformance() {
         measure {
             // Test the time for tokeniser, parser and encoder
             for _ in 0...99 { testOneData() }
