@@ -8,8 +8,7 @@
 
 import Foundation
 
-func usage() {
-    print("""
+fileprivate let usageText = """
 Usage:
     cardasm [options]... <input files>...
 
@@ -18,5 +17,8 @@ Options:
     -O or --output <name>   Write the output to name
     --stdout                Write to stdout
     --to <directory>        Save output files in directory
-""")
+"""
+
+func usage() {
+    print(usageText)
 }
