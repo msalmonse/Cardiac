@@ -43,8 +43,7 @@
       { "addr": 70, "data": 716 },
       { "addr": 71, "data": 614 },
       { "addr": 72, "data": 514 },
-      { "addr": 73, "data": 952 },
-      { "addr": 99, "data": 800 }
+      { "addr": 73, "data": 952 }
    ],
    "comment": [
        "Rules of Single Pile Nim",
