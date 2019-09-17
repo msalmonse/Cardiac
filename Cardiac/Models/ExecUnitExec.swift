@@ -14,6 +14,7 @@ enum ExecError: Error {
     case invalid(UInt16)    // Invalid opcode
     case badNumber          // failure during conversion
     case outOfRange
+    case readB4Write(UInt16)
 }
 
 extension ExecError: LocalizedError {
@@ -23,6 +24,7 @@ extension ExecError: LocalizedError {
         case let .illegal(opcode): return "Illegal opcode: \(opcode.value)"
         case let .invalid(value): return "Invalid opcode: \(value)"
         case .outOfRange: return "Out of range"
+        case let .readB4Write(addr): return "Read of address \(addr) before write"
         }
     }
 }
@@ -50,6 +52,7 @@ extension ExecUnit {
     }
 
     func opB(_ addr: UInt16) -> UInt16 {
+        if !memory[addr].valid { trap(.readB4Write(addr)) }
         readAddr = addr
         readArrow = generateArrow(memory[addr].tag, "Arithmatic Unit", readColor)
         return memory[addr].value
@@ -67,6 +70,7 @@ extension ExecUnit {
                 iotrap(err)
             }
         case let .out(addr):
+            if !memory[addr].valid { trap(.readB4Write(addr)) }
             switch outTape.writeNext(memory[addr].value) {
             case .success:
                 readAddr = addr
