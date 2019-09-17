@@ -17,56 +17,46 @@ enum Action {
 
 var action = Action.assemble
 
-enum NextArgDestination {
-    case inFile
-    case noDestination
-    case outDir
-    case outFile
-}
+if CommandLine.arguments.count <= 1 { usage(0) }
 
-var argDestination = NextArgDestination.noDestination
-
-if CommandLine.arguments.count <= 1 {
-    usage()
-    exit(1)
-}
-
-for arg in CommandLine.arguments.dropFirst() {
-    switch argDestination {
-    case .inFile:
-        inFiles.append(arg)
-        continue
-    case .outFile: outFile = .toFile(URL(fileURLWithPath: arg))
-    case .outDir: outFile = .toDir(URL(fileURLWithPath: arg, isDirectory: true))
-    default:
-        switch arg {
-        case "--":
-            argDestination = .inFile
-            continue
-        case "-D", "--disassemble":
-            action = .disassemble
-        case "-O", "--output":
-            argDestination = .outFile
-            continue
-        case "--stdout": outFile = .stdout
-        case "--to":
-            argDestination = .outDir
-        default:
-            inFiles.append(arg)
-        }
+let argRange = 1..<CommandLine.arguments.count
+var argi = argRange.lowerBound
+while argRange.contains(argi) {
+    let arg = CommandLine.arguments[argi]
+    if arg.prefix(1) != "-" { break }
+    if arg == "--" { // end of argument list
+        argi += 1
+        break
     }
-    argDestination = .noDestination
+    switch arg {
+    case "-D", "--disassemble": action = .disassemble
+    case "-O", "--output":
+        if !argRange.contains(argi + 1) {
+            errorUsage("Not enough argumnets for \(arg)", 1)
+        } else {
+            argi += 1
+            outFile = .toFile(URL(fileURLWithPath: CommandLine.arguments[argi]))
+        }
+    case "--stdout": outFile = .stdout
+    case "--to":
+        if !argRange.contains(argi + 1) {
+            errorUsage("Not enough argumnets for \(arg)", 1)
+        } else {
+            argi += 1
+            outFile = .toDir(URL(fileURLWithPath: CommandLine.arguments[argi], isDirectory: true))
+        }
+    default:
+        errorUsage("Unknown option: \(arg)\n", 1)
+    }
+    argi += 1
 }
 
-switch argDestination {
-case .inFile, .noDestination: break
-default: fatalError("Missing parameter")
-}
+inFiles = CommandLine.arguments[ argi..<CommandLine.arguments.count ].map { $0 }
 
 switch (outFile, inFiles.count) {
-case (_, 0): fatalError("No input files specified")
+case (_, 0): errorUsage("No input files specified", 1)
 case (.toFile, 1): break
-case (.toFile, _): fatalError("--output is not allowed with multiple input files")
+case (.toFile, _): errorUsage("--output is not allowed with multiple input files", 1)
 default: break
 }
 

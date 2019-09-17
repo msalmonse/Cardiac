@@ -19,6 +19,11 @@ Options:
     --to <directory>        Save output files in directory
 """
 
-func usage() {
+func usage(_ exitCode: Int32 = -1) {
     print(usageText)
+    if exitCode >= 0 { exit(exitCode) }
+}
+
+func errorUsage(_ msg: String, _ exitCode: Int32 = -1) {
+    print(msg)
 }
