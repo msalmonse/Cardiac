@@ -30,14 +30,14 @@ struct CommentView: View {
                 bgColor
                 VStack {
                     Spacer()
-                    ScrollView {
-                        Text(self.comment.lines.joined(separator: "\n"))
-                        .foregroundColor(.primary)
-                        .background(Color(.systemBackground))
-                        .lineLimit(1000)
-                        .font(.title)
+                    List(self.comment.lines, id: \.self) { line in
+                        Text(line)
+                        .fixedSize(horizontal: false, vertical: true)
                     }
-                    .frame(width: proxy.size.width * 0.8, height: proxy.size.height * 0.66)
+                    .foregroundColor(.primary)
+                    .background(Color(.systemBackground))
+                    .font(.title)
+                    .frame(width: proxy.size.width * 0.8, height: proxy.size.height * 0.8)
                     .clipped(antialiased: true)
                     .modifier(CardiacView.Standard())
                     Spacer()
