@@ -23,6 +23,8 @@ The Cardiac operations are:
 * `add <location>` -  
 Add the contents of location to the result.  
 Location can refer to a label or it can be a number
+* `blt <location>` -  
+Alias for `tac`
 * `cla <location>` -  
 clear the accumulator and add, essentially load the location into the accumulator.
 * `hrs <location>` -  
@@ -31,6 +33,8 @@ Halt Cardiac and continue at location if Cardiac is restarted.
 Read a number from the tape and store it in location.
 * `jmp <location>` -  
 Continue execution at location.
+* `ld location` -  
+Alias for `cla`.
 * `out <location>`-  
 Write the value at location to the output tape.
 * `slr <left> <right>` -  
