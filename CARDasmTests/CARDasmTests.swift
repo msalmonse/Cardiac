@@ -189,8 +189,8 @@ endcomment
 
 """
 
-let testAsmSize = 224
-let testJsonSize = 284
+let testAsmSize = 262
+let testJsonSize = 330
 
 let testComment = """
 
@@ -207,7 +207,9 @@ loc04: data 1
 loc23: inp loc04 # 4
    slr 3 1 # 431
 start: sub loc03 # 703
+   tac start # 325
    sto loc06 # 606
+   cla loc04 # 104
    jmp loc23 # 823
    tape 23
    tape 42
