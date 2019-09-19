@@ -45,7 +45,7 @@ Jump to location if the accumulator is negative.
 
 ### Pseudo-operations
 
-There are three pseudo-operations:
+There are four pseudo-operations:
 
 * `bss <count>` -  
 Reserve memory, the location is advanced by count
@@ -54,3 +54,34 @@ The value is written at the current location
 * `loc <value>` -  
 The current location is set to value.  
 The first location is 3 if it is not specified, this is to allow space for the bootstrap loader.
+* `tape <value>` -  
+Similar to `data` but used to specify data for the input tape.
+
+## Example
+This programme read a value from the input, reverses the digits and write the value to the output.
+
+```
+   loc 15
+start: inp input
+   cla input
+   slr 3 1
+   sto output
+   cla input
+   slr 1 3
+   add output
+   sto output
+   cla input
+   slr 2 3
+   slr 1 0
+   add output
+   sto output
+   out output
+   hrs start
+   tape 123   # Test value
+   loc 39
+input: bss 1
+output: bss 1
+comment
+Reverse the number read from the input i.e. 123 becomes 321
+endcomment
+```
