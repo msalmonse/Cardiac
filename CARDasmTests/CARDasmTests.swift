@@ -167,6 +167,7 @@ let testInput = """
 data0: dat 0
 data1: dat 1
     dat start
+    dat 123
 bss0: bss 10
 
 label1: loc 23
@@ -203,12 +204,13 @@ let testDis = """
 loc03: data 0
 loc04: data 1
    inp start # 25
+   cla loc23 # 123
    loc 23
 loc23: inp loc04 # 4
    slr 3 1 # 431
 start: sub loc03 # 703
    tac start # 325
-   sto loc06 # 606
+   sto loc07 # 607
    cla loc04 # 104
    jmp loc23 # 823
    tape 23

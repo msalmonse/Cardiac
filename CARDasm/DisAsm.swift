@@ -44,8 +44,13 @@ fileprivate func memPass1(_ dump: DumpData) -> Destinations {
                 // slr
             case 4: break
                 // jump instructions
-            case 3, 8, 9: if destinations[addr] == nil { destinations[addr] = .instruction(label) }
-            default: if destinations[addr] == nil { destinations[addr] = .data(label) }
+            case 3, 8, 9:
+                switch destinations[addr] ?? .data("") {
+                case .data: destinations[addr] = .instruction(label)
+                default: break
+                }
+            default:
+                if destinations[addr] == nil { destinations[addr] = .data(label) }
             }
         case .failure: break
         }
