@@ -111,16 +111,12 @@ class CARDasmTests: XCTestCase {
 
     func testBase32() {
         let encoder = Base32Encoder()
-        var encoded: [Int] = []
-
-        for value in 0..<1000 {
-            encoded.append(encoder[value])
-        }
-
         let decoder = Base32Decoder()
-        for index in encoded.indices {
-            XCTAssertEqual(index, decoder[encoded[index]])
+
+        for value in 0...999 {
+            XCTAssertEqual(value, decoder[encoder[value]])
         }
+        XCTAssertEqual(encoder[1024], 0x3f3f)   // Check for handling of too large values
     }
 
     func testDisAssPerformance() {
