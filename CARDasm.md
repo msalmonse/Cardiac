@@ -91,3 +91,15 @@ comment
 Reverse the number read from the input i.e. 123 becomes 321
 endcomment
 ```
+
+## Usage
+```
+Usage:
+    cardasm [options]... <input files>...
+
+Options:
+    -D or --disassemble     Take a json dump and convert it to cardasm
+    -O or --output <name>   Write the output to name
+    --stdout                Write to stdout
+    --to <directory>        Save output files in directory
+```
