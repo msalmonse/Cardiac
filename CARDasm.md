@@ -64,6 +64,8 @@ Similar to `data` but used to specify data for the input tape.
 ## Example
 This programme read a value from the input, reverses the digits and write the value to the output.
 
+Pragramme 6 from section 12 of the Cardiac Manual.
+
 ```
    loc 15
 start: inp input
