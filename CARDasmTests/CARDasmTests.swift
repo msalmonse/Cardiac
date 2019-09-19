@@ -109,6 +109,20 @@ class CARDasmTests: XCTestCase {
         }
     }
 
+    func testBase32() {
+        let encoder = Base32Encoder()
+        var encoded: [Int] = []
+
+        for value in 0..<1000 {
+            encoded.append(encoder[value])
+        }
+
+        let decoder = Base32Decoder()
+        for index in encoded.indices {
+            XCTAssertEqual(index, decoder[encoded[index]])
+        }
+    }
+
     func testDisAssPerformance() {
         printDiff = false
         measure {
@@ -121,6 +135,13 @@ class CARDasmTests: XCTestCase {
         measure {
             // Test the time for tokeniser, parser and encoder
             for _ in 0...99 { testOneData() }
+        }
+    }
+
+    func testBase32Performance() {
+        measure {
+            // Test the time for tokeniser, parser and encoder
+            for _ in 0...99 { testBase32() }
         }
     }
 
@@ -191,7 +212,7 @@ endcomment
 """
 
 let testAsmSize = 262
-let testJsonSize = 330
+let testJsonSize = 352
 
 let testComment = """
 
