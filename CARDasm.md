@@ -52,4 +52,5 @@ Reserve memory, the location is advanced by count
 * `data <value>` -  
 The value is written at the current location
 * `loc <value>` -  
-The current location is set to value.
+The current location is set to value.  
+The first location is 3 if it is not specified, this is to allow space for the bootstrap loader.
