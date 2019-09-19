@@ -68,18 +68,18 @@ Pragramme 6 from section 12 of the Cardiac Manual.
 
 ```
    loc 15
-start: inp input
+start: inp input  # Read 'abc'
    cla input
-   slr 3 1
+   slr 3 1        # Shift to produce 'c00'
    sto output
    cla input
-   slr 1 3
-   add output
+   slr 1 3        # Shift to produce '00a'
+   add output     # Produce 'c0a'
    sto output
    cla input
-   slr 2 3
-   slr 1 0
-   add output
+   slr 2 3        # Shift to produce '00b'
+   slr 1 0        # Shift to produce '0b0'
+   add output     # Produce 'cba'
    sto output
    out output
    hrs start
