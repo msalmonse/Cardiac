@@ -23,13 +23,13 @@ class CARDasmTests: XCTestCase {
     func testTokenizer() {
         let tokens = tokenize(testInput)
         print(tokens)
-        XCTAssertEqual(tokens.count, 14)
+        XCTAssertEqual(tokens.count, 17)
     }
 
     func testParser() {
         func checkDump(_ dump: DumpData) {
             XCTAssertEqual(dump.next, 25)
-            XCTAssertEqual(dump.memory.count, 8)
+            XCTAssertEqual(dump.memory.count, 10)
             XCTAssertNotNil(dump.input)
             XCTAssertEqual(dump.input?.count, 2)
             XCTAssertNotNil(dump.comment)
@@ -173,7 +173,9 @@ label1: loc 23
     inp data1
     slr 3 1     # comment
 start: sub data0
+    blt start
     sto bss0
+    ld data1
     jmp label1
 
     tape 23

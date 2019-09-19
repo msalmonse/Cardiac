@@ -88,8 +88,10 @@ func opCodeToken(_ words: [Substring]) -> Result<OpCode, Error> {
     switch words[0] {
     case "inp": return .success(.inp(Location.get(words[1])))
     case "cla": return .success(.cla(Location.get(words[1])))
+    case "ld":  return .success(.cla(Location.get(words[1])))
     case "add": return .success(.add(Location.get(words[1])))
     case "tac": return .success(.tac(Location.get(words[1])))
+    case "blt": return .success(.tac(Location.get(words[1])))
     case "slr":
         var sl = 0
         switch shiftVal(words[1]) {
