@@ -16,8 +16,6 @@
       { "addr": 27, "data": 640 },
       { "addr": 28, "data": 540 },
       { "addr": 29, "data": 915 },
-      { "addr": 39, "data": 123 },
-      { "addr": 99, "data": 800 }
    ],
    "input": [
       { "addr":  0, "data": 123 }
