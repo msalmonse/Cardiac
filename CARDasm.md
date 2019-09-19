@@ -41,3 +41,14 @@ The accumulator is 4 digits wide while memory is only 3 digits so some truncatio
 Subtract the contents of location from the accumulator.
 * `tac <location>` -  
 Jump to location if the accumulator is negative.
+
+### Pseudo-operations
+
+There are three pseudo-operations:
+
+* `bss <count>` -  
+Reserve memory, the location is advanced by count
+* `data <value>` -  
+The value is written at the current location
+* `loc <value>` -  
+The current location is set to value.
