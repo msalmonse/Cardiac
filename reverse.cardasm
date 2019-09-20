@@ -1,0 +1,23 @@
+   loc 15
+start: inp input  # Read 'abc'
+   cla input
+   slr 3 1        # Shift to produce 'c00'
+   sto output
+   cla input
+   slr 1 3        # Shift to produce '00a'
+   add output     # Produce 'c0a'
+   sto output
+   cla input
+   slr 2 3        # Shift to produce '00b'
+   slr 1 0        # Shift to produce '0b0'
+   add output     # Produce 'cba'
+   sto output
+   out output
+   hrs start
+   tape 123   # Test value
+   loc 39
+input: bss 1
+output: bss 1
+comment
+Reverse the number read from the input i.e. 123 becomes 321
+endcomment
