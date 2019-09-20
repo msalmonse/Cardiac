@@ -23,13 +23,13 @@ class CARDasmTests: XCTestCase {
     func testTokenizer() {
         let tokens = tokenize(testInput)
         print(tokens)
-        XCTAssertEqual(tokens.count, 17)
+        XCTAssertEqual(tokens.count, 18)
     }
 
     func testParser() {
         func checkDump(_ dump: DumpData) {
             XCTAssertEqual(dump.next, 25)
-            XCTAssertEqual(dump.memory.count, 10)
+            XCTAssertEqual(dump.memory.count, 11)
             XCTAssertNotNil(dump.input)
             XCTAssertEqual(dump.input?.count, 2)
             XCTAssertNotNil(dump.comment)
@@ -71,7 +71,7 @@ class CARDasmTests: XCTestCase {
             return
         }
 
-        switch assembleOneFile(tmpIn, to: .notspecified) {
+        switch assembleOneFile(tmpIn, to: .notspecified, as: .json) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
         case .success: break
         }
@@ -80,6 +80,19 @@ class CARDasmTests: XCTestCase {
         do {
             let values = try tmpJson.resourceValues(forKeys: [.fileSizeKey])
             XCTAssertEqual(values.fileSize!, testJsonSize)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        switch assembleOneFile(tmpIn, to: .notspecified, as: .tape) {
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
+        case .success: break
+        }
+
+        let tmpTape = tempDirURL().appendingPathComponent("test.tape")
+        do {
+            let values = try tmpTape.resourceValues(forKeys: [.fileSizeKey])
+            XCTAssertEqual(values.fileSize!, testTapeSize)
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
@@ -207,8 +220,9 @@ endcomment
 
 """
 
-let testAsmSize = 262
+let testAsmSize = 281
 let testJsonSize = 352
+let testTapeSize = 54
 
 let testComment = """
 
