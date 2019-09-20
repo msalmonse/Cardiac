@@ -368,10 +368,10 @@
 		C4AC9B54232E2F560015892D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C48921372333E84E00DF1B95 /* Base32.swift */,
 				C446BBEF23185035004B8146 /* Dump.swift */,
 				C446BBF42318E3AD004B8146 /* Files.swift */,
 				C446BBF22318E09B004B8146 /* LoadAndSave.swift */,
-				C48921372333E84E00DF1B95 /* Base32.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";

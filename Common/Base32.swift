@@ -28,6 +28,25 @@ class Base32Encoder {
         }
     }
 
+    func octets(_ in1: Int, _ in2: Int = Int.max) -> [UInt8] {
+        var ret: [UInt8] = []
+
+        func one(_ indata: Int) {
+            let encoded = self[Int(indata)]
+            ret.append(UInt8(encoded >> 8 & 0xff))
+            ret.append(UInt8(encoded & 0xff))
+        }
+
+        one(in1)
+        if in2 < table.count { one(in2) }
+
+        return ret
+    }
+
+    func octets(_ addrData: AddressAndData) -> [UInt8] {
+        return self.octets(addrData.address, addrData.data)
+    }
+
     subscript(index: Int) -> Int {
         return table.indices.contains(index) ? table[index] : query2
     }

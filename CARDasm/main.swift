@@ -10,6 +10,7 @@ import Foundation
 
 var inFiles: [String] = []
 var outFile = OutFileType.notspecified
+var outFormat = OutFormat.json
 
 enum Action {
     case assemble, disassemble, help
@@ -38,6 +39,7 @@ while argRange.contains(argi) {
             outFile = .toFile(URL(fileURLWithPath: CommandLine.arguments[argi]))
         }
     case "--stdout": outFile = .stdout
+    case "--tape": outFormat = .tape
     case "--to":
         if !argRange.contains(argi + 1) {
             errorUsage("Not enough argumnets for \(arg)", 1)
@@ -64,7 +66,7 @@ for file in inFiles {
     let url = URL(fileURLWithPath: file)
     switch action {
     case .assemble:
-        switch assembleOneFile(url, to: outFile) {
+        switch assembleOneFile(url, to: outFile, as: outFormat) {
         case let .failure(err): print("\(err)")
         case .success: break
         }

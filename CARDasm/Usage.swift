@@ -16,6 +16,7 @@ Options:
     -D or --disassemble     Take a json dump and convert it to cardasm
     -O or --output <name>   Write the output to name
     --stdout                Write to stdout
+    --tape                  Save output as a tape file
     --to <directory>        Save output files in directory
 """
 

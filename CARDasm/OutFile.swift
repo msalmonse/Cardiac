@@ -22,7 +22,7 @@ enum OutFileType {
     }
 }
 
-enum FileExt {
+enum OutFormat {
     case cardasm, json, tape
 
     var ext: String {
@@ -52,7 +52,7 @@ fileprivate func saveToDir(
     _ data: Data,
     _ dir: URL,
     _ inFile: URL,
-    _ newExt: FileExt
+    _ newExt: OutFormat
 ) -> Result<Void, Error> {
 
     var name = inFile.lastPathComponent
@@ -66,7 +66,7 @@ func saveToOutFile(
     _ data: Data,
     to outFile: OutFileType,
     from inFile: URL,
-    as newExt: FileExt
+    as newExt: OutFormat
 ) -> Result<Void, Error> {
 
     switch outFile {
