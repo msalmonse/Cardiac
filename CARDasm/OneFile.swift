@@ -86,6 +86,12 @@ func oneTape(_ inData: String) -> Result<Data, Error> {
             }
         }
 
+        if dump.comment != nil {
+            let comment = dump.comment!.joined(separator: "\n") + "\n"
+            data.append(contentsOf: [0x7e, 0x7e])
+            data.append(contentsOf: [UInt8](comment.utf8))
+        }
+
         return .success(data)
     }
 }

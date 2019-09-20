@@ -222,7 +222,7 @@ endcomment
 
 let testAsmSize = 281
 let testJsonSize = 352
-let testTapeSize = 54
+let testTapeSize = 76
 
 let testComment = """
 
