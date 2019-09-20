@@ -18,7 +18,8 @@ enum Action {
 
 var action = Action.assemble
 
-if CommandLine.arguments.count <= 1 { usage(0) }
+let commandPath = CommandLine.arguments.first ?? "CARDasm"
+if CommandLine.arguments.count <= 1 { usage(0, path: commandPath) }
 
 let argRange = 1..<CommandLine.arguments.count
 var argi = argRange.lowerBound
@@ -33,7 +34,7 @@ while argRange.contains(argi) {
     case "-D", "--disassemble": action = .disassemble
     case "-O", "--output":
         if !argRange.contains(argi + 1) {
-            errorUsage("Not enough argumnets for \(arg)", 1)
+            errorUsage("Not enough argumnets for \(arg)", 1, path: commandPath)
         } else {
             argi += 1
             outFile = .toFile(URL(fileURLWithPath: CommandLine.arguments[argi]))
@@ -42,13 +43,13 @@ while argRange.contains(argi) {
     case "--tape": outFormat = .tape
     case "--to":
         if !argRange.contains(argi + 1) {
-            errorUsage("Not enough argumnets for \(arg)", 1)
+            errorUsage("Not enough argumnets for \(arg)", 1, path: commandPath)
         } else {
             argi += 1
             outFile = .toDir(URL(fileURLWithPath: CommandLine.arguments[argi], isDirectory: true))
         }
     default:
-        errorUsage("Unknown option: \(arg)\n", 1)
+        errorUsage("Unknown option: \(arg)\n", 1, path: commandPath)
     }
     argi += 1
 }
@@ -56,9 +57,10 @@ while argRange.contains(argi) {
 inFiles = CommandLine.arguments[ argi..<CommandLine.arguments.count ].map { $0 }
 
 switch (outFile, inFiles.count) {
-case (_, 0): errorUsage("No input files specified", 1)
+case (_, 0): errorUsage("No input files specified", 1, path: commandPath)
 case (.toFile, 1): break
-case (.toFile, _): errorUsage("--output is not allowed with multiple input files", 1)
+case (.toFile, _):
+    errorUsage("--output is not allowed with multiple input files", 1, path: commandPath)
 default: break
 }
 
