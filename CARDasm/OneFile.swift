@@ -18,7 +18,7 @@ func assembleOneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result
     }
 
     var outData = Data()
-    switch oneData(inString, pretty: outFile.pretty) {
+    switch oneJSON(inString, pretty: outFile.pretty) {
     case let .failure(err): return .failure(err)
     case let .success(data): outData = data
     }
@@ -29,7 +29,7 @@ func assembleOneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Result
     }
 }
 
-func oneData(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
+func oneJSON(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
     switch parse(inData) {
     case let .failure(err): return .failure(err)
     case let .success(dump):

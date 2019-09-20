@@ -54,8 +54,8 @@ class CARDasmTests: XCTestCase {
         }
     }
 
-    func testOneData() {
-        switch oneData(testInput) {
+    func testOneJSON() {
+        switch oneJSON(testInput) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
         case let .success(data):
             XCTAssertEqual(data.count, testJsonSize)
@@ -127,10 +127,10 @@ class CARDasmTests: XCTestCase {
         }
     }
 
-    func testOneDataPerformance() {
+    func testOneJSONPerformance() {
         measure {
             // Test the time for tokeniser, parser and encoder
-            for _ in 0...99 { testOneData() }
+            for _ in 0...99 { testOneJSON() }
         }
     }
 
