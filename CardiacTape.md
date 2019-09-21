@@ -19,4 +19,4 @@ Illegal values are stored as 0x3f3f or "??".
 
 ### Comments on tape
 
-The data portion of a tape file ends with 0x7e7e or "\~\~", everything after that is a comment.
+The data portion of a tape file ends with 0x7e7e0a or "\~\~\\n", everything after that is a comment.
