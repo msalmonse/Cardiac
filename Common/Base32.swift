@@ -17,6 +17,9 @@ fileprivate let char32 = string32.unicodeScalars.map { $0.value }
 // The value for ??
 fileprivate let query2 = 0x3f3f
 
+fileprivate let table = tableBuild()
+fileprivate let inverse = inverseTableBuild()
+
 fileprivate func tableBuild() -> [Int] {
     var table: [Int] = []
     for outer in char32 {
@@ -28,7 +31,6 @@ fileprivate func tableBuild() -> [Int] {
 }
 
 fileprivate func inverseTableBuild() -> [Int: Int] {
-    let table = tableBuild()
     var inverse: [Int: Int] = [:]
 
     for index in table.indices {
@@ -39,8 +41,6 @@ fileprivate func inverseTableBuild() -> [Int: Int] {
 }
 
 class Base32Encoder {
-    static var table: [Int] = tableBuild()
-
     func octets(_ in1: Int, _ in2: Int = Int.max) -> [UInt8] {
         var ret: [UInt8] = []
 
@@ -51,7 +51,7 @@ class Base32Encoder {
         }
 
         one(in1)
-        if in2 < Self.table.count { one(in2) }
+        if in2 < table.count { one(in2) }
 
         return ret
     }
@@ -61,13 +61,11 @@ class Base32Encoder {
     }
 
     subscript(index: Int) -> Int {
-        return Self.table.indices.contains(index) ? Self.table[index] : query2
+        return table.indices.contains(index) ? table[index] : query2
     }
 }
 
 class Base32Decoder {
-    static var table: [Int: Int] = inverseTableBuild()
-
     // Lookup the result of 2 octets
     func hextet(_ in1: UInt8, _ in2: UInt8) -> Int {
         return self[Int(in1) << 8 | Int(in2)]
@@ -82,6 +80,6 @@ class Base32Decoder {
     }
 
     subscript(index: Int) -> Int {
-        return Self.table[index] ?? Int(UInt16.max)
+        return inverse[index] ?? Int(UInt16.max)
     }
 }
