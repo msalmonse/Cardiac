@@ -16,3 +16,7 @@ The data is stored on disk as pairs of characters. The Cardiac data is between 0
 before being written as two characters to disk. The value 0 become 0x3030 or "00" etc. using the following characters:
 "0123456789ABCDEFHJKLMNPRSTUVWXYZ", "G", "I", "O" and "Q" are excluded as it is easy to mistake them for numbers.
 Illegal values are stored as 0x3f3f or "??".
+
+### Comments on tape
+
+The data portion of a tape file ends with 0x7e7e or "\~\~", everything after that is a comment.
