@@ -11,8 +11,8 @@ import SwiftUI
 struct LoadButtons: View {
     var cpu: CPU
 
-    func loadJSON(_ name: String) {
-        switch self.cpu.loadJsonResource(name) {
+    func loadResource(_ name: String) {
+        switch self.cpu.loadFromResource(name) {
         case .success: break
         case .failure(let err):
             let message = errorMessage(err, "loading: '\(name)")
@@ -25,14 +25,14 @@ struct LoadButtons: View {
             Spacer()
 
             Button(
-                action: { self.loadJSON("nim") },
+                action: { self.loadResource("nim") },
                 label: { ButtonText("Load nim") }
             )
 
             Spacer()
 
             Button(
-                action: { self.loadJSON("reverse") },
+                action: { self.loadResource("reverse") },
                 label: { ButtonText("Load reverse") }
             )
 

@@ -68,7 +68,7 @@ func fileURL(_ name: String?,
 ///     name:                   filename
 ///     withExtension:      file's extension
 
-func bundledURL(_ name: String?, withExtension ext: String = "json") -> Result<URL, Error> {
+func bundledURL(_ name: String?, withExtension ext: String? = nil) -> Result<URL, Error> {
     let url = Bundle.main.url(forResource: name, withExtension: ext)
     if url == nil { return .failure(FileError.fileNotFound) }
     return .success(url!)

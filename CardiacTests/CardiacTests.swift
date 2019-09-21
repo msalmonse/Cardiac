@@ -22,7 +22,7 @@ class CardiacTests: XCTestCase {
     func testJsonLoad() {
         let cpu = CPU()
 
-        switch cpu.loadJsonResource("reverse") {
+        switch cpu.loadFromResource("reverse") {
         case .success: break
         case .failure(let err): XCTAssert(false, err.localizedDescription)
         }

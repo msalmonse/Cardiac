@@ -21,21 +21,25 @@ class CPU: Identifiable {
         self.exec = ExecUnit(memory: memory, inTape: inTape, outTape: outTape)
     }
 
-    func loadJsonResource(_ name: String) -> Result<Void, Error> {
-        var url: URL
-        switch bundledURL(name) {
-        case .success(let ret): url = ret
-        case .failure(let err): return .failure(err)
+    func loadFromResource(_ name: String) -> Result<Void, Error> {
+        switch bundledURL(name, withExtension: "json") {
+        case let .success(url):
+            return loadFromURL(url, fromJSON: true)
+        case .failure: break
         }
 
-        return loadJsonURL(url)
+        switch bundledURL(name, withExtension: "tape") {
+        case let .success(url):
+            return loadFromURL(url, fromJSON: false)
+        case let .failure(err): return .failure(err)
+        }
     }
 
-    func loadJsonURL(_ url: URL) -> Result<Void, Error> {
+    func loadFromURL(_ url: URL, fromJSON: Bool) -> Result<Void, Error> {
         exec.halt(.loading)
 
         var dump: DumpData
-        switch loadFromJSON(url, as: DumpData.self) {
+        switch fromJSON ? loadFromJSON(url, as: DumpData.self) : loadFromTape(url) {
         case .success(let data): dump = data
         case .failure(let err): return .failure(err)
         }
