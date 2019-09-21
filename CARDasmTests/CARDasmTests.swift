@@ -62,6 +62,14 @@ class CARDasmTests: XCTestCase {
         }
     }
 
+    func testOneTape() {
+        switch oneTape(testInput) {
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
+        case let .success(data):
+            XCTAssertEqual(data.count, testTapeSize)
+        }
+    }
+
     func testOneFile() {
         let tmpIn = tempDirURL().appendingPathComponent("test.txt")
         do {
@@ -80,9 +88,7 @@ class CARDasmTests: XCTestCase {
         do {
             let values = try tmpJson.resourceValues(forKeys: [.fileSizeKey])
             XCTAssertEqual(values.fileSize!, testJsonSize)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
+        } catch { XCTFail("Unexpected error: \(error)") }
 
         switch assembleOneFile(tmpIn, to: .notspecified, as: .tape) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
@@ -93,9 +99,7 @@ class CARDasmTests: XCTestCase {
         do {
             let values = try tmpTape.resourceValues(forKeys: [.fileSizeKey])
             XCTAssertEqual(values.fileSize!, testTapeSize)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
+        } catch { XCTFail("Unexpected error: \(error)") }
 
         switch disassembleOneFile(tmpJson, to: .notspecified) {
         case let .failure(err): XCTFail("Unexpected error: \(err)")
@@ -106,10 +110,17 @@ class CARDasmTests: XCTestCase {
         do {
             let values = try tmpAsm.resourceValues(forKeys: [.fileSizeKey])
             XCTAssertEqual(values.fileSize!, testAsmSize)
-        } catch {
-            XCTFail("Unexpected error: \(error)")
+        } catch { XCTFail("Unexpected error: \(error)") }
+
+        switch disassembleOneFile(tmpTape, to: .notspecified) {
+        case let .failure(err): XCTFail("Unexpected error: \(err)")
+        case .success: break
         }
 
+        do {
+            let values = try tmpAsm.resourceValues(forKeys: [.fileSizeKey])
+            XCTAssertEqual(values.fileSize!, testAsmSize)
+        } catch { XCTFail("Unexpected error: \(error)") }
     }
 
     func testDisAssemble() {
@@ -155,6 +166,13 @@ class CARDasmTests: XCTestCase {
         measure {
             // Test the time for tokeniser, parser and encoder
             for _ in 0...99 { testOneJSON() }
+        }
+    }
+
+    func testOneTapePerformance() {
+        measure {
+            // Test the time for tokeniser, parser and encoder
+            for _ in 0...99 { testOneTape() }
         }
     }
 

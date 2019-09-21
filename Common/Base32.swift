@@ -17,16 +17,29 @@ fileprivate let char32 = string32.unicodeScalars.map { $0.value }
 // The value for ??
 fileprivate let query2 = 0x3f3f
 
-class Base32Encoder {
+fileprivate func tableBuild() -> [Int] {
     var table: [Int] = []
-    init() {
-        // Build the table
-        for outer in char32 {
-            for inner in char32 {
-                table.append(Int(outer << 8 | inner))
-            }
+    for outer in char32 {
+        for inner in char32 {
+            table.append(Int(outer << 8 | inner))
         }
     }
+    return table
+}
+
+fileprivate func inverseTableBuild() -> [Int: Int] {
+    let table = tableBuild()
+    var inverse: [Int: Int] = [:]
+
+    for index in table.indices {
+        inverse[table[index]] = index
+    }
+
+    return inverse
+}
+
+class Base32Encoder {
+    static var table: [Int] = tableBuild()
 
     func octets(_ in1: Int, _ in2: Int = Int.max) -> [UInt8] {
         var ret: [UInt8] = []
@@ -38,7 +51,7 @@ class Base32Encoder {
         }
 
         one(in1)
-        if in2 < table.count { one(in2) }
+        if in2 < Self.table.count { one(in2) }
 
         return ret
     }
@@ -48,21 +61,12 @@ class Base32Encoder {
     }
 
     subscript(index: Int) -> Int {
-        return table.indices.contains(index) ? table[index] : query2
+        return Self.table.indices.contains(index) ? Self.table[index] : query2
     }
 }
 
 class Base32Decoder {
-    var table: [Int: Int] = [:]
-
-    init() {
-        let encoder = Base32Encoder()
-
-        for value in 0..<1000 {
-            table[encoder[value]] = value
-        }
-        table[query2] = Int(UInt16.max)
-    }
+    static var table: [Int: Int] = inverseTableBuild()
 
     // Lookup the result of 2 octets
     func hextet(_ in1: UInt8, _ in2: UInt8) -> Int {
@@ -72,12 +76,12 @@ class Base32Decoder {
     // Remove 2 octets from the data array and return their decoded value
     func hextet(_ data: inout Data) -> Int {
         // First check for eof marker
-        if data.first == 0x7e { return self[0x7e0a] }
+        if data.count < 2 || data.first == 0x7e { return self[0x7e0a] }
         guard let val1 = data.popFirst(), let val2 = data.popFirst() else { return self[0x7e0a] }
         return hextet(val1, val2)
     }
 
     subscript(index: Int) -> Int {
-        return table[index] ?? Int(UInt16.max)
+        return Self.table[index] ?? Int(UInt16.max)
     }
 }
