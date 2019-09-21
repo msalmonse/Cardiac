@@ -55,3 +55,53 @@ func oneCell(_ indata: [String: Int]) -> Result<AddressAndData, Error> {
     }
     return .success(AddressAndData(address: addr!, data: data!))
 }
+
+func loadFromTape(_ url: URL) -> Result<DumpData, Error> {
+    var data: Data
+    let dump = DumpData()
+
+    do {
+        data = try Data(contentsOf: url)
+    } catch {
+        return .failure(error)
+    }
+
+    let decoder = Base32Decoder()
+
+    while data.count > 0 {
+        let addr = decoder.hextet(&data)
+        // Check to see that addr is an address
+        if addr < 100 {
+            let memData = decoder.hextet(&data)
+            if memData > 999 { return .failure(FileError.dataFormatError) }
+            dump.memory.append(["addr": addr, "data": memData])
+        } else if addr >= 900 && addr < 999 {
+            // It was an hrs so set next and exit loop
+            dump.next = addr % 100
+            break
+        } else {
+            return .failure(FileError.dataFormatError)
+        }
+    }
+
+    if data.count > 2 && data.first != 0x7e {
+        dump.input = [[String: Int]]()
+        var addr = 0
+        while data.count > 0 {
+            let tapeData = decoder.hextet(&data)
+            // Test for eof
+            if tapeData > 999 { break }
+            dump.input!.append(["addr": addr, "data": tapeData])
+            addr += 1
+        }
+    }
+
+    if data.count > 2 {
+        if data.first != 0x7e { return .failure(FileError.dataFormatError) }
+        _ = data.dropFirst(2)   // Skip over comment prefix
+        let comment = String(decoding: data, as: UTF8.self)
+        dump.comment = comment.split(separator: "\n").map { String($0) }
+    }
+
+    return .success(dump)
+}

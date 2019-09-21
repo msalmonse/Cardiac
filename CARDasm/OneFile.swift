@@ -99,8 +99,13 @@ func disassembleOneFile(_ inFile: URL, to outFile: OutFileType = .stdout) -> Res
     var dump: DumpData
 
     switch loadFromJSON(inFile, as: DumpData.self) {
-    case .success(let data): dump = data
-    case .failure(let err): return .failure(err)
+    case let .success(data): dump = data
+    case let .failure(err):
+        // Not JSON, try tape
+        switch loadFromTape(inFile) {
+        case let .success(data): dump = data
+        case .failure: return .failure(err) // use error from JSON load
+        }
     }
 
     let asm = disAssemble(dump)
