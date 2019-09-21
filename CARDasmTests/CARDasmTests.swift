@@ -130,6 +130,17 @@ class CARDasmTests: XCTestCase {
             XCTAssertEqual(value, decoder[encoder[value]])
         }
         XCTAssertEqual(encoder[1024], 0x3f3f)   // Check for handling of too large values
+
+        var data = Data()
+
+        data.append(contentsOf: encoder.octets(2, 800))
+        data.append(contentsOf: [0x7e, 0x0a])
+        XCTAssertEqual(decoder.hextet(&data), 2)
+        XCTAssertEqual(data.count, 4)
+        XCTAssertEqual(decoder.hextet(&data), 800)
+        XCTAssertEqual(data.count, 2)
+        XCTAssertEqual(decoder.hextet(&data), Int(UInt16.max))
+        XCTAssertEqual(data.count, 2)
     }
 
     func testDisAssPerformance() {

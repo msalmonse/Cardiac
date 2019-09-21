@@ -64,6 +64,19 @@ class Base32Decoder {
         table[query2] = Int(UInt16.max)
     }
 
+    // Lookup the result of 2 octets
+    func hextet(_ in1: UInt8, _ in2: UInt8) -> Int {
+        return self[Int(in1) << 8 | Int(in2)]
+    }
+
+    // Remove 2 octets from the data array and return their decoded value
+    func hextet(_ data: inout Data) -> Int {
+        // First check for eof marker
+        if data.first == 0x7e { return self[0x7e0a] }
+        guard let val1 = data.popFirst(), let val2 = data.popFirst() else { return self[0x7e0a] }
+        return hextet(val1, val2)
+    }
+
     subscript(index: Int) -> Int {
         return table[index] ?? Int(UInt16.max)
     }
