@@ -68,6 +68,11 @@ func loadFromTape(_ url: URL) -> Result<DumpData, Error> {
 
     let decoder = Base32Decoder()
 
+    // Check for bootstrap loaded
+    if data.count < 4 || decoder.hextet(&data) != 2 || decoder.hextet(&data) != 800 {
+        return .failure(FileError.dataFormatError)
+    }
+
     while data.count > 0 {
         let addr = decoder.hextet(&data)
         // Check to see that addr is an address
@@ -98,9 +103,10 @@ func loadFromTape(_ url: URL) -> Result<DumpData, Error> {
 
     if data.count > 2 {
         if data.first != 0x7e { return .failure(FileError.dataFormatError) }
-        _ = data.dropFirst(2)   // Skip over comment prefix
+        data = data.dropFirst(2).dropLast(1)   // Skip over comment prefix and trailin newline
         let comment = String(decoding: data, as: UTF8.self)
-        dump.comment = comment.split(separator: "\n").map { String($0) }
+        dump.comment =
+            comment.split(separator: "\n", omittingEmptySubsequences: false).map { String($0) }
     }
 
     return .success(dump)
