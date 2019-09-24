@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C410F05E233A592000AF632D /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C410F05D233A592000AF632D /* TextView */; };
 		C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBAF2317C07E004B8146 /* AppDelegate.swift */; };
 		C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB12317C07E004B8146 /* SceneDelegate.swift */; };
 		C446BBB42317C07E004B8146 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB32317C07E004B8146 /* ContentView.swift */; };
@@ -177,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C410F05E233A592000AF632D /* TextView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +393,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				C410F060233A593100AF632D /* PBXTargetDependency */,
 			);
 			name = Cardiac;
+			packageProductDependencies = (
+				C410F05D233A592000AF632D /* TextView */,
+			);
 			productName = Cardiac;
 			productReference = C446BBAC2317C07E004B8146 /* Cardiac.app */;
 			productType = "com.apple.product-type.application";
@@ -506,6 +512,9 @@
 				Base,
 			);
 			mainGroup = C446BBA32317C07E004B8146;
+			packageReferences = (
+				C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */,
+			);
 			productRefGroup = C446BBAD2317C07E004B8146 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -694,6 +703,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C410F060233A593100AF632D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C410F05F233A593100AF632D /* TextView */;
+		};
 		C446BBC42317C085004B8146 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C446BBAB2317C07E004B8146 /* Cardiac */;
@@ -1072,6 +1085,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/msalmonse/TextView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C410F05D233A592000AF632D /* TextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */;
+			productName = TextView;
+		};
+		C410F05F233A593100AF632D /* TextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */;
+			productName = TextView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C446BBA42317C07E004B8146 /* Project object */;
 }

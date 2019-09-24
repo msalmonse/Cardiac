@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
+import TextView
 
 struct CommentLink: View {
     let comment: Comment
 
     var body: some View {
         NavigationLink(
-            destination: CommentView(comment: comment),
+            destination: CommentView(comment.lines.joined(separator: "\n")),
             label: { ButtonText("Show Comment") }
         )
         .disabled(comment.isEmpty)
@@ -21,8 +22,14 @@ struct CommentLink: View {
 }
 
 struct CommentView: View {
-    let comment: Comment
+    let textViewState: TextViewState
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
+    init(_ text: String) {
+        let uiFont = UIFont.systemFont(ofSize: 25)
+        textViewState = TextViewState(text, font: uiFont)
+            .set(.isEditable(false))
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -30,13 +37,7 @@ struct CommentView: View {
                 bgColor
                 VStack {
                     Spacer()
-                    List(self.comment.lines, id: \.self) { line in
-                        Text(line)
-                        .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .foregroundColor(.primary)
-                    .background(Color(.systemBackground))
-                    .font(.title)
+                    TextView(self.textViewState)
                     .frame(width: proxy.size.width * 0.8, height: proxy.size.height * 0.8)
                     .clipped(antialiased: true)
                     .modifier(CardiacView.Standard())
@@ -53,6 +54,6 @@ struct CommentView: View {
 
 struct CommentView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentView(comment: Comment("Comment"))
+        CommentView("Comment")
     }
 }
