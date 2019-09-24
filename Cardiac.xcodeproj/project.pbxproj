@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C410F05E233A592000AF632D /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C410F05D233A592000AF632D /* TextView */; };
+		C410F062233A815000AF632D /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F061233A815000AF632D /* EditorView.swift */; };
 		C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBAF2317C07E004B8146 /* AppDelegate.swift */; };
 		C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB12317C07E004B8146 /* SceneDelegate.swift */; };
 		C446BBB42317C07E004B8146 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB32317C07E004B8146 /* ContentView.swift */; };
@@ -108,6 +109,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C410F061233A815000AF632D /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		C446BBAC2317C07E004B8146 /* Cardiac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardiac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C446BBAF2317C07E004B8146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C446BBB12317C07E004B8146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				C446BC55231E3002004B8146 /* ButtonLabel.swift */,
 				C4635515232769F9008551AC /* CardiacView.swift */,
 				C446BC5B231F8215004B8146 /* CommentView.swift */,
+				C410F061233A815000AF632D /* EditorView.swift */,
 				C446BC51231D65AA004B8146 /* ExecView.swift */,
 				C446BC57231E417F004B8146 /* LoadButtons.swift */,
 				C446BBFF231910DD004B8146 /* MemoryCellLink.swift */,
@@ -634,6 +637,7 @@
 				C446BC47231BF7D1004B8146 /* ExecUnitExec.swift in Sources */,
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BC0323199EAC004B8146 /* Shapes.swift in Sources */,
+				C410F062233A815000AF632D /* EditorView.swift in Sources */,
 				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
 				C463550C23257C1E008551AC /* Breakpoint.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,

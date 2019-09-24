@@ -31,6 +31,10 @@ struct LoadButtons: View {
 
             Spacer()
 
+            EditorLink(text: "")
+
+            Spacer()
+
             Button(
                 action: { self.loadResource("reverse") },
                 label: { ButtonText("Load reverse") }
