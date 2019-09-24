@@ -67,7 +67,7 @@ enum OpCode {
         case let .cla(location): return location.plus(100)
         case let .add(location): return location.plus(200)
         case let .tac(location): return location.plus(300)
-        case let .slr(sl, sr): return .success(400 + sl * 10 + sr)
+        case let .slr(sl, sr):   return .success(400 + sl * 10 + sr)
         case let .out(location): return location.plus(500)
         case let .sto(location): return location.plus(600)
         case let .sub(location): return location.plus(700)
