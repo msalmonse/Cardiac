@@ -112,8 +112,8 @@ class Cell: ObservableObject, Identifiable {
         return left.value < right
     }
 
-    var opcode: OpCode {
-        return valid ? OpCode.opcode(value/100, value % 100) : .inv(value)
+    var operation: Operation {
+        return valid ? Operation.operation(value/100, value % 100) : .inv(value)
     }
 
     let location: String

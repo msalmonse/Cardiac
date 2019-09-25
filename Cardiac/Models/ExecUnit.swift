@@ -48,7 +48,7 @@ class ExecUnit: ObservableObject, Identifiable {
     var address: UInt16 = 0 {
         willSet { intAddress = Int(newValue) }
         didSet {
-            opcode = memory[address].opcode
+            operation = memory[address].operation
             breakPoint = memory[address].breakPoint
         }
     }
@@ -71,7 +71,7 @@ class ExecUnit: ObservableObject, Identifiable {
     var readAddr: UInt16 = 0
     var writeAddr: UInt16 = 0
 
-    var opcode: OpCode = .unk(0)
+    var operation: Operation = .unk(0)
     var breakPoint = BreakOn.never
 
     // Arrows
@@ -110,7 +110,7 @@ class ExecUnit: ObservableObject, Identifiable {
     func breakPointCheck() -> Bool {
         if breakPoint == .execute { return true }
 
-        switch opcode {
+        switch operation {
         case let .inp(addr), let .sto(addr):
             return memory[addr].breakPoint == .write
         case let .out(addr), let .cla(addr), let .add(addr), let .sub(addr):

@@ -10,8 +10,8 @@
 import SwiftUI
 
 enum ExecError: Error {
-    case illegal(OpCode)    // Illegal opcode
-    case invalid(UInt16)    // Invalid opcode
+    case illegal(Operation)    // Illegal operation
+    case invalid(UInt16)    // Invalid operation
     case badNumber          // failure during conversion
     case outOfRange
     case readB4Write(UInt16)
@@ -21,8 +21,8 @@ extension ExecError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .badNumber: return "Not a number"
-        case let .illegal(opcode): return "Illegal opcode: \(opcode.value)"
-        case let .invalid(value): return "Invalid opcode: \(value)"
+        case let .illegal(operation): return "Illegal operation: \(operation.value)"
+        case let .invalid(value): return "Invalid operation: \(value)"
         case .outOfRange: return "Out of range"
         case let .readB4Write(addr): return "Read of address \(addr) before write"
         }
@@ -58,8 +58,8 @@ extension ExecUnit {
         return memory[addr].value
     }
 
-    func ioOp(_ opcode: OpCode) {
-        switch opcode {
+    func ioOp(_ operation: Operation) {
+        switch operation {
         case let .inp(addr):
             switch inTape.readNext() {
             case let .success(val):
@@ -78,23 +78,23 @@ extension ExecUnit {
             case let .failure(err):
                 iotrap(err)
             }
-        default: trap(.illegal(opcode))
+        default: trap(.illegal(operation))
         }
         return
     }
 
-    func aluOp(_ opcode: OpCode) {
-        switch opcode {
+    func aluOp(_ operation: Operation) {
+        switch operation {
         case let .cla(addr): alu.cla(opB(addr))
         case let .add(addr): alu.add(opB(addr))
         case let .sub(addr): alu.sub(opB(addr))
-        default: trap(.illegal(opcode))
+        default: trap(.illegal(operation))
         }
         return
     }
 
-    func jumpOp(_ opcode: OpCode) {
-        switch opcode {
+    func jumpOp(_ operation: Operation) {
+        switch operation {
         case let .tac(addr):
             if alu.isNegative { next = addr }
         case let .jmp(addr):
@@ -106,7 +106,7 @@ extension ExecUnit {
             next = addr
             clearArrows()
             halt()
-        default: trap(.illegal(opcode))
+        default: trap(.illegal(operation))
         }
         return
     }
@@ -141,14 +141,14 @@ extension ExecUnit {
         clearArrows()
         execArrow = generateArrow(memory[address].tag, "Execution Unit", execColor)
 
-        switch opcode {
-        case .inp, .out: ioOp(opcode)
-        case .cla, .add, .sub: aluOp(opcode)
-        case .tac, .jmp, .hrs: jumpOp(opcode)
+        switch operation {
+        case .inp, .out: ioOp(operation)
+        case .cla, .add, .sub: aluOp(operation)
+        case .tac, .jmp, .hrs: jumpOp(operation)
         case let .slr(slr): shiftOp(slr/10, slr % 10)
         case let .sto(addr): storeOp(addr)
         case let .inv(value): trap(.invalid(value))
-        default: trap(.illegal(opcode))
+        default: trap(.illegal(operation))
         }
 
         memory.setActivity(read: readAddr, write: writeAddr, exec: address)

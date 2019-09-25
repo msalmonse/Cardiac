@@ -10,7 +10,7 @@
 
 import Foundation
 
-enum OpCode {
+enum Operation {
     case inp(UInt16)
     case cla(UInt16)
     case add(UInt16)
@@ -24,7 +24,7 @@ enum OpCode {
     case inv(UInt16)
     case unk(UInt16)
 
-    static func opcode(_ val: UInt16, _ extra: UInt16) -> OpCode {
+    static func operation(_ val: UInt16, _ extra: UInt16) -> Operation {
         switch val {
         case 0: return .inp(extra)
         case 1: return .cla(extra)
@@ -58,18 +58,18 @@ enum OpCode {
     }
 }
 
-/// Convert a cell's opcode and address into a string
+/// Convert a cell's operation and address into a string
 
 func instruction(_ cell: Cell, verbose: Bool = true) -> String {
-    return instruction(cell.opcode, verbose: verbose)
+    return instruction(cell.operation, verbose: verbose)
 }
 
-func instruction(_ opcode: OpCode, verbose: Bool = false) -> String {
+func instruction(_ operation: Operation, verbose: Bool = false) -> String {
     func sl(_ val: UInt16) -> UInt16 { return val / 10 }
     func sr(_ val: UInt16) -> UInt16 { return val % 10 }
     func fmt(_ addr: UInt16) -> String { return String(format: "%02d", Int(addr)) }
 
-    switch (opcode, verbose) {
+    switch (operation, verbose) {
     case (let .inp(addr), true):  return "Read from tape to " + fmt(addr)
     case (let .inp(addr), false): return "INP " + fmt(addr)
     case (let .cla(addr), true):  return "Load from " + fmt(addr)
@@ -92,7 +92,7 @@ func instruction(_ opcode: OpCode, verbose: Bool = false) -> String {
     case (let .hrs(addr), false): return "HRS " + fmt(addr)
     case (let .inv(val), true):   return "Invalid value \(val)"
     case (let .inv(val), false):  return "INV \(val)"
-    case (let .unk(val), true):   return "Unkown opcode \(val)"
+    case (let .unk(val), true):   return "Unkown operation \(val)"
     case (let .unk(val), false):  return "UNK \(val)"
     }
 }

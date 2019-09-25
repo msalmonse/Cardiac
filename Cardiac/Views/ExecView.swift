@@ -46,7 +46,7 @@ struct ExecView: View {
             }
             .foregroundColor(.primary)
 
-            Text(instruction(exec.opcode))
+            Text(instruction(exec.operation))
 
             Button(
                 action: { self.exec.execOne(true) },
