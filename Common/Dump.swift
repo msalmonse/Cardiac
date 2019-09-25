@@ -111,3 +111,30 @@ func loadFromTape(_ url: URL) -> Result<DumpData, Error> {
 
     return .success(dump)
 }
+
+func parsedDump(_ indata: String) -> Result<DumpData, Error> {
+    let dump = DumpData()
+
+    switch parse(indata) {
+    case let .failure(err): return .failure(err)
+    case let .success(program):
+        dump.next = program.start
+
+        for line in program.commentLines {
+            dump.commentAppend(line)
+        }
+
+        for element in program.memory {
+            switch element {
+            case let .data(addr, data), let .instruction(addr, data):
+                dump.memoryAppend(AddressAndData(address: addr, data: data))
+            }
+        }
+
+        for data in program.input {
+            dump.inputAppend(data)
+        }
+    }
+
+    return .success(dump)
+}

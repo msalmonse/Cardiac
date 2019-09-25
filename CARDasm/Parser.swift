@@ -13,15 +13,17 @@ enum ParserError: Error {
     case errorsExist([Error])
 }
 
-enum ParsedElements {
-    case comment(String)        // comment
+enum MemoryElements {
     case data(Int, Int)         // location and data
     case instruction(Int, Int)  // location and instruction
-    case start(Int)             // program start
-    case tape(Int)              // data on tape
 }
 
-typealias Program = [ParsedElements]
+class Program {
+    var commentLines = [String]()
+    var memory = [MemoryElements]()
+    var input = [Int]()
+    var start = -1
+}
 
 func locationInitialize() {
     // Remove any previous parse data
@@ -38,8 +40,6 @@ func locationInitialize() {
 func parse(_ indata: String) -> Result<Program, Error> {
     var program = Program()
     var errors = [Error]()
-    var commentLines = [String]()
-    var startFound = false
 
     func errPrint(_ lineNr: Int, _ err: Error) {
         print("Error on line \(lineNr): \(err.localizedDescription)")
@@ -52,14 +52,11 @@ func parse(_ indata: String) -> Result<Program, Error> {
 
     // check for start label
     let start = Location.get("start")
-    if let startAddress = start.address {
-        program.append(.start(startAddress))
-        startFound = true
-    }
+    if let startAddress = start.address { program.start = startAddress }
 
     for token in tokens {
         switch token {
-        case let .comment(line): commentLines.append(line)
+        case let .comment(line): program.commentLines.append(line)
         case let .data(lineNr, location, value):
             switch location.plus(0) {
             case let .failure(err): errPrint(lineNr, err)
@@ -67,7 +64,7 @@ func parse(_ indata: String) -> Result<Program, Error> {
                 switch dataValue(Substring(value)) {
                 case let .failure(err): errPrint(lineNr, err)
                 case let .success(data):
-                    program.append(.data(address, data))
+                    program.memory.append(.data(address, data))
                 }
             }
         case let .error(lineNr, err): errPrint(lineNr, err)
@@ -79,18 +76,15 @@ func parse(_ indata: String) -> Result<Program, Error> {
                 switch location.plus(0) {
                 case let .failure(err): errPrint(lineNr, err)
                 case let .success(address):
-                    if !startFound {
-                        program.append(.start(address))   // start at first instruction
-                        startFound = true
-                    }
-                    program.append(.instruction(address, inst))
+                    // start at first instruction
+                    if program.start < 0 { program.start = address }
+                    program.memory.append(.instruction(address, inst))
                 }
             }
         case let .tape(lineNr, value):
             switch dataValue(Substring(value)) {
             case let .failure(err): errPrint(lineNr, err)
-            case let .success(data):
-                program.append(.tape(data))
+            case let .success(data): program.input.append(data)
             }
         }
     }

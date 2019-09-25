@@ -45,7 +45,7 @@ func assembleOneFile(
 }
 
 func oneJSON(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
-    switch parse(inData) {
+    switch parsedDump(inData) {
     case let .failure(err): return .failure(err)
     case let .success(dump):
         do {
@@ -61,7 +61,7 @@ func oneJSON(_ inData: String, pretty: Bool = false) -> Result<Data, Error> {
 }
 
 func oneTape(_ inData: String) -> Result<Data, Error> {
-    switch parse(inData) {
+    switch parsedDump(inData) {
     case let .failure(err): return .failure(err)
     case let .success(dump):
         var data = Data(capacity: 500)

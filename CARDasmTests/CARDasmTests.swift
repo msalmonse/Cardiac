@@ -48,7 +48,7 @@ class CARDasmTests: XCTestCase {
             }
         }
 
-        switch parse(testInput) {
+        switch parsedDump(testInput) {
         case let .success(dump): checkDump(dump)
         case let .failure(err): XCTFail("Unexpected error: \(err)")
         }
@@ -124,7 +124,7 @@ class CARDasmTests: XCTestCase {
     }
 
     func testDisAssemble() {
-        switch parse(testInput) {
+        switch parsedDump(testInput) {
         case .failure: XCTAssertFalse(true, "Wrong error")
         case let .success(dump):
             let result = disAssemble(dump)
