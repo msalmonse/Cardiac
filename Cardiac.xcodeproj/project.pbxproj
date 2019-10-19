@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		C410F05E233A592000AF632D /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = C410F05D233A592000AF632D /* TextView */; };
 		C410F062233A815000AF632D /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F061233A815000AF632D /* EditorView.swift */; };
+		C410F065233B30B500AF632D /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = C410F064233B30B500AF632D /* FilePicker */; };
+		C410F06A233B372D00AF632D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4635522232829EF008551AC /* Parser.swift */; };
+		C410F06B233B373200AF632D /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552423282A05008551AC /* Tokenizer.swift */; };
+		C410F06C233B373C00AF632D /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463552623282AF6008551AC /* OpCode.swift */; };
+		C410F06E233C771100AF632D /* FileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F06D233C771100AF632D /* FileData.swift */; };
 		C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBAF2317C07E004B8146 /* AppDelegate.swift */; };
 		C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB12317C07E004B8146 /* SceneDelegate.swift */; };
 		C446BBB42317C07E004B8146 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C446BBB32317C07E004B8146 /* ContentView.swift */; };
@@ -110,6 +115,7 @@
 
 /* Begin PBXFileReference section */
 		C410F061233A815000AF632D /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		C410F06D233C771100AF632D /* FileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileData.swift; sourceTree = "<group>"; };
 		C446BBAC2317C07E004B8146 /* Cardiac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardiac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C446BBAF2317C07E004B8146 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C446BBB12317C07E004B8146 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C410F065233B30B500AF632D /* FilePicker in Frameworks */,
 				C410F05E233A592000AF632D /* TextView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +320,7 @@
 				C446BC44231BAD38004B8146 /* ALU.swift */,
 				C463550B23257C1E008551AC /* Breakpoint.swift */,
 				C446BBE32317C298004B8146 /* Cell.swift */,
+				C410F06D233C771100AF632D /* FileData.swift */,
 				C446BC5D231F93E4004B8146 /* Comment.swift */,
 				C446BBEB23184621004B8146 /* CPU.swift */,
 				C463550F2327649C008551AC /* ErrorMessages.swift */,
@@ -396,11 +404,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				C410F067233B30C900AF632D /* PBXTargetDependency */,
 				C410F060233A593100AF632D /* PBXTargetDependency */,
 			);
 			name = Cardiac;
 			packageProductDependencies = (
 				C410F05D233A592000AF632D /* TextView */,
+				C410F064233B30B500AF632D /* FilePicker */,
 			);
 			productName = Cardiac;
 			productReference = C446BBAC2317C07E004B8146 /* Cardiac.app */;
@@ -517,6 +527,7 @@
 			mainGroup = C446BBA32317C07E004B8146;
 			packageReferences = (
 				C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */,
+				C410F063233B30B500AF632D /* XCRemoteSwiftPackageReference "FilePicker" */,
 			);
 			productRefGroup = C446BBAD2317C07E004B8146 /* Products */;
 			projectDirPath = "";
@@ -613,12 +624,14 @@
 				C446BBB02317C07E004B8146 /* AppDelegate.swift in Sources */,
 				C4635516232769F9008551AC /* CardiacView.swift in Sources */,
 				C446BBE62317C3C6004B8146 /* MemoryCellView.swift in Sources */,
+				C410F06C233B373C00AF632D /* OpCode.swift in Sources */,
 				C446BC49231CE810004B8146 /* ALUview.swift in Sources */,
 				C48921382333E84E00DF1B95 /* Base32.swift in Sources */,
 				C446BBEA2317C6CD004B8146 /* Memory.swift in Sources */,
 				C446BC45231BAD38004B8146 /* ALU.swift in Sources */,
 				C446BC56231E3002004B8146 /* ButtonLabel.swift in Sources */,
 				C446BC4B231D0846004B8146 /* TapeView.swift in Sources */,
+				C410F06A233B372D00AF632D /* Parser.swift in Sources */,
 				C463550623218A88008551AC /* ArrowsView.swift in Sources */,
 				C446BC0123191450004B8146 /* MemoryCellLink.swift in Sources */,
 				C446BC54231D9109004B8146 /* ExecUnit.swift in Sources */,
@@ -638,6 +651,7 @@
 				C446BBE42317C298004B8146 /* Cell.swift in Sources */,
 				C446BC0323199EAC004B8146 /* Shapes.swift in Sources */,
 				C410F062233A815000AF632D /* EditorView.swift in Sources */,
+				C410F06B233B373200AF632D /* Tokenizer.swift in Sources */,
 				C446BBFC2318FB18004B8146 /* Instruction.swift in Sources */,
 				C463550C23257C1E008551AC /* Breakpoint.swift in Sources */,
 				C446BBB22317C07E004B8146 /* SceneDelegate.swift in Sources */,
@@ -648,6 +662,7 @@
 				C446BBB42317C07E004B8146 /* ContentView.swift in Sources */,
 				C463551423276776008551AC /* Alerts.swift in Sources */,
 				C446BC60231FF002004B8146 /* Positioning.swift in Sources */,
+				C410F06E233C771100AF632D /* FileData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +725,10 @@
 		C410F060233A593100AF632D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = C410F05F233A593100AF632D /* TextView */;
+		};
+		C410F067233B30C900AF632D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C410F066233B30C900AF632D /* FilePicker */;
 		};
 		C446BBC42317C085004B8146 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1099,6 +1118,14 @@
 				minimumVersion = 0.2.0;
 			};
 		};
+		C410F063233B30B500AF632D /* XCRemoteSwiftPackageReference "FilePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/msalmonse/FilePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.17;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1111,6 +1138,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C410F05C233A592000AF632D /* XCRemoteSwiftPackageReference "TextView" */;
 			productName = TextView;
+		};
+		C410F064233B30B500AF632D /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C410F063233B30B500AF632D /* XCRemoteSwiftPackageReference "FilePicker" */;
+			productName = FilePicker;
+		};
+		C410F066233B30C900AF632D /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C410F063233B30B500AF632D /* XCRemoteSwiftPackageReference "FilePicker" */;
+			productName = FilePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

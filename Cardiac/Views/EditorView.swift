@@ -38,23 +38,27 @@ endcomment
 """
 
 struct EditorLink: View {
-    let text: String
+    let file: FileData
 
     var body: some View {
         NavigationLink(
-            destination: EditorView(reverse),
-            label: { ButtonText("Show Editor") }
+            destination: EditorView(file),
+            label: { ButtonText("Edit File") }
         )
     }
 }
 
 struct EditorView: View {
     let textViewState: TextViewState
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    let file: FileData
+    @Environment(\.presentationMode)
+    var mode: Binding<PresentationMode>
 
-    init(_ text: String) {
+    init(_ file: FileData) {
+        self.file = file
+        if file.contents.isEmpty { file.contents = reverse }
         let uiFont = UIFont.monospacedSystemFont(ofSize: 25, weight: .regular)
-        textViewState = TextViewState(text, font: uiFont)
+        textViewState = TextViewState(file.contents, font: uiFont)
             .set(.autocapitalizationType(.none))
             .set(.autocorrectionType(.no))
             .set(.spellCheckingType(.no))
@@ -71,18 +75,24 @@ struct EditorView: View {
                     .clipped(antialiased: true)
                     .modifier(CardiacView.Standard())
                     Spacer()
-                    Button(
-                        action: { self.mode.wrappedValue.dismiss() },
-                        label: { ButtonText("Dismiss", font: .title) }
-                    )
+                    HStack {
+                        Spacer()
+                        Button(
+                            action: { self.mode.wrappedValue.dismiss() },
+                            label: { ButtonText("Save", font: .title) }
+                        )
+                        .disabled(self.file.url == nil)
+                        Spacer()
+                        Text(self.file.url?.lastPathComponent ?? "")
+                        Spacer()
+                        Button(
+                            action: { self.mode.wrappedValue.dismiss() },
+                            label: { ButtonText("Dismiss", font: .title) }
+                        )
+                        Spacer()
+                    }
                 }
             }
         }
-    }
-}
-
-struct EditorView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditorView("Editor")
     }
 }

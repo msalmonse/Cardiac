@@ -31,7 +31,7 @@ struct LoadButtons: View {
 
             Spacer()
 
-            EditorLink(text: "")
+            EditorLink(file: cpu.currentFile)
 
             Spacer()
 

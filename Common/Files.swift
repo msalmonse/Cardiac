@@ -14,6 +14,7 @@ enum FileError: Error {
     case fileNotFound
     case noSuchPath
     case unknownError
+    case urlNotDefined
 }
 
 extension FileError {
@@ -25,6 +26,7 @@ extension FileError {
         case .fileNotFound:     return "File not found"
         case .noSuchPath:       return "The search path is not defined"
         case .unknownError:     return "The exact cause of the error is not known"
+        case .urlNotDefined:    return "The url has not been defined"
         }
     }
 }

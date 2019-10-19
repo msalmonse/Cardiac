@@ -17,6 +17,8 @@ class CPU: Identifiable {
     var inTape = Tape(.input)
     var outTape = Tape(.output)
 
+    var currentFile = FileData(nil)
+
     init() {
         self.exec = ExecUnit(memory: memory, inTape: inTape, outTape: outTape)
     }
